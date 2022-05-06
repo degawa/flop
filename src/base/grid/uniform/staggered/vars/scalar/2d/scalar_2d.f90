@@ -318,7 +318,7 @@ contains
             !! 乗算結果を格納する`scalar_2d_type`
 
         call new_scr%construct(this%grid)
-        new_scr%val = new_scr%val*factor
+        new_scr%val = this%val*factor
     end function multiply_r8
 
     !| `scalar_2d_type`と倍精度実数の乗算を計算し，
