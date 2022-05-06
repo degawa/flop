@@ -17,5 +17,6 @@ module grid_uniform_staggered_op_custom_bc
     use :: grid_uniform_staggered_op_custom_bc_on
     use :: grid_uniform_staggered_op_custom_bc_set
     use :: grid_uniform_staggered_op_custom_bc_impose
+    use :: grid_uniform_staggered_op_custom_bc_with
     public
 end module grid_uniform_staggered_op_custom_bc
