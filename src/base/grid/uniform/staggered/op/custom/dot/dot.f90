@@ -6,6 +6,7 @@
 !
 !また，移流項を`u.dot.nabla`と表現することを実現するための
 !ユーザ定義演算子`.dot.`を定義するインタフェースも含まれる．
+!
 module grid_uniform_staggered_op_custom_dot
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_vector_2d
