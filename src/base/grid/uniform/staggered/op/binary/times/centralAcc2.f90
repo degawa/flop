@@ -33,6 +33,12 @@ contains
     !を計算し，得られた結果をテンソル量で返す．
     !
     !上流化は行わず，中心補間を用いる．
+    !これは，梶島(1994) (https://doi.org/10.1299/kikaib.60.2058)によって
+    !示された，移流項に対する適切な差分形式うち，発散型（の被微分項）
+    !\[
+    ! \delta_{x_j}\left(\overline{u_j}^{x_i}\overline{u_i}^{x_j}\right)
+    !\]
+    !に相当する．
     function tensor_product(vec_l, vec_r) result(new_tsr)
         use :: space_Cartesian, &
             xx => xx_index, xy => xy_index, yx => yx_index, yy => yy_index, &
