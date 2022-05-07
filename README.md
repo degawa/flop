@@ -49,6 +49,75 @@ conc = conc + deriv * deltt
 
 FLOPでは，非圧縮性流れの数値計算における一連の手続を分解し，演算子として提供します．また，それだけではなく，スカラ量やベクトル量を表す型，境界条件を表現する型や条件を定めるための演算子も提供します．
 
+## Usage
+### 必須ソフトウェア
+- Fortranコンパイラ
+    - このライブラリは，gfortran 10.3.0, intel fortran 2021.1, nag fortran 7.1でビルド・実行確認されています．
+- fpm
+    - このライブラリは，fpm(fortran-lang/fpm)を用いてビルドされます．
+- FORD (optional)
+    - FORDを利用するとAPI辞彙が生成できます．
+
+### ソースの入手
+ソースコードを入手するには，下記のコマンドをターミナルで実行します．
+
+```console
+git clone https://github.com/degawa/flop.git
+cd flop
+```
+
+### fpmを用いたビルド
+FLOPをビルドするには，flopディレクトリ内で下記のコマンドを実行します．
+
+#### gfortran
+```console
+fpm build --profile debug --flag "-std=f2018"
+```
+#### intel fortran
+```console
+fpm build --compiler ifort --profile debug --flag "/stand=f18"
+```
+#### nag fortran
+```console
+fpm build --compiler nagfor --profile debug --flag "-f2018"
+```
+
+### サンプルの実行
+FLOPには，サンプルとしてキャビティ流れを計算するプログラムが添付されています．下記のコマンドを利用して，プログラムを実行します．
+
+#### gfortran
+```console
+fpm run --profile debug --flag "-std=f2018" --example cavity
+```
+#### intel fortran
+```console
+fpm run --compiler ifort --profile debug --flag "/stand=f18"  --example cavity
+```
+#### nag fortran
+```console
+fpm run --compiler nagfor --profile debug --flag "-english -f2018"  --example cavity
+```
+
+### API辞彙の生成
+FORDを用いると，辞彙を生成できます.
+
+```console
+ford api-doc-ford-settings.md
+```
+
+### 他のfpmプロジェクトからの参照
+他のfpmプロジェクトからFLOPを利用するには，参照したいプロジェクトの`fpm.toml`に下記の設定を追記します．
+
+```toml
+[dependencies]
+flop = {git = "https://github.com/degawa/flop"}
+```
+
+また，FLOPを利用するソースに，次の一文を追加します．
+```Fortran
+use :: flop
+```
+
 ## 提供される機能
 上記の例を用いて，FLOPが提供する機能を説明します．
 
