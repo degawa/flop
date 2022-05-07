@@ -12,7 +12,7 @@
 !その他の連立方程式を取り扱う場合は，専用の手続を追加し，
 !interfaceを用いて適切な手続が自動で選択されるようにする．
 !
-module grid_uniform_staggered_op_custom_bc_with
+module grid_uniform_staggered_op_custom_solver_with
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_op_custom_bc_scalar
     use :: grid_uniform_staggered_op_custom_solver_Ax_adt
@@ -47,4 +47,4 @@ contains
         new_Ax%accel = Ax%accel
     end function Ax_laplacian_with_BC
 
-end module grid_uniform_staggered_op_custom_bc_with
+end module grid_uniform_staggered_op_custom_solver_with
