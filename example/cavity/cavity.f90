@@ -4,7 +4,7 @@
 !
 module incompressible_condition_stability
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
+    use :: flop
     implicit none
     private
     public :: stabilize
@@ -60,13 +60,8 @@ end module incompressible_condition_stability
 
 program cavity_flow
     use, intrinsic :: iso_fortran_env
-    use :: space_Cartesian
     use :: fluid_knownFluids, only:Water
-    use :: time_axis
-    use :: discreteTime
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_variables
-    use :: grid_uniform_staggered_operators
+    use :: flop
     use :: incompressible_condition_stability
     implicit none
 
