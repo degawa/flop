@@ -1,0 +1,14 @@
+name = "FLOP"
+version = "0.1.0"
+license = "MIT"
+author = "Tomoiro Degawa"
+maintainer = "@degawa/flop"
+copyright = "Copyright 2022, Tomohiro Degawa"
+
+[build]
+auto-executables = false
+auto-tests = true
+auto-examples = true
+
+[install]
+library = true
