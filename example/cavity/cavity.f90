@@ -83,14 +83,18 @@ program cavity_flow
     U_wall = 0.01d0
     l = Re*kvisc/U_wall
 
-    call space%construct(x_coord_val=[0d0, l], &
-                         y_coord_val=[0d0, l])
-    call grid%construct(space, number_of_grid_points=[41, 41])
+    block
+        type(axis_type) :: x, y
+        x = x.set. [0d0, l]
+        y = y.set. [0d0, l]
+        space = space.set.Cartesian([x, y])
+    end block
+    grid = .divide.space.into.cells([40, 40])
 
-    time = [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
+    t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
     dt = 0.25d0
-    call discrete_time%construct &
-        (time, time_interval=stabilize(dt, grid, U_wall, kvisc, Courant=0.1d0))
+    dt = stabilize(dt, grid, U_wall, kvisc, Courant=0.1d0)
+    discrete_time = .divide.t.into.intervals(dt)
 
     block
         type(vector_2d_type) :: u !! 速度
@@ -122,7 +126,7 @@ program cavity_flow
 
         u = u .impose. BC_u !&
 
-        do n = 1, Nt
+        do n = 1, 10 !Nt
             print *, n
 
             !Fractional Step法で時間積分を実行
