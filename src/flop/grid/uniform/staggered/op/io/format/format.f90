@@ -1,0 +1,5 @@
+!>対応している出力形式を一括して`use`するためのモジュール．
+module grid_uniform_staggered_op_io_format
+    use :: grid_uniform_staggered_op_io_format_csv
+    public
+end module grid_uniform_staggered_op_io_format

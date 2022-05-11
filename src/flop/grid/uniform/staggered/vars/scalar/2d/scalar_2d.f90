@@ -62,8 +62,6 @@ module grid_uniform_staggered_vars_scalar_2d
         generic :: assignment(=) => assign
         generic :: operator(*)   => multiply_r8, r_multiply_r8
         !&>
-        procedure, public, pass :: output
-            !! 成分を出力
     end type scalar_2d_type
 contains
     !| 成分の`grid`の情報に基づいて，`scalar_2d_type`を構築する．
@@ -243,41 +241,6 @@ contains
 
         grid => this%grid
     end function get_base_grid
-
-    !| 成分をファイルに出力する．
-    !
-    !- アスキーテキスト
-    !- 要素の区切りはスペース
-    !- 格子点上に値を補間
-    !
-    subroutine output(this, filename)
-        implicit none
-        !&<
-        class(scalar_2d_type)   , intent(inout) :: this
-            !! 出力されるスカラ量<br>
-            !! 当該実体仮引数
-        character(*)            , intent(in)    :: filename
-            !! 拡張子を含むファイル名
-        !&>
-
-        block
-            integer(int32) :: Ncx, Ncy, ic, jc
-            integer(int32) :: o_unit
-
-            call this%grid%get_number_of_grid_center_to(Ncx, Ncy)
-            open (newunit=o_unit, file=filename)
-            !&<
-            do jc = 1, Ncy
-            do ic = 1, Ncx
-                ! `vector_2d_type`でfmtを指定しているので合わせる
-                write (o_unit, '(3E28.16E3)') &
-                    this%grid%xc(ic), this%grid%yc(jc), this%val(ic, jc)
-            end do
-            end do
-            !&>
-            close (o_unit)
-        end block
-    end subroutine output
 
     !------------------------------------------------------------------!
     !|`scalar_2d_type`を代入する．
