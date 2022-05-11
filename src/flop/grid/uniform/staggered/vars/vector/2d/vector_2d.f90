@@ -75,8 +75,6 @@ module grid_uniform_staggered_vars_vector_2d
         generic :: operator(-)   => minus_vec, negate
         generic :: operator(*)   => multiply_r8, r_multiply_r8
         !&>
-        procedure, public, pass :: output
-            !! 成分を出力
     end type vector_2d_type
 
 contains
@@ -276,45 +274,6 @@ contains
 
         grid => this%grid
     end function get_base_grid
-
-    !| 成分をファイルに出力する．
-    !
-    !- アスキーテキスト
-    !- 要素の区切りはスペース
-    !- 格子点上に値を補間
-    !
-    subroutine output(this, filename)
-        implicit none
-        !&<
-        class(vector_2d_type)   , intent(inout) :: this
-            !! 出力されるベクトル量<br>
-            !! 当該実体仮引数
-        character(*)            , intent(in)    :: filename
-            !! 拡張子を含むファイル名
-        !&>
-
-        block
-            integer(int32) :: o_unit
-            integer(int32) :: Nx, Ny, i, j, ic, jc
-
-            call this%grid%get_number_of_grid_points_to(Nx, Ny)
-            open (newunit=o_unit, file=filename)
-            !&<
-            do j = 1, Ny
-            do i = 1, Nx
-                ic = i
-                jc = j
-                ! intel fortranは4個以上のデータを勝手に改行するので
-                ! fmtの指定は必須
-                write (o_unit, '(4E28.16E3)') this%grid%x(i), this%grid%y(j), &
-                    (this%x(i   , jc-1) + this%x(i , jc))/2d0, &
-                    (this%y(ic-1, j   ) + this%y(ic, j ))/2d0
-            end do
-            end do
-            !&>
-            close (o_unit)
-        end block
-    end subroutine output
 
     !------------------------------------------------------------------!
     !|`vector_2d_type`を代入する．
