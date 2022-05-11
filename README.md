@@ -29,6 +29,17 @@ u = (u_aux - dt/dens*.grad.p) .impose. BC_u
 ```
 
 ```Fortran
+! discretize space and time
+x = x.set. [0d0, l]
+y = y.set. [0d0, l]
+space = space.set.Cartesian([x, y])
+grid = .divide.space.into.cells([40, 40])
+
+t = t.set. [0d0, 50d0*l/U_wall]
+delta_t = .divide.t.into.intervals(dt)
+```
+
+```Fortran
 ! output to csv file
 call output((p.as.csv) .to.unit("p.txt"))
 call output((u.as.csv) .to.unit("u.txt"))
