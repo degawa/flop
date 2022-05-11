@@ -115,7 +115,7 @@ fpm run --compiler ifort --profile debug --flag "/stand=f18"  --example cavity
 ```
 #### nag fortran
 ```console
-fpm run --compiler nagfor --profile debug --flag "-english -f2018"  --example cavity
+fpm run --compiler nagfor --profile debug --flag "-f2018"  --example cavity
 ```
 
 ### API辞彙の生成
