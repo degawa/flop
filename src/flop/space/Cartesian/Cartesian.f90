@@ -1,4 +1,4 @@
-!>デカルト座標系に関する定数や型を提供する．
+!>デカルト座標系に関する定数や型，手続を提供する．
 !>
 !>定義される型には，2次元デカルト座標系の情報（各軸の情報）
 !>を取り扱う派生型が含まれる．
@@ -6,6 +6,8 @@
 !>
 !>この型を使う限り，各軸の最大，最小値などは，`[x_min, y_min, x_max, ymax]`
 !>の順で扱う事になる．
+!>
+!>手続には，各軸の情報から2次元デカルト座標系を構築するコンストラクタが含まれる．
 !>
 module space_Cartesian
     use, intrinsic :: iso_fortran_env
@@ -17,6 +19,7 @@ module space_Cartesian
     public :: x_min_index, x_max_index, &
               y_min_index, y_max_index
     public :: xx_index, xy_index, yx_index, yy_index
+    public :: Cartesian
 
     enum, bind(c)
         enumerator :: x_dir_index = 1
@@ -73,7 +76,25 @@ module space_Cartesian
         generic :: assignment(=) => assign
     end type Cartesian_2d_type
 
+    !>2次元デカルト座標系型のコンストラクタ．
+    interface Cartesian
+        procedure :: construct_Cartesian
+    end interface
+
 contains
+    !>軸の値に基づいて設定された2次元デカルト座標系型変数を返す．
+    function construct_Cartesian(axes) result(new_Cartesian)
+        implicit none
+
+        type(axis_type), intent(in) :: axes(:)
+            !! axis型で表された軸
+
+        type(Cartesian_2d_type) :: new_Cartesian
+            !! 作成される2次元デカルト座標
+
+        call new_Cartesian%construct(x_axis=axes(x_dir_index), y_axis=axes(y_dir_index))
+    end function construct_Cartesian
+
     !>配列の値に基づいて2次元デカルト座標系型変数を設定する．
     subroutine set_coordinate_2d_by_array(this, x_coord_val, y_coord_val)
         implicit none
