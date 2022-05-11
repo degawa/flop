@@ -68,7 +68,7 @@ program cavity_flow
     type(Cartesian_2d_type) :: space !! 計算領域
     type(staggered_uniform_grid_2d_type), target :: grid !! 空間格子
     type(time_axis_type) :: t !! 計算時間
-    type(discrete_time_type) :: discrete_time !! 時間積分の設定
+    type(discrete_time_type) :: delta_t !! 時間積分の設定
 
     real(real64) :: Re !! レイノルズ数
     real(real64) :: kvisc !! 動粘度
@@ -94,7 +94,7 @@ program cavity_flow
     t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
     dt = 0.25d0
     dt = stabilize(dt, grid, U_wall, kvisc, Courant=0.1d0)
-    discrete_time = .divide.t.into.intervals(dt)
+    delta_t = .divide.t.into.intervals(dt)
 
     block
         type(vector_2d_type) :: u !! 速度
@@ -107,8 +107,8 @@ program cavity_flow
         integer(int32) :: n, Nt !! 時間積分回数
         real(real64) :: below_criterion = 1d-9 !! 収束判定条件
 
-        Nt = discrete_time%get_number_of_integration()
-        dt = discrete_time%get_time_interval()
+        Nt = delta_t%get_number_of_integration()
+        dt = delta_t%get_time_interval()
 
         ! initialize
         u = .init. (u.on.grid)
