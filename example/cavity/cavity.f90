@@ -65,27 +65,17 @@ program cavity_flow
     use :: incompressible_condition_stability
     implicit none
 
-    type(Cartesian_2d_type) :: space
-        !! 計算領域
-    type(staggered_uniform_grid_2d_type), target :: grid
-        !! 空間格子
-    type(time_axis_type) :: time
-        !! 計算時間
-    type(discrete_time_type) :: discrete_time
-        !! 時間積分の設定
+    type(Cartesian_2d_type) :: space !! 計算領域
+    type(staggered_uniform_grid_2d_type), target :: grid !! 空間格子
+    type(time_axis_type) :: t !! 計算時間
+    type(discrete_time_type) :: discrete_time !! 時間積分の設定
 
-    real(real64) :: Re
-        !! レイノルズ数
-    real(real64) :: kvisc
-        !! 動粘度
-    real(real64) :: dens
-        !! 密度
-    real(real64) :: U_wall
-        !! 移動壁の速度
-    real(real64) :: l
-        !! キャビティの1辺の長さ
-    real(real64) :: dt
-        !! 計算時間間隔
+    real(real64) :: Re !! レイノルズ数
+    real(real64) :: kvisc !! 動粘度
+    real(real64) :: dens !! 密度
+    real(real64) :: U_wall !! 移動壁の速度
+    real(real64) :: l !! キャビティの1辺の長さ
+    real(real64) :: dt !! 計算時間間隔
 
     Re = 1000d0
     kvisc = Water%kinetic_viscosity
