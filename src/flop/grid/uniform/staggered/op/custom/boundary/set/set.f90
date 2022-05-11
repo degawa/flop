@@ -1,12 +1,12 @@
-!| ある境界における境界条件から，全体の境界条件を組み立てる手続を提供する．
-!
-!手続には，スカラ量もしくはベクトル量の境界条件を取り扱う型に，
-!ある境界における境界条件の情報を追加する手続が含まれる．
-!
-!また，`BC_u .set. (Dirichlet([0d0, 0d0]) .on. B1)`などと
-!表現することを実現するためのユーザ定義演算子`.set.`を
-!定義するインタフェースも含まれる．
-!
+!>ある境界における境界条件から，全体の境界条件を組み立てる手続を提供する．
+!>
+!>手続には，スカラ量もしくはベクトル量の境界条件を取り扱う型に，
+!>ある境界における境界条件の情報を追加する手続が含まれる．
+!>
+!>また，`BC_u .set. (Dirichlet([0d0, 0d0]) .on. B1)`などと
+!>表現することを実現するためのユーザ定義演算子`.set.`を
+!>定義するインタフェースも含まれる．
+!>
 module grid_uniform_staggered_op_custom_bc_set
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_op_custom_bc_type
@@ -20,7 +20,7 @@ module grid_uniform_staggered_op_custom_bc_set
     private
     public :: operator(.set.)
 
-    !| ユーザ定義演算子`.set.`を定義するインタフェース
+    !>ユーザ定義演算子`.set.`を定義するインタフェース
     interface operator(.set.)
         procedure :: set_vecval_bc
         procedure :: set_scrgrad_bc
@@ -29,9 +29,9 @@ module grid_uniform_staggered_op_custom_bc_set
 
 contains
 
-    !| ベクトル量に対する領域全体の境界条件に対して，
-    !ある境界におけるベクトル量のDirichlet境界条件を追加し，
-    !全体の境界条件を返す．
+    !>ベクトル量に対する領域全体の境界条件に対して，
+    !>ある境界におけるベクトル量のDirichlet境界条件を追加し，
+    !>全体の境界条件を返す．
     function set_vecval_bc(vec_bc, vec_bnd_val) result(new_vec_bc)
         implicit none
         !&<
@@ -57,9 +57,9 @@ contains
         end block
     end function set_vecval_bc
 
-    !| スカラ量に対する領域全体の境界条件に対して，
-    !ある境界におけるスカラ量のNeumann境界条件を追加し，
-    !全体の境界条件を返す．
+    !>スカラ量に対する領域全体の境界条件に対して，
+    !>ある境界におけるスカラ量のNeumann境界条件を追加し，
+    !>全体の境界条件を返す．
     function set_scrgrad_bc(scr_bc, scr_bnd_grad) result(new_scr_bc)
         implicit none
         !&<
@@ -85,9 +85,9 @@ contains
         end block
     end function set_scrgrad_bc
 
-    !| スカラ量に対する領域全体の境界条件に対して，
-    !ある境界におけるスカラ量のNeumann境界条件を追加し，
-    !全体の境界条件を返す．
+    !>スカラ量に対する領域全体の境界条件に対して，
+    !>ある境界におけるスカラ量のNeumann境界条件を追加し，
+    !>全体の境界条件を返す．
     function set_scrval_bc(scr_bc, scr_bnd_val) result(new_scr_bc)
         implicit none
         !&<

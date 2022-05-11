@@ -1,7 +1,7 @@
-!| 空間離散化情報である空間格子に関係する派生型を提供する．
-!
-!派生型には，2次元等間隔のスタガード格子を表す型が含まれる．
-!
+!>空間離散化情報である空間格子に関係する派生型を提供する．
+!>
+!>派生型には，2次元等間隔のスタガード格子を表す型が含まれる．
+!>
 module grid_uniform_staggered_2d
     use, intrinsic :: iso_fortran_env
     use :: space_Cartesian
@@ -97,7 +97,7 @@ module grid_uniform_staggered_2d
 
 contains
 
-    !| 座標系情報と格子点数を用いて1次元等間隔格子を設定する．
+    !>座標系情報と格子点数を用いて1次元等間隔格子を設定する．
     subroutine construct_by_length_and_num_grid_points(this, space, number_of_grid_points)
         implicit none
         !&<
@@ -124,7 +124,7 @@ contains
         call this%discretize_space()
     end subroutine construct_by_length_and_num_grid_points
 
-    !| 座標系情報と格子点間隔に基づいて1次元等間隔格子を設定する．
+    !>座標系情報と格子点間隔に基づいて1次元等間隔格子を設定する．
     subroutine construct_by_length_and_interval(this, space, interval)
         implicit none
         !&<
@@ -151,9 +151,9 @@ contains
         call this%discretize_space()
     end subroutine construct_by_length_and_interval
 
-    !| 座標系情報，格子点数，格子点間隔に基づいて
-    !1次元等間隔格子を設定する．<br>
-    !整合性は確認しない．
+    !>座標系情報，格子点数，格子点間隔に基づいて
+    !>1次元等間隔格子を設定する．<br>
+    !>整合性は確認しない．
     subroutine construct_by_num_grid_points_and_interval(this, space, &
                                                          number_of_grid_points, interval)
         implicit none
@@ -176,7 +176,7 @@ contains
     end subroutine construct_by_num_grid_points_and_interval
 
     !------------------------------------------------------------------!
-    !|仮想点の数を含まない，\(x, y\)方向の格子点数を配列で返す．
+    !>仮想点の数を含まない，\(x, y\)方向の格子点数を配列で返す．
     function get_number_of_grid_points(this) result(number_of_grid_points)
         implicit none
 
@@ -192,7 +192,7 @@ contains
         number_of_grid_points(y_dir_index) = this%Ny
     end function get_number_of_grid_points
 
-    !| 仮想点の数を含まない，\(x, y\)方向の格子点数を個々に取得する．
+    !>仮想点の数を含まない，\(x, y\)方向の格子点数を個々に取得する．
     subroutine get_number_of_grid_points_to(this, Nx, Ny)
         implicit none
 
@@ -209,7 +209,7 @@ contains
     end subroutine get_number_of_grid_points_to
 
     !------------------------------------------------------------------!
-    !| \(x, y\)方向の格子点間隔を配列で返す．
+    !>\(x, y\)方向の格子点間隔を配列で返す．
     function get_interval(this) result(interval_between_grid_points)
         implicit none
 
@@ -224,7 +224,7 @@ contains
         interval_between_grid_points(y_dir_index) = this%dy
     end function get_interval
 
-    !| \(x, y\)方向の格子点間隔を個々に取得する．
+    !>\(x, y\)方向の格子点間隔を個々に取得する．
     subroutine get_interval_to(this, dx, dy)
         implicit none
 
@@ -241,7 +241,7 @@ contains
     end subroutine get_interval_to
 
     !------------------------------------------------------------------!
-    !| 仮想点を含まない，\(x, y\)方向の領域長さを配列で返す．
+    !>仮想点を含まない，\(x, y\)方向の領域長さを配列で返す．
     function get_length(this) result(length)
         implicit none
 
@@ -257,7 +257,7 @@ contains
         length(y_dir_index) = dble(this%Ny-1)*this%dy !&
     end function get_length
 
-    !| 仮想点を含まない，\(x, y\)方向の領域長さを個々に取得する．
+    !>仮想点を含まない，\(x, y\)方向の領域長さを個々に取得する．
     subroutine get_length_to(this, Lx, Ly)
         implicit none
 
@@ -276,7 +276,7 @@ contains
     end subroutine get_length_to
 
     !------------------------------------------------------------------!
-    !| 仮想点を含まない，\(x, y\)方向のセル数を配列で返す．
+    !>仮想点を含まない，\(x, y\)方向のセル数を配列で返す．
     function get_number_of_grid_center(this) result(number_of_grid_center)
         implicit none
 
@@ -292,7 +292,7 @@ contains
         number_of_grid_center(y_dir_index) = this%Ncy
     end function get_number_of_grid_center
 
-    !| 仮想点の数を含まない，\(x, y\)方向のセル数を個々に取得する．
+    !>仮想点の数を含まない，\(x, y\)方向のセル数を個々に取得する．
     subroutine get_number_of_grid_center_to(this, Ncx, Ncy)
         implicit none
 
@@ -309,7 +309,7 @@ contains
     end subroutine get_number_of_grid_center_to
 
     !------------------------------------------------------------------!
-    !| 仮想点数を返す．
+    !>仮想点数を返す．
     function get_number_of_virtual_points(this) result(number_of_virtual_points)
         implicit none
 
@@ -323,7 +323,7 @@ contains
     end function get_number_of_virtual_points
 
     !------------------------------------------------------------------!
-    !| 仮想点を含む格子点数の範囲を配列で返す．
+    !>仮想点を含む格子点数の範囲を配列で返す．
     function get_grid_point_range(this) result(point_range)
         implicit none
 
@@ -340,7 +340,7 @@ contains
         point_range(y_max_index) = this%Ny + this%Nv
     end function get_grid_point_range
 
-    !| 仮想点を含むセル数の範囲を配列で返す．
+    !>仮想点を含むセル数の範囲を配列で返す．
     function get_grid_center_range(this) result(center_range)
         implicit none
 
@@ -358,7 +358,7 @@ contains
     end function get_grid_center_range
 
     !------------------------------------------------------------------!
-    !| スカラ量が定義されている定義点番号の範囲を配列で返す．
+    !>スカラ量が定義されている定義点番号の範囲を配列で返す．
     function get_scalar_range(this) result(scalar_range)
         implicit none
 
@@ -374,7 +374,7 @@ contains
         scalar_range = this%get_grid_center_range()
     end function get_scalar_range
 
-    !| ベクトル量が定義されている定義点番号の範囲を配列で返す．
+    !>ベクトル量が定義されている定義点番号の範囲を配列で返す．
     function get_vector_range(this) result(vector_range)
         implicit none
 
@@ -400,7 +400,7 @@ contains
         vector_range(y_dir_index, y_max_index) = this%Ny + this%Nv
     end function get_vector_range
 
-    !| テンソル量が定義されている定義点番号の範囲を配列で返す．
+    !>テンソル量が定義されている定義点番号の範囲を配列で返す．
     function get_tensor_range(this) result(tensor_range)
         implicit none
 
@@ -433,8 +433,8 @@ contains
     end function get_tensor_range
 
     !------------------------------------------------------------------!
-    !| 設定された情報に基づいて，空間離散化を実行する．
-    !具体的には，格子点座標値，セル中心座標値を計算する．
+    !>設定された情報に基づいて，空間離散化を実行する．
+    !>具体的には，格子点座標値，セル中心座標値を計算する．
     subroutine discretize_space(this)
         implicit none
 

@@ -1,10 +1,10 @@
-!| 座標系の各軸に関する定数や派生型を提供する．
-!
-!定義される型には，1次元の軸の情報（最小値と最大値）
-!を取り扱う派生型が含まれる．
-!また，軸の最大値や最小値を配列として扱うので，
-!配列を参照するための定数も定義される．
-!
+!>座標系の各軸に関する定数や派生型を提供する．
+!>
+!>定義される型には，1次元の軸の情報（最小値と最大値）
+!>を取り扱う派生型が含まれる．
+!>また，軸の最大値や最小値を配列として扱うので，
+!>配列を参照するための定数も定義される．
+!>
 module space_axis
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
@@ -19,7 +19,7 @@ module space_axis
             !! 軸の最大値を参照するための配列添字
     end enum
 
-    !| 軸の最小値，最大値を取り扱う派生型．
+    !>軸の最小値，最大値を取り扱う派生型．
     type, public :: axis_type
         real(real64), private :: min = 0d0
             !! 軸の最小値
@@ -51,9 +51,9 @@ module space_axis
 
 contains
 
-    !| 軸の最小値と最大値を持った配列を軸に代入する．
-    !単体で呼び出すことはなく，代入演算子`=`をオーバーロード
-    !して利用する．
+    !>軸の最小値と最大値を持った配列を軸に代入する．
+    !>単体で呼び出すことはなく，代入演算子`=`をオーバーロード
+    !>して利用する．
     subroutine assign_array(this, coord_val)
         implicit none
         !&<
@@ -67,9 +67,9 @@ contains
         this%max = coord_val(axis_max_index)
     end subroutine assign_array
 
-    !| `axis`型の変数の値をコピーする．
-    !単体で呼び出すことはなく，代入演算子`=`をオーバーロード
-    !して利用する．
+    !>`axis`型の変数の値をコピーする．
+    !>単体で呼び出すことはなく，代入演算子`=`をオーバーロード
+    !>して利用する．
     subroutine assign_axis(this, axis)
         implicit none
         !&<
@@ -84,9 +84,9 @@ contains
 
     !------------------------------------------------------------------!
 
-    !| 引数で指定した軸の最小値，最大値に基づいて`axis_type`変数を生成する．
-    ! 動作は`set_coord_values`と同じであるが，
-    ! 他の型とインタフェースを統一するために定義される．
+    !>引数で指定した軸の最小値，最大値に基づいて`axis_type`変数を生成する．
+    !>動作は`set_coord_values`と同じであるが，
+    !>他の型とインタフェースを統一するために定義される．
     subroutine construct_by_values(this, min_coord_val, max_coord_val)
         implicit none
         !&<
@@ -102,8 +102,8 @@ contains
         call this%set_coord_values(coord_val=[min_coord_val, max_coord_val])
     end subroutine construct_by_values
 
-    !| 引数で指定した，軸の最小値，最大値を持つ配列に基づいて
-    ! `axis`型変数を生成する．
+    !>引数で指定した，軸の最小値，最大値を持つ配列に基づいて
+    !>`axis`型変数を生成する．
     subroutine construct_by_array(this, coord_val)
         implicit none
         class(axis_type), intent(inout) :: this
@@ -116,7 +116,7 @@ contains
     end subroutine construct_by_array
 
     !------------------------------------------------------------------!
-    !| 軸の最小値と最大値を設定する．
+    !>軸の最小値と最大値を設定する．
     subroutine set_coord_values(this, coord_val)
         implicit none
         !&<
@@ -129,7 +129,7 @@ contains
         this = coord_val
     end subroutine set_coord_values
 
-    !| 軸の最小値と最大値を返す．
+    !>軸の最小値と最大値を返す．
     function get_coord_values(this) result(coord_vals)
         implicit none
         !&<
@@ -145,7 +145,7 @@ contains
         coord_vals(axis_max_index) = this%max
     end function get_coord_values
 
-    !| 軸の長さを返す．
+    !>軸の長さを返す．
     function get_length(this) result(length)
         implicit none
         !&<

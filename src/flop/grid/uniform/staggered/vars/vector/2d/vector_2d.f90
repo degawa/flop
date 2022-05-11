@@ -1,8 +1,8 @@
-!| ベクトル量に関する型を提供する．
-!
-!定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
-!定義されるベクトル量を取り扱う型が含まれる．
-!
+!>ベクトル量に関する型を提供する．
+!>
+!>定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
+!>定義されるベクトル量を取り扱う型が含まれる．
+!>
 module grid_uniform_staggered_vars_vector_2d
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -10,7 +10,7 @@ module grid_uniform_staggered_vars_vector_2d
     private
     public :: vector_2d_type
 
-    !| 2次元Staggered格子上で定義されるベクトル量型．
+    !>2次元Staggered格子上で定義されるベクトル量型．
     type :: vector_2d_type
         type(staggered_uniform_grid_2d_type), private, pointer :: grid
             !! ベクトル量が定義されている格子の情報<br>
@@ -78,9 +78,9 @@ module grid_uniform_staggered_vars_vector_2d
     end type vector_2d_type
 
 contains
-    !| 成分の`grid`の情報に基づいて，`vector_2d_type`を構築する．
-    !
-    !成分の配列を動的に割り付ける．
+    !>成分の`grid`の情報に基づいて，`vector_2d_type`を構築する．
+    !>
+    !>成分の配列を動的に割り付ける．
     subroutine construct_by_base_grid(this)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
@@ -112,25 +112,25 @@ contains
         allocate (this%y(is:ie, js:je), source=0d0)
     end subroutine construct_by_base_grid
 
-    !| 渡された格子（ポインタ）の情報に基づいて，`vector_2d_type`を構築する．
-    !
-    !格子を`vector_2d_type`のbase_gridとして関連付け，
-    !成分の配列を動的に割り付ける．
-    !
-    !@note
-    !
-    !gnu, nag fortranでは不要だが，intel fortranは
-    !`target`属性を持つ実体と，`pointer`で動作が異なる場合がある．
-    !そのため，intel fortran用に`pointer`を引数に取るコンストラクタを作成．
-    !
-    !`construct_by_grid`と引数が同じと判断されるので，
-    !`construct_by_grid`は`init_on`という別名を与える．
-    !gridの実体を与えるのはmainルーチンのみであることが想定されるので，
-    !ユーザの利便性を考え，ライブラリ外部からは`call u%init_on(grid)`
-    !として設定し，ポインタしか参照しない内部では`u%construct`で設定する．
-    !
-    !@endnote
-    !
+    !>渡された格子（ポインタ）の情報に基づいて，`vector_2d_type`を構築する．
+    !>
+    !>格子を`vector_2d_type`のbase_gridとして関連付け，
+    !>成分の配列を動的に割り付ける．
+    !>
+    !>@note
+    !>
+    !>gnu, nag fortranでは不要だが，intel fortranは
+    !>`target`属性を持つ実体と，`pointer`で動作が異なる場合がある．
+    !>そのため，intel fortran用に`pointer`を引数に取るコンストラクタを作成．
+    !>
+    !>`construct_by_grid`と引数が同じと判断されるので，
+    !>`construct_by_grid`は`init_on`という別名を与える．
+    !>gridの実体を与えるのはmainルーチンのみであることが想定されるので，
+    !>ユーザの利便性を考え，ライブラリ外部からは`call u%init_on(grid)`
+    !>として設定し，ポインタしか参照しない内部では`u%construct`で設定する．
+    !>
+    !>@endnote
+    !>
     subroutine construct_by_grid_pointer(this, grid)
         implicit none
         !&<
@@ -147,11 +147,11 @@ contains
         call this%construct()
     end subroutine construct_by_grid_pointer
 
-    !| 渡された`vector_2d_type`の情報に基づいて，
-    !`vector_2d_type`を構築する．
-    !
-    !格子を`vector_2d_type`のbase_gridとして関連付け，
-    !成分の配列を動的に割り付ける．
+    !>渡された`vector_2d_type`の情報に基づいて，
+    !>`vector_2d_type`を構築する．
+    !>
+    !>格子を`vector_2d_type`のbase_gridとして関連付け，
+    !>成分の配列を動的に割り付ける．
     subroutine construct_by_mold(this, mold)
         implicit none
         !&<
@@ -166,10 +166,10 @@ contains
         call this%construct(mold%grid)
     end subroutine construct_by_mold
 
-    !| 渡された格子（実体）の情報に基づいて，`vector_2d_type`を構築する．
-    !
-    !格子を`vector_2d_type`のbase_gridとして関連付け，
-    !成分の配列を動的に割り付ける．
+    !>渡された格子（実体）の情報に基づいて，`vector_2d_type`を構築する．
+    !>
+    !>格子を`vector_2d_type`のbase_gridとして関連付け，
+    !>成分の配列を動的に割り付ける．
     subroutine construct_by_grid(this, grid)
         implicit none
         !&<
@@ -187,9 +187,9 @@ contains
         call this%construct()
     end subroutine construct_by_grid
 
-    !| 構築した`vector_2d_type`を破棄する．
-    !
-    !成分の配列を解放し，base_gridとの関連を絶つ．
+    !>構築した`vector_2d_type`を破棄する．
+    !>
+    !>成分の配列を解放し，base_gridとの関連を絶つ．
     subroutine destruct(this)
         implicit none
         class(vector_2d_type), intent(inout) :: this
@@ -201,9 +201,9 @@ contains
         this%grid => null()
     end subroutine destruct
 
-    !| 動的に割り付けられた`vector_2d_type`を始末する．
-    !
-    !成分の配列を解放し，base_gridとの関連を絶つ．
+    !>動的に割り付けられた`vector_2d_type`を始末する．
+    !>
+    !>成分の配列を解放し，base_gridとの関連を絶つ．
     subroutine finalize(this)
         implicit none
         type(vector_2d_type), intent(inout) :: this
@@ -213,16 +213,16 @@ contains
         call this%destruct()
     end subroutine finalize
 
-    !| 渡された格子を関連付けた，新しい`vector_2d_type`を返す．
-    !
-    !戻り値となる`vector_2d_type`に格子をbase_gridとして関連付けるが，
-    !配列は割り付けない．
-    !
-    !割付は，[[grid_uniform_staggered_vars_vector_2d(module):initialize(function)]]
-    !が行う．
-    !
-    !演算子指向的に`u = u .on. grid`と呼ぶことを目的に，
-    !`.on.`2項演算子に関連付けられる．
+    !>渡された格子を関連付けた，新しい`vector_2d_type`を返す．
+    !>
+    !>戻り値となる`vector_2d_type`に格子をbase_gridとして関連付けるが，
+    !>配列は割り付けない．
+    !>
+    !>割付は，[[grid_uniform_staggered_vars_vector_2d(module):initialize(function)]]
+    !>が行う．
+    !>
+    !>演算子指向的に`u = u .on. grid`と呼ぶことを目的に，
+    !>`.on.`2項演算子に関連付けられる．
     function associate_grid(this, grid) result(new_vec)
         implicit none
         !&<
@@ -244,10 +244,10 @@ contains
         new_vec%grid => grid ! `=`だと以降で実行時エラー
     end function associate_grid
 
-    !| base_gridに基づいて配列を割り付けた新しい`vector_2d_type`を返す．
-    !
-    !演算子指向的に`u = .init. (u)`と呼ぶことを目的に，
-    !`.init.`単項演算子に関連付けられる．
+    !>base_gridに基づいて配列を割り付けた新しい`vector_2d_type`を返す．
+    !>
+    !>演算子指向的に`u = .init. (u)`と呼ぶことを目的に，
+    !>`.init.`単項演算子に関連付けられる．
     function initialize(this) result(new_vec)
         implicit none
 
@@ -261,7 +261,7 @@ contains
         call new_vec%construct_by_grid_pointer(this%grid)
     end function initialize
 
-    !| ベクトル量が定義される格子へのポインタを返す．
+    !>ベクトル量が定義される格子へのポインタを返す．
     function get_base_grid(this) result(grid)
         implicit none
 
@@ -276,9 +276,9 @@ contains
     end function get_base_grid
 
     !------------------------------------------------------------------!
-    !|`vector_2d_type`を代入する．
-    !
-    !単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
+    !>`vector_2d_type`を代入する．
+    !>
+    !>単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
     subroutine assign(lhs, rhs)
         implicit none
         !&<
@@ -296,10 +296,10 @@ contains
         lhs%y = rhs%y !
     end subroutine assign
 
-    !| `vector_2d_type`同士の加算を計算し，
-    !結果を`vector_2d_type`で返す．
-    !
-    !単体で呼び出すことはなく，加算演算子をオーバーロードして利用する．
+    !>`vector_2d_type`同士の加算を計算し，
+    !>結果を`vector_2d_type`で返す．
+    !>
+    !>単体で呼び出すことはなく，加算演算子をオーバーロードして利用する．
     function add_vec(this, vec_r) result(new_vec)
         implicit none
         !&<
@@ -317,10 +317,10 @@ contains
         new_vec%y(:, :) = this%y(:, :) + vec_r%y(:, :)
     end function add_vec
 
-    !| `vector_2d_type`同士の減算を計算し，
-    !結果を`vector_2d_type`で返す．
-    !
-    !単体で呼び出すことはなく，減算演算子をオーバーロードして利用する．
+    !>`vector_2d_type`同士の減算を計算し，
+    !>結果を`vector_2d_type`で返す．
+    !>
+    !>単体で呼び出すことはなく，減算演算子をオーバーロードして利用する．
     function minus_vec(this, vec_r) result(new_vec)
         implicit none
         !&<
@@ -338,10 +338,10 @@ contains
         new_vec%y(:, :) = this%y(:, :) - vec_r%y(:, :)
     end function minus_vec
 
-    !| `vector_2d_type`の各成分に-1をかけた結果を
-    !`vector_2d_type`で返す．
-    !
-    !単体で呼び出すことはなく，単項演算子をオーバーロードして利用する．
+    !>`vector_2d_type`の各成分に-1をかけた結果を
+    !>`vector_2d_type`で返す．
+    !>
+    !>単体で呼び出すことはなく，単項演算子をオーバーロードして利用する．
     function negate(this) result(new_vec)
         implicit none
         !&<
@@ -357,12 +357,12 @@ contains
         new_vec%y(:, :) = -1d0*new_vec%y(:, :)
     end function negate
 
-    !| `vector_2d_type`と倍精度実数の乗算を計算し，
-    !結果を`vector_2d_type`で返す．
-    !
-    !`vector_2d_type*real64`の形で計算する．
-    !
-    !単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
+    !>`vector_2d_type`と倍精度実数の乗算を計算し，
+    !>結果を`vector_2d_type`で返す．
+    !>
+    !>`vector_2d_type*real64`の形で計算する．
+    !>
+    !>単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
     function multiply_r8(this, factor) result(new_vec)
         implicit none
         !&<
@@ -380,12 +380,12 @@ contains
         new_vec%y = this%y*factor
     end function multiply_r8
 
-    !| `vector_2d_type`と倍精度実数の乗算を計算し，
-    !結果を`vector_2d_type`で返す．
-    !
-    !`real64*vector_2d_type`の形で計算する．
-    !
-    !単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
+    !>`vector_2d_type`と倍精度実数の乗算を計算し，
+    !>結果を`vector_2d_type`で返す．
+    !>
+    !>`real64*vector_2d_type`の形で計算する．
+    !>
+    !>単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
     function r_multiply_r8(factor, this) result(new_vec)
         implicit none
         !&<

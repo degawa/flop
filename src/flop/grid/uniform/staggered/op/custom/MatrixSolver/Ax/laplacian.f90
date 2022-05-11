@@ -1,8 +1,8 @@
-!| Laplace-Poisson方程式\(\nabla^2 x=b\)
-!の取り扱いに関する派生型を提供する．
-!
-!派生型には，連立方程式の左辺\(\nabla^2 x\)を表す派生型が含まれる．
-!
+!>Laplace-Poisson方程式\(\nabla^2 x=b\)
+!>の取り扱いに関する派生型を提供する．
+!>
+!>派生型には，連立方程式の左辺\(\nabla^2 x\)を表す派生型が含まれる．
+!>
 module grid_uniform_staggered_op_custom_solver_Ax_laplacian
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -13,8 +13,8 @@ module grid_uniform_staggered_op_custom_solver_Ax_laplacian
     private
     public :: laplacian
 
-    !| Laplace-Poisson方程式の左辺\(\nabla^2 x\)を
-    !取り扱う派生型．
+    !>Laplace-Poisson方程式の左辺\(\nabla^2 x\)を
+    !>取り扱う派生型．
     type, public, extends(Ax_atype) :: Ax_laplacian_type
         real(real64) :: accel = 1.925d0
             !! 解放にSOR法を利用する場合の加速係数
@@ -31,14 +31,14 @@ module grid_uniform_staggered_op_custom_solver_Ax_laplacian
         generic :: assignment(=) => assign
     end type Ax_laplacian_type
 
-    !| `Ax_laplacian_type`のコンストラクタを
-    !`laplacian(p)`と呼ぶためのインタフェース．
+    !>`Ax_laplacian_type`のコンストラクタを
+    !>`laplacian(p)`と呼ぶためのインタフェース．
     interface laplacian
         procedure :: construct_Ax_laplacian
     end interface
 
 contains
-    !| `Ax_laplacian_type`のコンストラクタ．
+    !>`Ax_laplacian_type`のコンストラクタ．
     function construct_Ax_laplacian(x) result(new_Ax_lap)
         implicit none
 
@@ -56,9 +56,9 @@ contains
         ! 別途演算子を用いて更新
     end function construct_Ax_laplacian
 
-    !| `Ax_laplacian_type`を代入する．
-    !
-    !単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
+    !>`Ax_laplacian_type`を代入する．
+    !>
+    !>単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
     subroutine assign(lhs, rhs)
         implicit none
         !&<
@@ -77,9 +77,9 @@ contains
         lhs%accel = rhs%accel
     end subroutine assign
 
-    !| 連立方程式を解いて未知数`x`を更新する．
-    !
-    ! 求解アルゴリズムにはSOR法を用いる．
+    !>連立方程式を解いて未知数`x`を更新する．
+    !>
+    !>求解アルゴリズムにはSOR法を用いる．
     subroutine solve(this, x, b)
         implicit none
         !&<
@@ -141,7 +141,7 @@ contains
         end do
     end subroutine solve
 
-    !| \(\nabla^2 x\)を計算した結果を返す．
+    !>\(\nabla^2 x\)を計算した結果を返す．
     function eval(this) result(new_b)
         use :: grid_uniform_staggered_op_unary_laplacian_acc2
         implicit none

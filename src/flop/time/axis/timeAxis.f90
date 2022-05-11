@@ -1,10 +1,10 @@
-!| 時間方向の軸の情報関する定数や派生型を提供する．
-!
-!定義される型には，時間方向の情報（開始時間，終了時間）
-!を取り扱う派生型が含まれる．
-!また，開始時間や終了時間を配列として扱うので，
-!配列を参照するための定数も定義される．
-!
+!>時間方向の軸の情報関する定数や派生型を提供する．
+!>
+!>定義される型には，時間方向の情報（開始時間，終了時間）
+!>を取り扱う派生型が含まれる．
+!>また，開始時間や終了時間を配列として扱うので，
+!>配列を参照するための定数も定義される．
+!>
 module time_axis
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
@@ -19,8 +19,8 @@ module time_axis
             !! 終了時間（時間軸の最大値）を参照するための配列添字
     end enum
 
-    !| 時間軸を取り扱う派生型．
-    !開始時間，終了時間が含まれる．
+    !>時間軸を取り扱う派生型．
+    !>開始時間，終了時間が含まれる．
     type, public :: time_axis_type
         real(real64), private :: begin = 0d0
             !! 開始時間（時間軸の最小値）
@@ -51,9 +51,9 @@ module time_axis
 
 contains
 
-    !| 開始時間と終了時間を持った配列を代入する．
-    !単体で呼び出すことはなく，代入演算子`=`をオーバーロード
-    !して利用する．
+    !>開始時間と終了時間を持った配列を代入する．
+    !>単体で呼び出すことはなく，代入演算子`=`をオーバーロード
+    !>して利用する．
     subroutine assign_array(this, period_val)
         implicit none
         !&<
@@ -68,9 +68,9 @@ contains
         this%end = period_val(time_axis_end_index)
     end subroutine assign_array
 
-    !| `time_axis`型の変数の値をコピーする．
-    !単体で呼び出すことはなく，代入演算子`=`をオーバーロード
-    !して利用する．
+    !>`time_axis`型の変数の値をコピーする．
+    !>単体で呼び出すことはなく，代入演算子`=`をオーバーロード
+    !>して利用する．
     subroutine assign_time_axis(this, ref_axis)
         implicit none
         !&<
@@ -84,10 +84,10 @@ contains
     end subroutine assign_time_axis
 
     !------------------------------------------------------------------!
-    !| 引数で指定した，開始時間，終了時間に基づいて
-    !`time_axis_type`変数を生成する．
-    ! 動作は`set_period`と同じであるが，
-    ! 他の型とインタフェースを統一するために定義される．
+    !>引数で指定した，開始時間，終了時間に基づいて
+    !>`time_axis_type`変数を生成する．
+    !> 動作は`set_period`と同じであるが，
+    !> 他の型とインタフェースを統一するために定義される．
     subroutine construct_by_values(this, time_begin, time_end)
         implicit none
         !&<
@@ -103,8 +103,8 @@ contains
         call this%set_period(period_val=[time_begin, time_end])
     end subroutine construct_by_values
 
-    !| 引数で指定した，開始時間，終了時間を持つ配列に基づいて
-    ! `time_axis_type`変数を生成する．
+    !>引数で指定した，開始時間，終了時間を持つ配列に基づいて
+    !>`time_axis_type`変数を生成する．
     subroutine construct_by_array(this, period_val)
         implicit none
         !&<
@@ -119,7 +119,7 @@ contains
     end subroutine construct_by_array
 
     !------------------------------------------------------------------!
-    !| 開始時間と終了時間を設定する．
+    !>開始時間と終了時間を設定する．
     subroutine set_period(this, period_val)
         implicit none
         !&<
@@ -133,7 +133,7 @@ contains
         this = period_val ! 代入演算子を利用
     end subroutine set_period
 
-    !| 開始時間と終了時間を返す．
+    !>開始時間と終了時間を返す．
     function get_period(this) result(period_val)
         implicit none
         !&<
@@ -149,7 +149,7 @@ contains
     end function get_period
 
     !------------------------------------------------------------------!
-    !| 計算時間（開始時間と終了時間の差）を返す．
+    !>計算時間（開始時間と終了時間の差）を返す．
     function get_duration(this) result(duration)
         implicit none
         !&<

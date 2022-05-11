@@ -1,5 +1,5 @@
-!| 2次元Staggered格子上で定義される物理量に対する境界条件を
-!一括して取り扱うために`use`するモジュール
+!>2次元Staggered格子上で定義される物理量に対する境界条件を
+!>一括して取り扱うために`use`するモジュール
 module grid_uniform_staggered_op_custom_bc
     use :: grid_uniform_staggered_op_custom_bc_type
     use :: grid_uniform_staggered_op_custom_bc_position

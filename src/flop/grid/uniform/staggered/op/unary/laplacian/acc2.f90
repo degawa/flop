@@ -1,18 +1,18 @@
-!| 単項演算子laplacian（∇²）に関する手続を提供する．
-!
-!手続には，ベクトル量に対するlaplacian
-!\[
-!\nabla^2 \boldsymbol{u} = \frac{\partial u_i}{\partial x_j\partial x_j}
-!\]
-!と，スカラ量に対するlaplacian
-!\[
-!\nabla^2 p = \frac{\partial p}{\partial x_j\partial x_j}
-!\]
-!が含まれる．
-!
-!また，ユーザ定義演算子`.laplacian.`として公開するための
-!インタフェースも含まれる．
-!
+!>単項演算子laplacian（∇²）に関する手続を提供する．
+!>
+!>手続には，ベクトル量に対するlaplacian
+!>\[
+!>\nabla^2 \boldsymbol{u} = \frac{\partial u_i}{\partial x_j\partial x_j}
+!>\]
+!>と，スカラ量に対するlaplacian
+!>\[
+!>\nabla^2 p = \frac{\partial p}{\partial x_j\partial x_j}
+!>\]
+!>が含まれる．
+!>
+!>また，ユーザ定義演算子`.laplacian.`として公開するための
+!>インタフェースも含まれる．
+!>
 module grid_uniform_staggered_op_unary_laplacian_acc2
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -21,7 +21,7 @@ module grid_uniform_staggered_op_unary_laplacian_acc2
     private
     public :: operator(.laplacian.)
 
-    !| ユーザ定義演算子`.laplacia.`を定義するインタフェース
+    !>ユーザ定義演算子`.laplacia.`を定義するインタフェース
     interface operator(.laplacian.)
         procedure :: laplacian_vec
         procedure :: laplacian_scr
@@ -29,11 +29,11 @@ module grid_uniform_staggered_op_unary_laplacian_acc2
 
 contains
 
-    !| 引数のベクトル量にlaplacian
-    !\[
-    !\nabla^2 \boldsymbol{u} = \frac{\partial u_i}{\partial x_j\partial x_j}
-    !\]
-    !を適用し，得られた結果をベクトル量で返す．
+    !>引数のベクトル量にlaplacian
+    !>\[
+    !>\nabla^2 \boldsymbol{u} = \frac{\partial u_i}{\partial x_j\partial x_j}
+    !>\]
+    !>を適用し，得られた結果をベクトル量で返す．
     function laplacian_vec(vec) result(new_vec)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
@@ -82,11 +82,11 @@ contains
         end block
     end function laplacian_vec
 
-    !| 引数のスカラ量にlaplacian
-    !\[
-    !\nabla^2 p = \frac{\partial p}{\partial x_j\partial x_j}
-    !\]
-    !を適用し，得られた結果をスカラ量で返す．
+    !>引数のスカラ量にlaplacian
+    !>\[
+    !>\nabla^2 p = \frac{\partial p}{\partial x_j\partial x_j}
+    !>\]
+    !>を適用し，得られた結果をスカラ量で返す．
     function laplacian_scr(scr) result(new_scr)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &

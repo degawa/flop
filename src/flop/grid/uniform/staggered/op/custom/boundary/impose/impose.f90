@@ -1,24 +1,24 @@
-!| スカラ量あるいはベクトル量に，境界条件を適用する手続を提供する．
-!
-!手続には，ベクトル量に境界条件を適用する手続と，
-!スカラ量に境界条件を適用する手続が含まれる．
-!
-!`u .impose. BC_u`などと表現することを実現するための
-!ユーザ定義演算子`.impose.`を定義するインタフェースも含まれる．
-!
-!また，スカラ量の境界条件をin-placeで適用するための手続`impose`も定義される．
-!
-!@note
-!`.impose.`に限らず，演算子は被演算子を更新できない．
-!そのため，連立方程式を反復法で解く場合，`.impose.`を利用すると
-!反復の繰り返しの中でNeumann境界条件を適用する度に，
-!`p = p .impose. BC_p`とする必要があり，一時変数の生成・解放が行われる．
-!
-!そのため，in-placeで境界条件を適用する`impose()`を定義し，
-!`call impose(p, BC_p)`として更新することで
-!一時変数の生成・解放を回避する．
-!@endnote
-!
+!>スカラ量あるいはベクトル量に，境界条件を適用する手続を提供する．
+!>
+!>手続には，ベクトル量に境界条件を適用する手続と，
+!>スカラ量に境界条件を適用する手続が含まれる．
+!>
+!>`u .impose. BC_u`などと表現することを実現するための
+!>ユーザ定義演算子`.impose.`を定義するインタフェースも含まれる．
+!>
+!>また，スカラ量の境界条件をin-placeで適用するための手続`impose`も定義される．
+!>
+!>@note
+!>`.impose.`に限らず，演算子は被演算子を更新できない．
+!>そのため，連立方程式を反復法で解く場合，`.impose.`を利用すると
+!>反復の繰り返しの中でNeumann境界条件を適用する度に，
+!>`p = p .impose. BC_p`とする必要があり，一時変数の生成・解放が行われる．
+!>
+!>そのため，in-placeで境界条件を適用する`impose()`を定義し，
+!>`call impose(p, BC_p)`として更新することで
+!>一時変数の生成・解放を回避する．
+!>@endnote
+!>
 module grid_uniform_staggered_op_custom_bc_impose
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -33,25 +33,25 @@ module grid_uniform_staggered_op_custom_bc_impose
     public :: operator(.impose.)
     public :: impose
 
-    !| ユーザ定義演算子`.impose.`を定義するインタフェース．
-    !
-    !ベクトル量およびスカラ量へのDirichlet境界条件
-    !の適用のみ取り扱う．
+    !>ユーザ定義演算子`.impose.`を定義するインタフェース．
+    !>
+    !>ベクトル量およびスカラ量へのDirichlet境界条件
+    !>の適用のみ取り扱う．
     interface operator(.impose.)
         procedure :: impose_vec_vecbc_dirichlet_op
         procedure :: impose_scr_scrbc_dirichlet_op
     end interface
 
-    !| `impose`手続の総称名．
-    !
-    !スカラ用のNeumann境界条件の適用を行う．
+    !>`impose`手続の総称名．
+    !>
+    !>スカラ用のNeumann境界条件の適用を行う．
     interface impose
         procedure :: impose_scr_scrbc_neumann
     end interface
 contains
 
-    !| ベクトル量に対するDirichlet境界条件を適用し，
-    !条件が適用されたベクトル量を返す．
+    !>ベクトル量に対するDirichlet境界条件を適用し，
+    !>条件が適用されたベクトル量を返す．
     function impose_vec_vecbc_dirichlet_op(vec, vec_bc) result(new_vec)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
@@ -162,8 +162,8 @@ contains
         end block
     end function impose_vec_vecbc_dirichlet_op
 
-    !| スカラ量に対するDirichlet境界条件を適用し，
-    !条件が適用されたスカラ量を返す．
+    !>スカラ量に対するDirichlet境界条件を適用し，
+    !>条件が適用されたスカラ量を返す．
     function impose_scr_scrbc_dirichlet_op(scr, scr_bc) result(new_scr)
         use :: space_Cartesian, &
             x_min => x_min_index, x_max => x_max_index, &
@@ -256,7 +256,7 @@ contains
         end block
     end function impose_scr_scrbc_dirichlet_op
 
-    !| スカラ量に対するNeumann境界条件を適用し，in-placeで更新する．
+    !>スカラ量に対するNeumann境界条件を適用し，in-placeで更新する．
     subroutine impose_scr_scrbc_neumann(scr, scr_bc)
         use :: space_Cartesian, &
             x_min => x_min_index, x_max => x_max_index, &

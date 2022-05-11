@@ -1,5 +1,5 @@
-!| Flopを構成するモジュールを
-!一括して`use`するためのモジュール
+!>Flopを構成するモジュールを
+!>一括して`use`するためのモジュール
 module flop
     use :: time_axis
     use :: discreteTime

@@ -1,17 +1,17 @@
-!| ある境界における境界条件を作成する手続を提供する．
-!
-!手続には，境界の位置と，境界における値や勾配を組み合わせて，
-!ある境界における境界条件を作成する手続が含まれる．
-!
-!- ベクトル量に対するDirichlet境界条件
-!- スカラ量に対するDirichlet境界条件
-!- スカラ量に対するNeumann境界条件
-!
-!を作成する．
-!
-!また，`Dirichlet([0d0, 0d0]) .on. B1`などと表現することを実現するための
-!ユーザ定義演算子`.on.`を定義するインタフェースも含まれる．
-!
+!>ある境界における境界条件を作成する手続を提供する．
+!>
+!>手続には，境界の位置と，境界における値や勾配を組み合わせて，
+!>ある境界における境界条件を作成する手続が含まれる．
+!>
+!>- ベクトル量に対するDirichlet境界条件
+!>- スカラ量に対するDirichlet境界条件
+!>- スカラ量に対するNeumann境界条件
+!>
+!>を作成する．
+!>
+!>また，`Dirichlet([0d0, 0d0]) .on. B1`などと表現することを実現するための
+!>ユーザ定義演算子`.on.`を定義するインタフェースも含まれる．
+!>
 module grid_uniform_staggered_op_custom_bc_on
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_op_custom_bc_type
@@ -26,7 +26,7 @@ module grid_uniform_staggered_op_custom_bc_on
     private
     public :: operator(.on.)
 
-    !| ユーザ定義演算子`.on.`を定義するインタフェース
+    !>ユーザ定義演算子`.on.`を定義するインタフェース
     interface operator(.on.)
         procedure :: on_vecval_pos
         procedure :: on_scrval_pos
@@ -35,8 +35,8 @@ module grid_uniform_staggered_op_custom_bc_on
 
 contains
 
-    !| ベクトル量のDirichlet境界条件と境界の位置を組み合わせ，
-    ! ある境界におけるベクトル量の境界条件を返す．
+    !>ベクトル量のDirichlet境界条件と境界の位置を組み合わせ，
+    !>ある境界におけるベクトル量の境界条件を返す．
     function on_vecval_pos(Dirichlet_vector_value, position) result(new_vecval_bc)
         implicit none
         !&<
@@ -52,8 +52,8 @@ contains
         new_vecval_bc%boundary_index = position%position
     end function on_vecval_pos
 
-    !| スカラ量のDirichlet境界条件と境界の位置を組み合わせ，
-    ! ある境界におけるスカラ量の境界条件を返す．
+    !>スカラ量のDirichlet境界条件と境界の位置を組み合わせ，
+    !>ある境界におけるスカラ量の境界条件を返す．
     function on_scrval_pos(Dirichlet_scalar_value, position) result(new_scrval_bc)
         implicit none
         !&<
@@ -69,8 +69,8 @@ contains
         new_scrval_bc%boundary_index = position%position
     end function on_scrval_pos
 
-    !| スカラ量のDirichlet境界条件と境界の位置を組み合わせ，
-    ! ある境界におけるスカラ量の境界条件を返す．
+    !>スカラ量のDirichlet境界条件と境界の位置を組み合わせ，
+    !>ある境界におけるスカラ量の境界条件を返す．
     function on_scrgrad_pos(Neumann_scalar_gradient, position) result(new_scrgrad_bc)
         implicit none
         !&<

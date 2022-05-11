@@ -1,15 +1,15 @@
-!| 時間方向の離散化に関する型を提供する．
-!
-!定義される型には，時間軸の情報（計算開始時間と終了時間）
-!を取り扱う派生型が含まれる．
-!
+!>時間方向の離散化に関する型を提供する．
+!>
+!>定義される型には，時間軸の情報（計算開始時間と終了時間）
+!>を取り扱う派生型が含まれる．
+!>
 module discreteTime
     use, intrinsic :: iso_fortran_env
     use :: time_axis
     implicit none
     private
 
-    !| 時間方向の離散化情報を取り扱う派生型．
+    !>時間方向の離散化情報を取り扱う派生型．
     type, public :: discrete_time_type
         type(time_axis_type), private :: time
             !! 時間軸の情報
@@ -36,7 +36,7 @@ module discreteTime
 
 contains
 
-    !| 時間軸と計算時間間隔を用いて時間離散化情報を作成する．
+    !>時間軸と計算時間間隔を用いて時間離散化情報を作成する．
     subroutine construct_by_time_interval(this, time, time_interval)
         implicit none
         !&<
@@ -55,7 +55,7 @@ contains
         ! 誤差の都合で199.99999->199とならないように最近傍値に丸める
     end subroutine construct_by_time_interval
 
-    !| 時間軸と計算時間間隔を用いて時間離散化情報を作成する．
+    !>時間軸と計算時間間隔を用いて時間離散化情報を作成する．
     subroutine construct_by_number_of_integration(this, time, number_of_integration)
         implicit none
         !&<
@@ -85,7 +85,7 @@ contains
         !
     end subroutine construct_by_number_of_integration
 
-    !| 計算時間間隔を返す．
+    !>計算時間間隔を返す．
     function get_time_interval(this) result(interval)
         implicit none
 
@@ -98,7 +98,7 @@ contains
         interval = this%dt
     end function get_time_interval
 
-    !| 時間積分回数を返す．
+    !>時間積分回数を返す．
     function get_number_of_integration(this) result(num_integration)
         implicit none
 

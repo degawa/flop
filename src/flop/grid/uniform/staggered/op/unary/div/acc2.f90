@@ -1,18 +1,18 @@
-!| 単項演算子divergence（∇･）に関する手続を提供する．
-!
-!手続には，ベクトル量に対するdivergence
-!\[
-!\nabla\cdot \boldsymbol{u} = \frac{\partial u_j}{\partial x_j}
-!\]
-!と，テンソル量に対するdivergence
-!\[
-!\nabla\cdot \boldsymbol{\tau} = \frac{\partial \tau_{ij}}{\partial x_j}
-!\]
-!が含まれる．
-!
-!また，ユーザ定義演算子`.div.`として公開するための
-!インタフェースも含まれる．
-!
+!>単項演算子divergence（∇･）に関する手続を提供する．
+!>
+!>手続には，ベクトル量に対するdivergence
+!>\[
+!>\nabla\cdot \boldsymbol{u} = \frac{\partial u_j}{\partial x_j}
+!>\]
+!>と，テンソル量に対するdivergence
+!>\[
+!>\nabla\cdot \boldsymbol{\tau} = \frac{\partial \tau_{ij}}{\partial x_j}
+!>\]
+!>が含まれる．
+!>
+!>また，ユーザ定義演算子`.div.`として公開するための
+!>インタフェースも含まれる．
+!>
 module grid_uniform_staggered_op_unary_div_acc2
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -23,18 +23,18 @@ module grid_uniform_staggered_op_unary_div_acc2
     private
     public :: operator(.div.)
 
-    !| ユーザ定義演算子`.div.`を定義するインタフェース
+    !>ユーザ定義演算子`.div.`を定義するインタフェース
     interface operator(.div.)
         procedure :: div_vec
         procedure :: div_tsr
     end interface
 
 contains
-    !| 引数のベクトル量にdivergence
-    !\[
-    !\nabla\cdot \boldsymbol{u} = \frac{\partial u_j}{\partial x_j}
-    !\]
-    !を適用し，得られた結果をスカラ量で返す．
+    !>引数のベクトル量にdivergence
+    !>\[
+    !>\nabla\cdot \boldsymbol{u} = \frac{\partial u_j}{\partial x_j}
+    !>\]
+    !>を適用し，得られた結果をスカラ量で返す．
     function div_vec(vec) result(new_scr)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
@@ -72,11 +72,11 @@ contains
         end block
     end function div_vec
 
-    !| 引数のテンソル量にdivergence
-    !\[
-    !\nabla\cdot \boldsymbol{\tau} = \frac{\partial \tau_{ij}}{\partial x_j}
-    !\]
-    !を適用し，得られた結果をベクトル量で返す．
+    !>引数のテンソル量にdivergence
+    !>\[
+    !>\nabla\cdot \boldsymbol{\tau} = \frac{\partial \tau_{ij}}{\partial x_j}
+    !>\]
+    !>を適用し，得られた結果をベクトル量で返す．
     function div_tsr(tsr) result(new_vec)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &

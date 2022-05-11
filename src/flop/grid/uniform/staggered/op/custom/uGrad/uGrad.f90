@@ -1,24 +1,24 @@
-!| Navier-Stokes方程式の移流項\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)
-!に関する派生型を提供する．
-!
-!派生型には，Navier-Stokes方程式の移流項\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)のうち，
-!\(\boldsymbol{u}\cdot\nabla\)を扱う派生型が含まれる．
-!
-!@note
-!
-!\(\boldsymbol{u}\cdot\nabla\)は非常に特殊であり，
-!単純に単項演算子や2項演算子としては記述できない．
-!また，Fortranではユーザ定義演算子を返す関数を作れない．
-!
-!そこで，単純な演算子として記述することを諦め，`(u_dot_nabla).op.u`と記述する．
-!`u_dot_nabla`は，移流速度\(\boldsymbol{u}\)を成分にもち，
-!実際に\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)を離散的に計算する
-!手続を含んでいればよい．
-!
-!`.op.`の内から`u_dot_nabla`の手続を呼び出せば，移流項の表現が実現できる．
-!
-!@endnote
-!
+!>Navier-Stokes方程式の移流項\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)
+!>に関する派生型を提供する．
+!>
+!>派生型には，Navier-Stokes方程式の移流項\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)のうち，
+!>\(\boldsymbol{u}\cdot\nabla\)を扱う派生型が含まれる．
+!>
+!>@note
+!>
+!>\(\boldsymbol{u}\cdot\nabla\)は非常に特殊であり，
+!>単純に単項演算子や2項演算子としては記述できない．
+!>また，Fortranではユーザ定義演算子を返す関数を作れない．
+!>
+!>そこで，単純な演算子として記述することを諦め，`(u_dot_nabla).op.u`と記述する．
+!>`u_dot_nabla`は，移流速度\(\boldsymbol{u}\)を成分にもち，
+!>実際に\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)を離散的に計算する
+!>手続を含んでいればよい．
+!>
+!>`.op.`の内から`u_dot_nabla`の手続を呼び出せば，移流項の表現が実現できる．
+!>
+!>@endnote
+!>
 module grid_uniform_staggered_op_custom_uGrad
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -26,8 +26,8 @@ module grid_uniform_staggered_op_custom_uGrad
     implicit none
     private
 
-    !| Navier-Stokes方程式の移流項のうち，
-    !\(\boldsymbol{u}\cdot\nabla\)を扱う派生型．
+    !>Navier-Stokes方程式の移流項のうち，
+    !>\(\boldsymbol{u}\cdot\nabla\)を扱う派生型．
     type, public :: u_grad_type
         type(vector_2d_type), public :: u
             !! 移流速度
@@ -39,7 +39,7 @@ module grid_uniform_staggered_op_custom_uGrad
     end type u_grad_type
 
 contains
-    !| 移流速度に基づいて，`u_grad_type`を構築する．
+    !>移流速度に基づいて，`u_grad_type`を構築する．
     subroutine construct(this, u)
         implicit none
         !&<
@@ -52,20 +52,20 @@ contains
         this%u = u
     end subroutine construct
 
-    !| `u_grad_type`に格納された移流速度と，
-    !引数で渡された速度（保存量）を用いて，Navier-Stokes方程式の移流項
-    !\[
-    !(\boldsymbol{u}\cdot\nabla)\boldsymbol{u} = u_j\frac{\partial u_i}{\partial x_j}
-    !\]
-    !を計算し，得られた結果をベクトル量で返す．
-    !
-    !上流化は行わず，中心補間を用いる．
-    !これは，梶島(1994) (https://doi.org/10.1299/kikaib.60.2058)によって
-    !示された，移流項に対する適切な差分形式のうち，勾配型
-    !\[
-    ! \overline{\overline{u_j}^{x_i}\delta_{x_j}u_i}^{x_j}
-    !\]
-    !に相当する．
+    !>`u_grad_type`に格納された移流速度と，
+    !>引数で渡された速度（保存量）を用いて，Navier-Stokes方程式の移流項
+    !>\[
+    !>(\boldsymbol{u}\cdot\nabla)\boldsymbol{u} = u_j\frac{\partial u_i}{\partial x_j}
+    !>\]
+    !>を計算し，得られた結果をベクトル量で返す．
+    !>
+    !>上流化は行わず，中心補間を用いる．
+    !>これは，梶島(1994) (https://doi.org/10.1299/kikaib.60.2058)によって
+    !>示された，移流項に対する適切な差分形式のうち，勾配型
+    !>\[
+    !> \overline{\overline{u_j}^{x_i}\delta_{x_j}u_i}^{x_j}
+    !>\]
+    !>に相当する．
     function compute(u_grad, u) result(new_vec)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &

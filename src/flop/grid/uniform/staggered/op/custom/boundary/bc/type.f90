@@ -1,8 +1,8 @@
-!| 境界の種類を表す定数を提供する．
-!
-!定数は，第1種（Dirichlet）境界条件および
-!第2種（Neumann）境界条件を表す定数が定義される．
-!
+!>境界の種類を表す定数を提供する．
+!>
+!>定数は，第1種（Dirichlet）境界条件および
+!>第2種（Neumann）境界条件を表す定数が定義される．
+!>
 module grid_uniform_staggered_op_custom_bc_type
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
@@ -21,8 +21,8 @@ module grid_uniform_staggered_op_custom_bc_type
     end enum
 
 contains
-    !| 境界の種類がDirichlet境界条件の場合に`.true.`を，
-    !そうでない場合に`.false.`を返す．
+    !>境界の種類がDirichlet境界条件の場合に`.true.`を，
+    !>そうでない場合に`.false.`を返す．
     logical function is_Dirichlet_boundary(boundary_type)
         implicit none
 
@@ -32,8 +32,8 @@ contains
         is_Dirichlet_boundary = (boundary_type == boundary_Dirichlet)
     end function is_Dirichlet_boundary
 
-    !| 境界の種類がNeumann境界条件の場合に`.true.`を，
-    !そうでない場合に`.false.`を返す．
+    !>境界の種類がNeumann境界条件の場合に`.true.`を，
+    !>そうでない場合に`.false.`を返す．
     logical function is_Neumann_boundary(boundary_type)
         implicit none
 

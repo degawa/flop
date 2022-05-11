@@ -1,12 +1,12 @@
-!| デカルト座標系に関する定数や型を提供する．
-!
-!定義される型には，2次元デカルト座標系の情報（各軸の情報）
-!を取り扱う派生型が含まれる．
-!また，各軸の値や量の成分を格納した配列を参照するための定数も定義される．
-!
-!この型を使う限り，各軸の最大，最小値などは，`[x_min, y_min, x_max, ymax]`
-!の順で扱う事になる．
-!
+!>デカルト座標系に関する定数や型を提供する．
+!>
+!>定義される型には，2次元デカルト座標系の情報（各軸の情報）
+!>を取り扱う派生型が含まれる．
+!>また，各軸の値や量の成分を格納した配列を参照するための定数も定義される．
+!>
+!>この型を使う限り，各軸の最大，最小値などは，`[x_min, y_min, x_max, ymax]`
+!>の順で扱う事になる．
+!>
 module space_Cartesian
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
@@ -47,7 +47,7 @@ module space_Cartesian
             !! デカルト座標系の\(y\)軸の最大値を参照するための配列添字
     end enum
 
-    !| 2次元デカルト座標系の各軸の情報を取り扱う派生型．
+    !>2次元デカルト座標系の各軸の情報を取り扱う派生型．
     type, public :: Cartesian_2d_type
         type(axis_type), private :: x
             !! \(x\)軸
@@ -74,7 +74,7 @@ module space_Cartesian
     end type Cartesian_2d_type
 
 contains
-    !| 配列の値に基づいて2次元デカルト座標系型変数を設定する．
+    !>配列の値に基づいて2次元デカルト座標系型変数を設定する．
     subroutine set_coordinate_2d_by_array(this, x_coord_val, y_coord_val)
         implicit none
         !&<
@@ -90,7 +90,7 @@ contains
         this%y = y_coord_val(:)
     end subroutine set_coordinate_2d_by_array
 
-    !| 軸の値に基づいて2次元デカルト座標系型変数を設定する．
+    !>軸の値に基づいて2次元デカルト座標系型変数を設定する．
     subroutine set_coodinate_2d_by_axis(this, x_axis, y_axis)
         implicit none
         !&<
@@ -106,7 +106,7 @@ contains
         this%y = y_axis
     end subroutine set_coodinate_2d_by_axis
 
-    !| 2次元デカルト座標系の各軸の座標値を配列で返す．
+    !>2次元デカルト座標系の各軸の座標値を配列で返す．
     function get_coordinate_2d(this) result(coord_vals)
         implicit none
         !&<
@@ -126,7 +126,7 @@ contains
         coord_vals(y_max_index) = coord_val_y(2)
     end function get_coordinate_2d
 
-    !| 2次元デカルト座標系の各軸の長さを返す．
+    !>2次元デカルト座標系の各軸の長さを返す．
     function get_length_2d(this) result(lengths)
         implicit none
         !&<
@@ -140,9 +140,9 @@ contains
                    this%y%get_length()]
     end function get_length_2d
 
-    !| 2次元デカルト座標系変数を代入する．
-    !単体で呼び出すことはなく，代入演算子`=`をオーバーロード
-    !して利用する．
+    !>2次元デカルト座標系変数を代入する．
+    !>単体で呼び出すことはなく，代入演算子`=`をオーバーロード
+    !>して利用する．
     subroutine assign(lhs, rhs)
         implicit none
         !&<

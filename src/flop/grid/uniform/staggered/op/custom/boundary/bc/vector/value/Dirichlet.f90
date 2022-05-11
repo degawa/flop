@@ -1,31 +1,31 @@
-!| ベクトル量に対するDirichlet境界条件に関係した型や手続を提供する．
-!
-!型には，ベクトル量の値を取り扱う型が含まれる．
-!
-!手続には，ベクトル量の値を取り扱う型を構築する
-!コンストラクタが含まれる．
-!
+!>ベクトル量に対するDirichlet境界条件に関係した型や手続を提供する．
+!>
+!>型には，ベクトル量の値を取り扱う型が含まれる．
+!>
+!>手続には，ベクトル量の値を取り扱う型を構築する
+!>コンストラクタが含まれる．
+!>
 module grid_uniform_staggered_op_custom_bc_vector_value_Dirichlet
     use, intrinsic :: iso_fortran_env
     implicit none
     private
     public :: Dirichlet
 
-    !| ベクトル量の値を取り扱う派生型．
+    !>ベクトル量の値を取り扱う派生型．
     type, public :: Dirichlet_vector_value_type
         real(real64) :: value(2)
             !! 境界におけるベクトル量の値
             !! `=[x, y]`
     end type Dirichlet_vector_value_type
 
-    !| ベクトル量を`Dirichlet([u_x, u_y])`
-    !で作成できるようにするためのインタフェース
+    !>ベクトル量を`Dirichlet([u_x, u_y])`
+    !>で作成できるようにするためのインタフェース
     interface Dirichlet
         procedure :: Dirichlet_vector
     end interface
 
 contains
-    !| ベクトル量を扱う型を構築するためのコンストラクタ．
+    !>ベクトル量を扱う型を構築するためのコンストラクタ．
     function Dirichlet_vector(val) result(new_value)
         implicit none
 

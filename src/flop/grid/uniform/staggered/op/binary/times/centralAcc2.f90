@@ -1,16 +1,16 @@
-!| 2項演算子のテンソル積\(\otimes\)に関する手続を提供する．
-!
-!手続には，ベクトル量に対するテンソル積
-!\[
-!\boldsymbol{u}\otimes\boldsymbol{v} = u_i v_j
-!\]
-!が含まれる．
-!
-!また，ユーザ定義演算子`.times.`として公開するための
-!インタフェースも含まれる．
-!
-!WENOやMUSCL等を用いた上流化は，必要に応じて実装する．
-!
+!> 2項演算子のテンソル積\(\otimes\)に関する手続を提供する．
+!>
+!>手続には，ベクトル量に対するテンソル積
+!>\[
+!>\boldsymbol{u}\otimes\boldsymbol{v} = u_i v_j
+!>\]
+!>が含まれる．
+!>
+!>また，ユーザ定義演算子`.times.`として公開するための
+!>インタフェースも含まれる．
+!>
+!>WENOやMUSCL等を用いた上流化は，必要に応じて実装する．
+!>
 module grid_uniform_staggered_op_binary_times_central
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -20,25 +20,25 @@ module grid_uniform_staggered_op_binary_times_central
     private
     public :: operator(.times.)
 
-    !| ユーザ定義演算子`.times.`を定義するインタフェース
+    !>ユーザ定義演算子`.times.`を定義するインタフェース
     interface operator(.times.)
         procedure :: tensor_product
     end interface
 
 contains
-    !| 引数の二つのベクトル量を用いてテンソル積
-    !\[
-    !\boldsymbol{u}\otimes\boldsymbol{v} = u_i v_j
-    !\]
-    !を計算し，得られた結果をテンソル量で返す．
-    !
-    !上流化は行わず，中心補間を用いる．
-    !これは，梶島(1994) (https://doi.org/10.1299/kikaib.60.2058)によって
-    !示された，移流項に対する適切な差分形式うち，発散型（の被微分項）
-    !\[
-    ! \delta_{x_j}\left(\overline{u_j}^{x_i}\overline{u_i}^{x_j}\right)
-    !\]
-    !に相当する．
+    !>引数の二つのベクトル量を用いてテンソル積
+    !>\[
+    !>\boldsymbol{u}\otimes\boldsymbol{v} = u_i v_j
+    !>\]
+    !>を計算し，得られた結果をテンソル量で返す．
+    !>
+    !>上流化は行わず，中心補間を用いる．
+    !>これは，梶島(1994) (https://doi.org/10.1299/kikaib.60.2058)によって
+    !>示された，移流項に対する適切な差分形式うち，発散型（の被微分項）
+    !>\[
+    !> \delta_{x_j}\left(\overline{u_j}^{x_i}\overline{u_i}^{x_j}\right)
+    !>\]
+    !>に相当する．
     function tensor_product(vec_l, vec_r) result(new_tsr)
         use :: space_Cartesian, &
             xx => xx_index, xy => xy_index, yx => yx_index, yy => yy_index, &

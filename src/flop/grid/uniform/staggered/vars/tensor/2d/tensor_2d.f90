@@ -1,8 +1,8 @@
-!| テンソル量に関する型を提供する．
-!
-!定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
-!定義されるテンソル量を取り扱う型が含まれる．
-!
+!>テンソル量に関する型を提供する．
+!>
+!>定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
+!>定義されるテンソル量を取り扱う型が含まれる．
+!>
 module grid_uniform_staggered_vars_tensor_2d
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -10,7 +10,7 @@ module grid_uniform_staggered_vars_tensor_2d
     private
     public :: tensor_2d_type
 
-    !| 2次元Staggered格子上で定義されるテンソル量型．
+    !>2次元Staggered格子上で定義されるテンソル量型．
     type :: tensor_2d_type
         type(staggered_uniform_grid_2d_type), private, pointer :: grid
             !! テンソル量が定義されている格子の情報<br>
@@ -42,9 +42,9 @@ module grid_uniform_staggered_vars_tensor_2d
             !! 格子へのポインタを返却
     end type tensor_2d_type
 contains
-    !| 成分の`grid`の情報に基づいて，`tensor_2d_type`を構築する．
-    !
-    !成分の配列を動的に割り付ける．
+    !>成分の`grid`の情報に基づいて，`tensor_2d_type`を構築する．
+    !>
+    !>成分の配列を動的に割り付ける．
     subroutine construct_by_base_grid(this)
         use :: space_Cartesian, &
             xx => xx_index, xy => xy_index, &
@@ -87,13 +87,13 @@ contains
         allocate (this%yy(is:ie, js:je), source=0d0)
     end subroutine construct_by_base_grid
 
-    !| 渡された格子（ポインタ）の情報に基づいて，`tensor_2d_type`を構築する．
-    !
-    !格子を`tensor_2d_type`のbase_gridとして関連付け，
-    !成分の配列を動的に割り付ける．
-    !
-    !@note テンソル量は，明示的に変数として宣言しないので，実体を受け取る手続は不要．
-    !
+    !>渡された格子（ポインタ）の情報に基づいて，`tensor_2d_type`を構築する．
+    !>
+    !>格子を`tensor_2d_type`のbase_gridとして関連付け，
+    !>成分の配列を動的に割り付ける．
+    !>
+    !>@note テンソル量は，明示的に変数として宣言しないので，実体を受け取る手続は不要．
+    !>
     subroutine construct_by_grid_pointer(this, grid)
         use :: space_Cartesian, &
             xx => xx_index, xy => xy_index, &
@@ -115,9 +115,9 @@ contains
         call this%construct()
     end subroutine construct_by_grid_pointer
 
-    !| 構築した`tensor_2d_type`を破棄する．
-    !
-    !成分の配列を解放し，base_gridとの関連を絶つ．
+    !>構築した`tensor_2d_type`を破棄する．
+    !>
+    !>成分の配列を解放し，base_gridとの関連を絶つ．
     subroutine destruct(this)
         implicit none
 
@@ -130,9 +130,9 @@ contains
         this%grid => null()
     end subroutine destruct
 
-    !| 動的に割り付けられた`tensor_2d_type`を始末する．
-    !
-    !成分の配列を解放し，base_gridとの関連を絶つ．
+    !>動的に割り付けられた`tensor_2d_type`を始末する．
+    !>
+    !>成分の配列を解放し，base_gridとの関連を絶つ．
     subroutine finalize(this)
         implicit none
         type(tensor_2d_type), intent(inout) :: this
@@ -142,7 +142,7 @@ contains
         call this%destruct()
     end subroutine finalize
 
-    !| テンソル量が定義される格子へのポインタを返す．
+    !>テンソル量が定義される格子へのポインタを返す．
     function get_base_grid(this) result(grid)
         implicit none
 

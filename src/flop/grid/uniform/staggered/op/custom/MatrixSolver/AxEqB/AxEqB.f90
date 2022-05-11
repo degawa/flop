@@ -1,9 +1,9 @@
-!| 連立方程式\(\boldsymbol{Ax}=\boldsymbol{b}\)
-!の取り扱いに関する派生型を提供する．
-!
-!派生型には，連立方程式の左辺\(\boldsymbol{Ax}\)と右辺\(\boldsymbol{b}\)
-!を取り扱う派生型が含まれる．
-!
+!>連立方程式\(\boldsymbol{Ax}=\boldsymbol{b}\)
+!>の取り扱いに関する派生型を提供する．
+!>
+!>派生型には，連立方程式の左辺\(\boldsymbol{Ax}\)と右辺\(\boldsymbol{b}\)
+!>を取り扱う派生型が含まれる．
+!>
 module grid_uniform_staggered_op_custom_solver_AxEqB
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
@@ -11,8 +11,8 @@ module grid_uniform_staggered_op_custom_solver_AxEqB
     implicit none
     private
 
-    !| 連立方程式の左辺\(\boldsymbol{Ax}\)と
-    !右辺\(\boldsymbol{b}\)を表す派生型．
+    !>連立方程式の左辺\(\boldsymbol{Ax}\)と
+    !>右辺\(\boldsymbol{b}\)を表す派生型．
     type, public :: Ax_eq_b_type
         class(Ax_atype), allocatable :: Ax
             !! 連立方程式の左辺
@@ -27,12 +27,12 @@ module grid_uniform_staggered_op_custom_solver_AxEqB
     end type Ax_eq_b_type
 
 contains
-    !| 左辺`Ax`と右辺`b`を用いて連立方程式を求解する．
-    !
-    !実際には，`.inverse.`演算子を利用して`.inverse.Ax_eq_b`と書き，
-    !演算子内からこの手続を呼ぶことを想定している．
-    !演算子を用いると被演算子を更新できないため，
-    !演算子は左辺`Ax`の成分`x`は，コピーするが直接更新はしない．
+    !>左辺`Ax`と右辺`b`を用いて連立方程式を求解する．
+    !>
+    !>実際には，`.inverse.`演算子を利用して`.inverse.Ax_eq_b`と書き，
+    !>演算子内からこの手続を呼ぶことを想定している．
+    !>演算子を用いると被演算子を更新できないため，
+    !>演算子は左辺`Ax`の成分`x`は，コピーするが直接更新はしない．
     subroutine inverse(this, unknown, rhs)
         implicit none
         !&<
@@ -48,9 +48,9 @@ contains
         call this%Ax%solve(unknown, rhs)
     end subroutine inverse
 
-    !| `Ax_eq_b_type`を代入する．
-    !
-    !単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
+    !>`Ax_eq_b_type`を代入する．
+    !>
+    !>単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
     subroutine assign(lhs, rhs)
         implicit none
         !&<

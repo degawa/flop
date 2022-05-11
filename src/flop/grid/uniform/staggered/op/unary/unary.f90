@@ -1,5 +1,5 @@
-!| 2次元Staggered格子上で定義される，ユーザ定義の単項演算子を
-!一括して`use`するためのモジュール
+!>2次元Staggered格子上で定義される，ユーザ定義の単項演算子を
+!>一括して`use`するためのモジュール
 module grid_uniform_staggered_op_unary
     use :: grid_uniform_staggered_op_unary_div_acc2
     use :: grid_uniform_staggered_op_unary_grad_acc2

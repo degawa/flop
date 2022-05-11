@@ -1,7 +1,7 @@
-!| 非圧縮性流れの計算を行う際の安定条件に関係する手続を定義する．
-!
-!手続には，移流と拡散の安定条件に基づいて時間刻みを計算する手続が含まれる．
-!
+!>非圧縮性流れの計算を行う際の安定条件に関係する手続を定義する．
+!>
+!>手続には，移流と拡散の安定条件に基づいて時間刻みを計算する手続が含まれる．
+!>
 module incompressible_condition_stability
     use, intrinsic :: iso_fortran_env
     use :: flop
@@ -14,13 +14,13 @@ module incompressible_condition_stability
     end interface
 
 contains
-    !| 安定条件を満たす計算時間間隔を返す．
-    !安定条件として，
-    !
-    !- 移流方程式に対する安定条件 \(u\frac{\varDelta t}{\varDelta x}<1\)
-    !- 拡散方程式に対する安定条件 \(\nu\frac{\varDelta t}{\varDelta x^2}<0.5\)
-    !
-    !を考慮する．
+    !>安定条件を満たす計算時間間隔を返す．
+    !>安定条件として，
+    !>
+    !>- 移流方程式に対する安定条件 \(u\frac{\varDelta t}{\varDelta x}<1\)
+    !>- 拡散方程式に対する安定条件 \(\nu\frac{\varDelta t}{\varDelta x^2}<0.5\)
+    !>
+    !>を考慮する．
     function stabilize_time_interval(dt, grid, &
                                      velocity, kinetic_viscosity, &
                                      Courant, Diffusion) result(time_interval)

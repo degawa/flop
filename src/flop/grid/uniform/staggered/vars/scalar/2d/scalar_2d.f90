@@ -1,8 +1,8 @@
-!| スカラ量に関する型を提供する．
-!
-!定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
-!定義されるスカラ量を取り扱う型が含まれる．
-!
+!>スカラ量に関する型を提供する．
+!>
+!>定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
+!>定義されるスカラ量を取り扱う型が含まれる．
+!>
 module grid_uniform_staggered_vars_scalar_2d
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -10,7 +10,7 @@ module grid_uniform_staggered_vars_scalar_2d
     private
     public :: scalar_2d_type
 
-    !| 2次元Staggered格子上で定義されるスカラ量型．
+    !>2次元Staggered格子上で定義されるスカラ量型．
     type :: scalar_2d_type
         type(staggered_uniform_grid_2d_type), private, pointer :: grid
             !! スカラ量が定義されている格子の情報<br>
@@ -64,10 +64,10 @@ module grid_uniform_staggered_vars_scalar_2d
         !&>
     end type scalar_2d_type
 contains
-    !| 成分の`grid`の情報に基づいて，`scalar_2d_type`を構築する．
-    !
-    !格子を`scalar_2d_type`のbase_gridとして関連付け，
-    !配列を動的に割り付ける．
+    !>成分の`grid`の情報に基づいて，`scalar_2d_type`を構築する．
+    !>
+    !>格子を`scalar_2d_type`のbase_gridとして関連付け，
+    !>配列を動的に割り付ける．
     subroutine construct_by_base_grid(this)
         use :: space_Cartesian, &
             x_min => x_min_index, x_max => x_max_index, &
@@ -92,13 +92,13 @@ contains
         allocate (this%val(is:ie, js:je), source=0d0)
     end subroutine construct_by_base_grid
 
-    !| 渡された格子（ポインタ）の情報に基づいて，`scalar_2d_type`を構築する．
-    !
-    !格子を`scalar_2d_type`のbase_gridとして関連付け，
-    !成分の配列を動的に割り付ける．
-    !
-    !導入の理由は[[grid_uniform_staggered_vars_vector_2d(module):construct_by_grid_pointer(subroutine)]]
-    !を参照のこと．
+    !>渡された格子（ポインタ）の情報に基づいて，`scalar_2d_type`を構築する．
+    !>
+    !>格子を`scalar_2d_type`のbase_gridとして関連付け，
+    !>成分の配列を動的に割り付ける．
+    !>
+    !>導入の理由は[[grid_uniform_staggered_vars_vector_2d(module):construct_by_grid_pointer(subroutine)]]
+    !>を参照のこと．
     subroutine construct_by_grid_pointer(this, grid)
         implicit none
         !&<
@@ -115,11 +115,11 @@ contains
         call this%construct()
     end subroutine construct_by_grid_pointer
 
-    !| 渡された`scalar_2d_type`の情報に基づいて，
-    !`scalar_2d_type`を構築する．
-    !
-    !格子を`scalar_2d_type`のbase_gridとして関連付け，
-    !成分の配列を動的に割り付ける．
+    !>渡された`scalar_2d_type`の情報に基づいて，
+    !>`scalar_2d_type`を構築する．
+    !>
+    !>格子を`scalar_2d_type`のbase_gridとして関連付け，
+    !>成分の配列を動的に割り付ける．
     subroutine construct_by_mold(this, mold)
         implicit none
         !&<
@@ -134,10 +134,10 @@ contains
         call this%construct(mold%grid)
     end subroutine construct_by_mold
 
-    !| 渡された格子の情報に基づいて，`scalar_2d_type`を構築する．
-    !
-    !格子を`scalar_2d_type`のbase_gridとして関連付け，
-    !配列を動的に割り付ける．
+    !>渡された格子の情報に基づいて，`scalar_2d_type`を構築する．
+    !>
+    !>格子を`scalar_2d_type`のbase_gridとして関連付け，
+    !>配列を動的に割り付ける．
     subroutine construct_by_grid(this, grid)
         implicit none
         !&<
@@ -155,9 +155,9 @@ contains
         call this%construct()
     end subroutine construct_by_grid
 
-    !| 構築した`scalar_2d_type`を破棄する．
-    !
-    !成分の配列を解放し，base_gridとの関連を絶つ．
+    !>構築した`scalar_2d_type`を破棄する．
+    !>
+    !>成分の配列を解放し，base_gridとの関連を絶つ．
     subroutine destruct(this)
         implicit none
         class(scalar_2d_type), intent(inout) :: this
@@ -168,9 +168,9 @@ contains
         this%grid => null()
     end subroutine destruct
 
-    !| 動的に割り付けられた`scalar_2d_type`を始末する．
-    !
-    !成分の配列を解放し，base_gridとの関連を絶つ．
+    !>動的に割り付けられた`scalar_2d_type`を始末する．
+    !>
+    !>成分の配列を解放し，base_gridとの関連を絶つ．
     subroutine finalize(this)
         implicit none
         type(scalar_2d_type), intent(inout) :: this
@@ -180,16 +180,16 @@ contains
         call this%destruct()
     end subroutine finalize
 
-    !| 渡された格子を関連付けた，新しい`scalar_2d_type`を返す．
-    !
-    !戻り値となる`scalar_2d_type`に格子をbase_gridとして関連付けるが，
-    !配列は割り付けない．
-    !
-    !割付は，[[grid_uniform_staggered_vars_scalar_2d(module):initialize(function)]]
-    !が行う．
-    !
-    !演算子指向的に`p = p .on. grid`と呼ぶことを目的に，
-    !`.on.`2項演算子に関連付けられる．
+    !>渡された格子を関連付けた，新しい`scalar_2d_type`を返す．
+    !>
+    !>戻り値となる`scalar_2d_type`に格子をbase_gridとして関連付けるが，
+    !>配列は割り付けない．
+    !>
+    !>割付は，[[grid_uniform_staggered_vars_scalar_2d(module):initialize(function)]]
+    !>が行う．
+    !>
+    !>演算子指向的に`p = p .on. grid`と呼ぶことを目的に，
+    !>`.on.`2項演算子に関連付けられる．
     function associate_grid(this, grid) result(new_scr)
         implicit none
         !&<
@@ -212,10 +212,10 @@ contains
         new_scr%grid => grid ! `=`だと以降で実行時エラー
     end function associate_grid
 
-    !| base_gridに基づいて配列を割り付けた新しい`scalar_2d_type`を返す．
-    !
-    !演算子指向的に`p = .init. (p)`と呼ぶことを目的に，
-    !`.init.`単項演算子に関連付けられる．
+    !>base_gridに基づいて配列を割り付けた新しい`scalar_2d_type`を返す．
+    !>
+    !>演算子指向的に`p = .init. (p)`と呼ぶことを目的に，
+    !>`.init.`単項演算子に関連付けられる．
     function initialize(this) result(new_scr)
         implicit none
 
@@ -229,7 +229,7 @@ contains
         call new_scr%construct(this%grid)
     end function initialize
 
-    !| スカラ量が定義される格子へのポインタを返す．
+    !>スカラ量が定義される格子へのポインタを返す．
     function get_base_grid(this) result(grid)
         implicit none
         class(scalar_2d_type), intent(in) :: this
@@ -243,9 +243,9 @@ contains
     end function get_base_grid
 
     !------------------------------------------------------------------!
-    !|`scalar_2d_type`を代入する．
-    !
-    !単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
+    !>`scalar_2d_type`を代入する．
+    !>
+    !>単体で呼び出すことはなく，代入演算子をオーバーロードして利用する．
     subroutine assign(lhs, rhs)
         implicit none
         !&<
@@ -262,12 +262,12 @@ contains
         lhs%val = rhs%val ! 自動割り付け
     end subroutine assign
 
-    !| `scalar_2d_type`と倍精度実数の乗算を計算し，
-    !結果を`scalar_2d_type`で返す．
-    !
-    !`scalar_2d_type*real64`の形で計算する．
-    !
-    !単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
+    !>`scalar_2d_type`と倍精度実数の乗算を計算し，
+    !>結果を`scalar_2d_type`で返す．
+    !>
+    !>`scalar_2d_type*real64`の形で計算する．
+    !>
+    !>単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
     function multiply_r8(this, factor) result(new_scr)
         implicit none
         !&<
@@ -284,12 +284,12 @@ contains
         new_scr%val = this%val*factor
     end function multiply_r8
 
-    !| `scalar_2d_type`と倍精度実数の乗算を計算し，
-    !結果を`scalar_2d_type`で返す．
-    !
-    !`real64*scalar_2d_type`の形で計算する．
-    !
-    !単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
+    !>`scalar_2d_type`と倍精度実数の乗算を計算し，
+    !>結果を`scalar_2d_type`で返す．
+    !>
+    !>`real64*scalar_2d_type`の形で計算する．
+    !>
+    !>単体で呼び出すことはなく，乗算演算子をオーバーロードして利用する．
     function r_multiply_r8(factor, this) result(new_scr)
         implicit none
         !&<

@@ -1,4 +1,4 @@
-!| 物理量のIOに関わる型と演算子を一括して`use`するためのモジュール
+!>物理量のIOに関わる型と演算子を一括して`use`するためのモジュール
 module grid_uniform_staggered_op_io
     use :: grid_uniform_staggered_op_io_vars_vector_writer_csv
     use :: grid_uniform_staggered_op_io_vars_scalar_writer_csv

@@ -1,12 +1,12 @@
-!| Navier-Stokes方程式の移流項\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)
-!に関する手続を提供する．
-!
-!手続には，移流速度\boldsymbol{u}とナブラ演算子\(\nabla\)の内積を
-!模擬する手続が含まれる．
-!
-!また，移流項を`u.dot.nabla`と表現することを実現するための
-!ユーザ定義演算子`.dot.`を定義するインタフェースも含まれる．
-!
+!>Navier-Stokes方程式の移流項\((\boldsymbol{u}\cdot\nabla)\boldsymbol{u}\)
+!>に関する手続を提供する．
+!>
+!>手続には，移流速度\boldsymbol{u}とナブラ演算子\(\nabla\)の内積を
+!>模擬する手続が含まれる．
+!>
+!>また，移流項を`u.dot.nabla`と表現することを実現するための
+!>ユーザ定義演算子`.dot.`を定義するインタフェースも含まれる．
+!>
 module grid_uniform_staggered_op_custom_dot
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_vector_2d
@@ -16,14 +16,14 @@ module grid_uniform_staggered_op_custom_dot
     private
     public :: operator(.dot.)
 
-    !| ユーザ定義演算子`.dot.`を定義するインタフェース
+    !>ユーザ定義演算子`.dot.`を定義するインタフェース
     interface operator(.dot.)
         procedure :: dot_u_nabla
     end interface
 
 contains
-    !| 移流速度とナブラ演算子の内積を計算し，
-    !移流速度を反映した非線形演算子`u_grad_type`を返す．
+    !>移流速度とナブラ演算子の内積を計算し，
+    !>移流速度を反映した非線形演算子`u_grad_type`を返す．
     function dot_u_nabla(u, nabla) result(u_grad)
         implicit none
         !&<

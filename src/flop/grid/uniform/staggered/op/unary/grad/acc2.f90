@@ -1,21 +1,21 @@
-!| 単項演算子gradient（∇）に関する手続を提供する．
-!
-!手続には，スカラ量に対するgradient
-!\[
-!\nabla p = \frac{\partial p}{\partial x_j}
-!\]
-!が含まれる．
-!
-!また，ユーザ定義演算子`.grad.`として公開するための
-!インタフェースも含まれる．
-!
-!ベクトル量に対するgradient
-!\[
-!\nabla^2 \boldsymbol{u} = \frac{\partial u_i}{\partial x_j}
-!\]
-!は，laplacianをdiv･gradとして表現することを目的に，
-!今後実装する予定である．
-!
+!>単項演算子gradient（∇）に関する手続を提供する．
+!>
+!>手続には，スカラ量に対するgradient
+!>\[
+!>\nabla p = \frac{\partial p}{\partial x_j}
+!>\]
+!>が含まれる．
+!>
+!>また，ユーザ定義演算子`.grad.`として公開するための
+!>インタフェースも含まれる．
+!>
+!>ベクトル量に対するgradient
+!>\[
+!>\nabla^2 \boldsymbol{u} = \frac{\partial u_i}{\partial x_j}
+!>\]
+!>は，laplacianをdiv･gradとして表現することを目的に，
+!>今後実装する予定である．
+!>
 module grid_uniform_staggered_op_unary_grad_acc2
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
@@ -25,17 +25,17 @@ module grid_uniform_staggered_op_unary_grad_acc2
     private
     public :: operator(.grad.)
 
-    !| ユーザ定義演算子`.grad.`を定義するインタフェース
+    !>ユーザ定義演算子`.grad.`を定義するインタフェース
     interface operator(.grad.)
         procedure :: grad_scr
     end interface
 
 contains
-    !| 引数のスカラ量にgradient
-    !\[
-    !\nabla^2 p = \frac{\partial p}{\partial x_j}
-    !\]
-    !を適用し，得られた結果をベクトル量で返す．
+    !>引数のスカラ量にgradient
+    !>\[
+    !>\nabla^2 p = \frac{\partial p}{\partial x_j}
+    !>\]
+    !>を適用し，得られた結果をベクトル量で返す．
     function grad_scr(scr) result(new_vec)
         use :: space_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
