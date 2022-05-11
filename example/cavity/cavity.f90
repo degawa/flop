@@ -65,27 +65,17 @@ program cavity_flow
     use :: incompressible_condition_stability
     implicit none
 
-    type(Cartesian_2d_type) :: space
-        !! 計算領域
-    type(staggered_uniform_grid_2d_type), target :: grid
-        !! 空間格子
-    type(time_axis_type) :: time
-        !! 計算時間
-    type(discrete_time_type) :: discrete_time
-        !! 時間積分の設定
+    type(Cartesian_2d_type) :: space !! 計算領域
+    type(staggered_uniform_grid_2d_type), target :: grid !! 空間格子
+    type(time_axis_type) :: t !! 計算時間
+    type(discrete_time_type) :: delta_t !! 時間積分の設定
 
-    real(real64) :: Re
-        !! レイノルズ数
-    real(real64) :: kvisc
-        !! 動粘度
-    real(real64) :: dens
-        !! 密度
-    real(real64) :: U_wall
-        !! 移動壁の速度
-    real(real64) :: l
-        !! キャビティの1辺の長さ
-    real(real64) :: dt
-        !! 計算時間間隔
+    real(real64) :: Re !! レイノルズ数
+    real(real64) :: kvisc !! 動粘度
+    real(real64) :: dens !! 密度
+    real(real64) :: U_wall !! 移動壁の速度
+    real(real64) :: l !! キャビティの1辺の長さ
+    real(real64) :: dt !! 計算時間間隔
 
     Re = 1000d0
     kvisc = Water%kinetic_viscosity
@@ -93,14 +83,18 @@ program cavity_flow
     U_wall = 0.01d0
     l = Re*kvisc/U_wall
 
-    call space%construct(x_coord_val=[0d0, l], &
-                         y_coord_val=[0d0, l])
-    call grid%construct(space, number_of_grid_points=[41, 41])
+    block
+        type(axis_type) :: x, y
+        x = x.set. [0d0, l]
+        y = y.set. [0d0, l]
+        space = space.set.Cartesian([x, y])
+    end block
+    grid = .divide.space.into.cells([40, 40])
 
-    time = [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
+    t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
     dt = 0.25d0
-    call discrete_time%construct &
-        (time, time_interval=stabilize(dt, grid, U_wall, kvisc, Courant=0.1d0))
+    dt = stabilize(dt, grid, U_wall, kvisc, Courant=0.1d0)
+    delta_t = .divide.t.into.intervals(dt)
 
     block
         type(vector_2d_type) :: u !! 速度
@@ -113,8 +107,8 @@ program cavity_flow
         integer(int32) :: n, Nt !! 時間積分回数
         real(real64) :: below_criterion = 1d-9 !! 収束判定条件
 
-        Nt = discrete_time%get_number_of_integration()
-        dt = discrete_time%get_time_interval()
+        Nt = delta_t%get_number_of_integration()
+        dt = delta_t%get_time_interval()
 
         ! initialize
         u = .init. (u.on.grid)
