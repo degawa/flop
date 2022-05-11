@@ -126,7 +126,7 @@ program cavity_flow
 
         u = u .impose. BC_u !&
 
-        do n = 1, 10 !Nt
+        do n = 1, Nt
             print *, n
 
             !Fractional Step法で時間積分を実行
