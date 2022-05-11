@@ -151,8 +151,10 @@ program cavity_flow
 
         end do
 
-        call p%output("p.txt")
-        call u%output("u.txt")
+        call output((p.as.csv) .to.unit("p.txt"))
+        call output((u.as.csv) .to.unit("u.txt"))
 
+        close (unit("p.txt"))
+        close (unit("u.txt"))
     end block
 end program cavity_flow
