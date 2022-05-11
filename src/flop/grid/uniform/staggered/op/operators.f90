@@ -7,4 +7,6 @@ module grid_uniform_staggered_operators
     use :: grid_uniform_staggered_op_custom_bracket
     use :: grid_uniform_staggered_op_custom_bc
     use :: grid_uniform_staggered_op_custom_solver
+    use :: grid_uniform_staggered_op_io
+    public
 end module grid_uniform_staggered_operators
