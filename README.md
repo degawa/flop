@@ -29,6 +29,11 @@ u = (u_aux - dt/dens*.grad.p) .impose. BC_u
 ```
 
 ```Fortran
+characteristics = characteristics .set. Reynolds_number(1000d0) &
+                                  .set. kinetic_viscosity(Water%kinetic_viscosity) &
+                                  .set. characteristic_velocity(U_wall)
+l = characteristics.value.of_length
+
 ! discretize space and time
 x = x .set. [0d0, l]
 y = y .set. [0d0, l]
@@ -36,6 +41,9 @@ space = space .set. Cartesian([x, y])
 grid = .divide.space .into. cells([40, 40])
 
 t = t .set. [0d0, 50d0*l/U_wall]
+stability_conditions = stability_conditions .set. Courant(grid, U_wall, 0.1d0) &
+                                            .set. Diffusion(grid, kvisc, 0.5d0)
+dt = .stabilize.(dt .by. stability_conditions)
 delta_t = .divide.t .into. intervals(dt)
 ```
 
