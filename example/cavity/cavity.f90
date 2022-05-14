@@ -36,7 +36,7 @@ program cavity_flow
         x = x.set. [0d0, l]
         y = y.set. [0d0, l]
         space = space.set.Cartesian([x, y])
-        grid = .divide.space.into.cells([40, 40])
+        grid = .divide. (space.into.cells([40, 40]))
 
         t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
         dt = 0.25d0
@@ -45,7 +45,7 @@ program cavity_flow
                                                     .set. Diffusion(grid, kvisc, 0.5d0) !&
         dt = .stabilize.(dt .by. stability_conditions) !&
 
-        delta_t = .divide.t.into.intervals(dt)
+        delta_t = .divide. (t.into.intervals(dt))
     end block
 
     block

@@ -5,7 +5,7 @@
 module incompressible_op_by
     use, intrinsic :: iso_fortran_env
     use :: incompressible_vars_stability_conditions
-    use :: incompressible_op_vars_stabilizer_stabilizing
+    use :: incompressible_op_vars_stabilizer_dtByStabilityConditions
     implicit none
     private
     public :: operator(.by.)
@@ -17,7 +17,7 @@ module incompressible_op_by
 
 contains
     !>安定条件を扱う型と安定化される値をまとめてを返す．
-    function set_stability_conditions(dt, stability_conditions) result(new_stabilizing)
+    function set_stability_conditions(dt, stability_conditions) result(new_dt_stab)
         implicit none
         !&<
         real(real64)                    , intent(in) :: dt
@@ -25,10 +25,10 @@ contains
         type(stability_conditions_type) , intent(in) :: stability_conditions
             !! 安定条件
         !&>
-        type(stabilizing_type) :: new_stabilizing
+        type(dt_by_stability_conditions_type) :: new_dt_stab
             !! 安定化されるパラメータと安定条件
 
-        new_stabilizing%dt = dt
-        allocate (new_stabilizing%stability_conditions, source=stability_conditions)
+        new_dt_stab%dt = dt
+        allocate (new_dt_stab%stability_conditions, source=stability_conditions)
     end function set_stability_conditions
 end module incompressible_op_by
