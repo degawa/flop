@@ -5,7 +5,7 @@
 module incompressible_op_by
     use, intrinsic :: iso_fortran_env
     use :: incompressible_vars_stability_conditions
-    use :: incompressible_op_vars_stabilizer_stabilizing
+    use :: incompressible_op_vars_stabilizer_dtByStabilityConditions
     implicit none
     private
     public :: operator(.by.)
