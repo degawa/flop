@@ -14,5 +14,8 @@ module flop
     use :: grid_uniform_staggered_variables
     use :: grid_uniform_staggered_operators
 
+    use :: incompressible_characteristics
+    use :: incompressible_stability
+    use :: incompressible_op
     public
 end module flop
