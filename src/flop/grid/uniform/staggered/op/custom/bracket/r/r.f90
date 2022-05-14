@@ -24,7 +24,7 @@
 module grid_uniform_staggered_op_custom_bracket_r
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_vector_2d
-    use :: grid_uniform_staggered_op_custom_uGrad
+    use :: grid_uniform_staggered_op_custom_binary_uGrad
     implicit none
     private
     public :: operator(.r.)
