@@ -3,9 +3,9 @@
 !>派生型には，複数の安定条件をまとめて取り扱う派生型が含まれる．
 !>
 module incompressible_vars_stability_conditions
-    use :: incompressible_op_var_stabilizer_time
-    use :: incompressible_op_var_stabilizer_time_advection
-    use :: incompressible_op_var_stabilizer_time_diffusion
+    use :: incompressible_op_vars_stabilizer_time
+    use :: incompressible_op_vars_stabilizer_time_advection
+    use :: incompressible_op_vars_stabilizer_time_diffusion
     implicit none
     private
 

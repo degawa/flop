@@ -14,7 +14,7 @@
 !>
 !>手続には，代表速度を取り扱う派生型のコンストラクタが含まれる．
 !>
-module incompressible_op_var_characteristicVelocity
+module incompressible_op_vars_characteristicVelocity
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -47,4 +47,4 @@ contains
 
         new_char_velo%velocity = velocity
     end function construct_characteristic_velocity
-end module incompressible_op_var_characteristicVelocity
+end module incompressible_op_vars_characteristicVelocity

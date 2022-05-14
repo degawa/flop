@@ -4,9 +4,9 @@
 !>
 !>手続には，移流に起因する安定条件を取り扱う型のコンストラクタが含まれる．
 !>
-module incompressible_op_var_stabilizer_time_advection
+module incompressible_op_vars_stabilizer_time_advection
     use, intrinsic :: iso_fortran_env
-    use :: incompressible_op_var_stabilizer_time
+    use :: incompressible_op_vars_stabilizer_time
     use :: grid_uniform_staggered_2d
     implicit none
     private
@@ -63,4 +63,4 @@ contains
                             this%stability_coefficient &
                             *this%min_spatial_interval/this%velocity)
     end function stabilize
-end module incompressible_op_var_stabilizer_time_advection
+end module incompressible_op_vars_stabilizer_time_advection

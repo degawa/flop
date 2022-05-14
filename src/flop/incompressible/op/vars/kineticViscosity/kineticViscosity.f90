@@ -14,7 +14,7 @@
 !>
 !>手続には，動粘度を取り扱う派生型のコンストラクタが含まれる．
 !>
-module incompressible_op_var_kineticViscosity
+module incompressible_op_vars_kineticViscosity
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -47,4 +47,4 @@ contains
 
         new_kvisc%kinetic_viscosity = kinetic_visc
     end function construct_kinetic_viscosity
-end module incompressible_op_var_kineticViscosity
+end module incompressible_op_vars_kineticViscosity

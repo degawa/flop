@@ -4,9 +4,9 @@
 !>
 !>手続には，拡散に起因する安定条件を取り扱う型のコンストラクタが含まれる．
 !>
-module incompressible_op_var_stabilizer_time_diffusion
+module incompressible_op_vars_stabilizer_time_diffusion
     use, intrinsic :: iso_fortran_env
-    use :: incompressible_op_var_stabilizer_time
+    use :: incompressible_op_vars_stabilizer_time
     use :: grid_uniform_staggered_2d
     implicit none
     private
@@ -64,4 +64,4 @@ contains
                             this%stability_coefficient &
                             *this%min_spatial_interval**2/this%kinetic_viscosity)
     end function stabilize
-end module incompressible_op_var_stabilizer_time_diffusion
+end module incompressible_op_vars_stabilizer_time_diffusion

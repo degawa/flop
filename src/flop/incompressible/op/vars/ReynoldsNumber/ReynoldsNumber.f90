@@ -14,7 +14,7 @@
 !>
 !>手続には，レイノルズ数を取り扱う派生型のコンストラクタが含まれる．
 !>
-module incompressible_op_var_ReynoldsNumber
+module incompressible_op_vars_ReynoldsNumber
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -47,4 +47,4 @@ contains
 
         new_Re%Re = Re
     end function construct_Reynolds_Number
-end module incompressible_op_var_ReynoldsNumber
+end module incompressible_op_vars_ReynoldsNumber

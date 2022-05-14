@@ -2,7 +2,7 @@
 !>
 !>派生型には，移流や拡散などに起因する安定条件を取り扱う抽象型が含まれる．
 !>
-module incompressible_op_var_stabilizer_time
+module incompressible_op_vars_stabilizer_time
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -34,4 +34,4 @@ module incompressible_op_var_stabilizer_time
                 !! 安定条件を考慮した計算時間間隔
         end function Istabilize
     end interface
-end module incompressible_op_var_stabilizer_time
+end module incompressible_op_vars_stabilizer_time

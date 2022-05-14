@@ -14,7 +14,7 @@
 !>
 !>手続には，代表長さを取り扱う派生型のコンストラクタが含まれる．
 !>
-module incompressible_op_var_characteristicLength
+module incompressible_op_vars_characteristicLength
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -47,4 +47,4 @@ contains
 
         new_char_len%length = length
     end function construct_characteristic_length
-end module incompressible_op_var_characteristicLength
+end module incompressible_op_vars_characteristicLength
