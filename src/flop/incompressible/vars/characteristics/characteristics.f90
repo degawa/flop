@@ -4,7 +4,7 @@
 !>
 !>定数には，特徴量に関わる変数に付与した定数が含まれる．
 !>
-module incompressible_characteristics
+module incompressible_vars_characteristics
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -238,4 +238,4 @@ contains
                   (this%Reynolds_number, this%velocity, this%length)
         end select
     end subroutine check_Reynolds_number_consistency
-end module incompressible_characteristics
+end module incompressible_vars_characteristics

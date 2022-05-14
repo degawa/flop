@@ -2,7 +2,7 @@
 !>
 !>派生型には，複数の安定条件をまとめて取り扱う派生型が含まれる．
 !>
-module incompressible_stability_conditions
+module incompressible_vars_stability_conditions
     use :: incompressible_op_var_stabilizer_time
     use :: incompressible_op_var_stabilizer_time_advection
     use :: incompressible_op_var_stabilizer_time_diffusion
@@ -47,4 +47,4 @@ contains
 
         stabilized_time_interval = dt
     end function stabilize
-end module incompressible_stability_conditions
+end module incompressible_vars_stability_conditions

@@ -4,7 +4,7 @@
 !>
 module incompressible_op_var_stabilizer_stabilizing
     use, intrinsic :: iso_fortran_env
-    use :: incompressible_stability_conditions
+    use :: incompressible_vars_stability_conditions
     implicit none
     private
 

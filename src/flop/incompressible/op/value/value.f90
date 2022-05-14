@@ -4,7 +4,7 @@
 !>
 module incompressible_op_value
     use, intrinsic :: iso_fortran_env
-    use :: incompressible_characteristics
+    use :: incompressible_vars_characteristics
     use :: incompressible_op_var_characteristicLength
     use :: incompressible_op_var_characteristicVelocity
     use :: incompressible_op_var_kineticViscosity
