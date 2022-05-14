@@ -1,68 +1,7 @@
-!>非圧縮性流れの計算を行う際の安定条件に関係する手続を定義する．
-!>
-!>手続には，移流と拡散の安定条件に基づいて時間刻みを計算する手続が含まれる．
-!>
-module incompressible_condition_stability
-    use, intrinsic :: iso_fortran_env
-    use :: flop
-    implicit none
-    private
-    public :: stabilize
-
-    interface stabilize
-        procedure :: stabilize_time_interval
-    end interface
-
-contains
-    !>安定条件を満たす計算時間間隔を返す．
-    !>安定条件として，
-    !>
-    !>- 移流方程式に対する安定条件 \(u\frac{\varDelta t}{\varDelta x}<1\)
-    !>- 拡散方程式に対する安定条件 \(\nu\frac{\varDelta t}{\varDelta x^2}<0.5\)
-    !>
-    !>を考慮する．
-    function stabilize_time_interval(dt, grid, &
-                                     velocity, kinetic_viscosity, &
-                                     Courant, Diffusion) result(time_interval)
-        implicit none
-        !&<
-        real(real64)                        , intent(in)            :: dt
-            !! 安定化したい計算時間間隔
-        type(staggered_uniform_grid_2d_type), intent(in)            :: grid
-            !! 空間離散化情報
-        real(real64)                        , intent(in)            :: velocity
-            !! 代表速度
-        real(real64)                        , intent(in)            :: kinetic_viscosity
-            !! 作動流体の動粘度
-        real(real64)                        , intent(in), optional  :: Courant
-            !! クーラン数<br>
-            !! これが渡されない場合は，移流に関する安定条件を考慮しない．
-        real(real64)                        , intent(in), optional  :: Diffusion
-            !! 拡散数
-            !! これが渡されない場合は，拡散に関する安定条件を考慮しない．
-        !&>
-        real(real64) :: time_interval
-
-        time_interval = dt
-
-        ! 移流方程式の安定条件
-        if (present(Courant)) &
-            time_interval = min(time_interval, &
-                                Courant*minval(grid%get_interval())/velocity)
-
-        ! 拡散方程式の安定条件
-        if (present(Diffusion)) &
-            time_interval = min(time_interval, &
-                                Diffusion*minval(grid%get_interval()**2)/kinetic_viscosity)
-
-    end function stabilize_time_interval
-end module incompressible_condition_stability
-
 program cavity_flow
     use, intrinsic :: iso_fortran_env
     use :: fluid_knownFluids, only:Water
     use :: flop
-    use :: incompressible_condition_stability
     implicit none
 
     type(Cartesian_2d_type) :: space !! 計算領域
@@ -70,31 +9,44 @@ program cavity_flow
     type(time_axis_type) :: t !! 計算時間
     type(discrete_time_type) :: delta_t !! 時間積分の設定
 
-    real(real64) :: Re !! レイノルズ数
     real(real64) :: kvisc !! 動粘度
     real(real64) :: dens !! 密度
     real(real64) :: U_wall !! 移動壁の速度
-    real(real64) :: l !! キャビティの1辺の長さ
     real(real64) :: dt !! 計算時間間隔
 
-    Re = 1000d0
-    kvisc = Water%kinetic_viscosity
-    dens = Water%density
+    type(characteristics_type) :: characteristics
+
     U_wall = 0.01d0
-    l = Re*kvisc/U_wall
+
+    !&<
+    characteristics = characteristics .set. Reynolds_number(1000d0) &
+                                      .set. kinetic_viscosity(Water%kinetic_viscosity) &
+                                      .set. characteristic_velocity(U_wall)
+    !&>
+
+    dens = Water%density
+    kvisc = characteristics.value.of_kinetic_viscosity !Water%kinetic_viscosity
 
     block
         type(axis_type) :: x, y
+        real(real64) :: l !! キャビティの1辺の長さ
+        type(stability_conditions_type) :: stability_conditions
+
+        l = characteristics.value.of_length !Re*kvisc/U_wall
         x = x.set. [0d0, l]
         y = y.set. [0d0, l]
         space = space.set.Cartesian([x, y])
-    end block
-    grid = .divide.space.into.cells([40, 40])
+        grid = .divide.space.into.cells([40, 40])
 
-    t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
-    dt = 0.25d0
-    dt = stabilize(dt, grid, U_wall, kvisc, Courant=0.1d0)
-    delta_t = .divide.t.into.intervals(dt)
+        t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
+        dt = 0.25d0
+
+        stability_conditions = stability_conditions .set. Courant(grid, U_wall, 0.1d0) &
+                                                    .set. Diffusion(grid, kvisc, 0.5d0) !&
+        dt = .stabilize.(dt .by. stability_conditions) !&
+
+        delta_t = .divide.t.into.intervals(dt)
+    end block
 
     block
         type(vector_2d_type) :: u !! 速度
