@@ -7,7 +7,7 @@
 module grid_uniform_staggered_op_custom_solver_vars_Ax_adt
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_bc_vars_scalar
+    use :: grid_uniform_staggered_vars_scalar_2d_bc
     implicit none
     private
 

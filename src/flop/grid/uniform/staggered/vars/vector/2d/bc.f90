@@ -3,7 +3,7 @@
 !>派生型には，ベクトル量に対する境界条件（境界の位置，種別および値）をまとめて
 !>取り扱うための型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_bc_vars_vector
+module grid_uniform_staggered_vars_vector_2d_bc
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_op_custom_bc_vars_type
     use :: grid_uniform_staggered_op_custom_bc_vars_position
@@ -56,4 +56,4 @@ contains
         end if
     end function get_boundary_value
 
-end module grid_uniform_staggered_op_custom_bc_vars_vector
+end module grid_uniform_staggered_vars_vector_2d_bc

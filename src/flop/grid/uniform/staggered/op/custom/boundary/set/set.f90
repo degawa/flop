@@ -12,10 +12,10 @@ module grid_uniform_staggered_op_custom_bc_set
     use :: grid_uniform_staggered_op_custom_bc_vars_type
     use :: grid_uniform_staggered_op_custom_bc_vars_position
     use :: grid_uniform_staggered_op_custom_bc_vars_vector_value_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_vars_vector
     use :: grid_uniform_staggered_op_custom_bc_vars_scalar_grad_on_bnd
     use :: grid_uniform_staggered_op_custom_bc_vars_scalar_value_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_vars_scalar
+    use :: grid_uniform_staggered_vars_vector_2d_bc
+    use :: grid_uniform_staggered_vars_scalar_2d_bc
     implicit none
     private
     public :: operator(.set.)

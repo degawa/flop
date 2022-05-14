@@ -10,7 +10,6 @@ module flop
 
     use :: discretization_op
 
-    use :: grid_uniform_staggered_2d
     use :: grid_uniform_staggered_variables
     use :: grid_uniform_staggered_operators
 
