@@ -2,6 +2,19 @@
 !>
 !>派生型には，安定化される値と安定条件をまとめて取り扱う派生型が含まれる．
 !>
+!>@note
+!>モジュールおよび派生型の名前は，演算子指向で書いた時間離散化の処理
+!>
+!>```Fortran
+!>stability_conditions = stability_conditions .set. Courant(grid, U_wall, 0.1d0) &
+!>                                            .set. Diffusion(grid, kvisc, 0.5d0)
+!>dt = .stabilize.(dt .by. stability_conditions)
+!>delta_t = .divide. (t.into.intervals(dt))
+!>```
+!>
+!>に現れる2項演算`dt .by. stability_conditions`に由来．
+!>@endnote
+!>
 module incompressible_op_vars_stabilizer_dtByStabilityConditions
     use, intrinsic :: iso_fortran_env
     use :: incompressible_vars_stability_conditions

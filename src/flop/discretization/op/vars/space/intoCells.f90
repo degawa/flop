@@ -3,6 +3,19 @@
 !>派生型には，離散化する空間と各方向のセル数を
 !>まとめて取り扱うための派生型が含まれる．
 !>
+!>@note
+!>モジュールおよび派生型の名前は，演算子指向で書いた空間離散化の処理
+!>
+!>```Fortran
+!>x = x .set. [0d0, l]
+!>y = y .set. [0d0, l]
+!>space = space .set. Cartesian([x, y])
+!>grid = .divide. (space.into.cells([40, 40]))
+!>```
+!>
+!>に現れる2項演算`space.into.cells([40, 40])`に由来．
+!>@endnote
+!>
 module discretization_op_vars_space_intoCells
     use :: space_vars_Cartesian
     use :: discretization_vars_cells
