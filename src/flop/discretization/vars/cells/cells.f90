@@ -4,7 +4,7 @@
 !>
 !>手続には，セル数をまとめた派生型のコンストラクタが含まれる．
 !>
-module discretization_op_cells
+module discretization_vars_cells
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -34,4 +34,4 @@ contains
 
         new_cells%num_cells = num_cells
     end function construct_cells
-end module discretization_op_cells
+end module discretization_vars_cells

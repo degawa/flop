@@ -4,7 +4,7 @@
 !>
 !>手続には，微小区間の幅を表現する派生型のコンストラクタが含まれる．
 !>
-module discretization_op_intervals
+module discretization_vars_intervals
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -48,4 +48,4 @@ contains
 
         new_intervals%intervals = intervals
     end function construct_intervals
-end module discretization_op_intervals
+end module discretization_vars_intervals
