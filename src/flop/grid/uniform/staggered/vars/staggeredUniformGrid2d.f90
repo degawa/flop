@@ -499,18 +499,18 @@ contains
         end block cell_center
 
     contains
-        subroutine compute_coordinate_values(bounds, min_vals, intervals, x, y)
+        subroutine compute_coordinate_values(bnds, min_vals, intervals, x, y)
             implicit none
             !&<
-            integer(int32)  , intent(in)    :: bounds(dim*2)
+            integer(int32)  , intent(in)    :: bnds(dim*2)
                 !! 配列の上下限 `=[x_min, y_min, x_max, y_max]`
             real(real64)    , intent(in)    :: min_vals(dim)
                 !! 各軸の座標値の最小値 `=[min_val_x, min_val_y]`
             real(real64)    , intent(in)    :: intervals(dim)
                 !! 各軸の格子点間隔 `=[interval_x, interval_y]`
-            real(real64)    , intent(inout) :: x(bounds(x_min_index):bounds(x_max_index))
+            real(real64)    , intent(inout) :: x(bnds(x_min_index):bnds(x_max_index))
                 !! x軸の座標値
-            real(real64)    , intent(inout) :: y(bounds(y_min_index):bounds(y_max_index))
+            real(real64)    , intent(inout) :: y(bnds(y_min_index):bnds(y_max_index))
                 !! y軸の座標値
             !&>
 
@@ -522,14 +522,14 @@ contains
                 !     o-----o-----o-----o-----o...
                 !  i= 1     2     3     4     5
                 !
-                do i = bounds(x_min_index), bounds(x_max_index)
+                do i = bnds(x_min_index), bnds(x_max_index)
                     x(i) = dble(i - 1)*intervals(x_dir_index) + min_vals(x_dir_index)
                 end do
             end block x_dir
 
             y_dir: block
                 integer(int32) :: j
-                do j = bounds(y_min_index), bounds(y_max_index)
+                do j = bnds(y_min_index), bnds(y_max_index)
                     y(j) = dble(j - 1)*intervals(y_dir_index) + min_vals(y_dir_index)
                 end do
             end block y_dir
