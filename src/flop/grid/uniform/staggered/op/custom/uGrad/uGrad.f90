@@ -19,7 +19,7 @@
 !>
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_uGrad
+module grid_uniform_staggered_op_custom_binary_uGrad
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
     use :: grid_uniform_staggered_vars_vector_2d
@@ -135,4 +135,4 @@ contains
             !&>
         end block
     end function compute
-end module grid_uniform_staggered_op_custom_uGrad
+end module grid_uniform_staggered_op_custom_binary_uGrad

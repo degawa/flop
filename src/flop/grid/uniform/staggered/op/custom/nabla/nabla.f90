@@ -5,9 +5,9 @@
 !>ただし，演算子としての機能は有しておらず，
 !>移流項を`u.dot.nabla`と表現するための擬似的な型である．
 !>
-module grid_uniform_staggered_op_custom_nabla
+module grid_uniform_staggered_op_custom_binary_nabla
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_uGrad
+    use :: grid_uniform_staggered_op_custom_binary_uGrad
     implicit none
     private
 
@@ -19,4 +19,4 @@ module grid_uniform_staggered_op_custom_nabla
 
     type(nabla_type), public :: nabla
         !! ナブラ演算子\(\nabla\)
-end module grid_uniform_staggered_op_custom_nabla
+end module grid_uniform_staggered_op_custom_binary_nabla
