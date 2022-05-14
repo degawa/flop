@@ -4,7 +4,7 @@
 !>
 module time_op_set
     use, intrinsic :: iso_fortran_env
-    use :: time_axis
+    use :: time_vars_axis
     implicit none
     private
     public :: operator(.set.)

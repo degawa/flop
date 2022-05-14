@@ -24,10 +24,10 @@ module grid_uniform_staggered_op_custom_bc_impose
     use :: grid_uniform_staggered_2d
     use :: grid_uniform_staggered_vars_vector_2d
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_bc_type
-    use :: grid_uniform_staggered_op_custom_bc_position
-    use :: grid_uniform_staggered_op_custom_bc_vector
-    use :: grid_uniform_staggered_op_custom_bc_scalar
+    use :: grid_uniform_staggered_op_custom_bc_vars_type
+    use :: grid_uniform_staggered_op_custom_bc_vars_position
+    use :: grid_uniform_staggered_vars_vector_2d_bc
+    use :: grid_uniform_staggered_vars_scalar_2d_bc
     implicit none
     private
     public :: operator(.impose.)
@@ -53,7 +53,7 @@ contains
     !>ベクトル量に対するDirichlet境界条件を適用し，
     !>条件が適用されたベクトル量を返す．
     function impose_vec_vecbc_dirichlet_op(vec, vec_bc) result(new_vec)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
             x_min => x_min_index, x_max => x_max_index, &
             y_min => y_min_index, y_max => y_max_index
@@ -165,7 +165,7 @@ contains
     !>スカラ量に対するDirichlet境界条件を適用し，
     !>条件が適用されたスカラ量を返す．
     function impose_scr_scrbc_dirichlet_op(scr, scr_bc) result(new_scr)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             x_min => x_min_index, x_max => x_max_index, &
             y_min => y_min_index, y_max => y_max_index
         implicit none
@@ -258,7 +258,7 @@ contains
 
     !>スカラ量に対するNeumann境界条件を適用し，in-placeで更新する．
     subroutine impose_scr_scrbc_neumann(scr, scr_bc)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             x_min => x_min_index, x_max => x_max_index, &
             y_min => y_min_index, y_max => y_max_index
         implicit none

@@ -46,7 +46,7 @@ contains
     !>
     !>成分の配列を動的に割り付ける．
     subroutine construct_by_base_grid(this)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             xx => xx_index, xy => xy_index, &
             yx => yx_index, yy => yy_index, &
             x_min => x_min_index, x_max => x_max_index, &
@@ -95,7 +95,7 @@ contains
     !>@note テンソル量は，明示的に変数として宣言しないので，実体を受け取る手続は不要．
     !>
     subroutine construct_by_grid_pointer(this, grid)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             xx => xx_index, xy => xy_index, &
             yx => yx_index, yy => yy_index, &
             x_min => x_min_index, x_max => x_max_index, &

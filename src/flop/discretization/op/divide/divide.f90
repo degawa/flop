@@ -8,8 +8,8 @@
 !>
 module discretization_op_divide
     use, intrinsic :: iso_fortran_env
-    use :: space_Cartesian
-    use :: time_axis
+    use :: space_vars_Cartesian
+    use :: time_vars_axis
     implicit none
     private
     public :: operator(.divide.)

@@ -10,8 +10,8 @@
 module grid_uniform_staggered_op_custom_binary_dot
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_vector_2d
-    use :: grid_uniform_staggered_op_custom_binary_uGrad
-    use :: grid_uniform_staggered_op_custom_binary_nabla, only:nabla_type
+    use :: grid_uniform_staggered_op_custom_binary_vars_uGrad
+    use :: grid_uniform_staggered_op_custom_binary_vars_nabla, only:nabla_type
     implicit none
     private
     public :: operator(.dot.)

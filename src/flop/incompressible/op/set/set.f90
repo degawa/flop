@@ -21,8 +21,8 @@ module incompressible_op_set
 contains
     !>特徴量に代表長さの値を反映して返す．
     function set_char_len(characteristics, length) result(new_char)
-        use :: incompressible_characteristics
-        use :: incompressible_op_var_characteristicLength
+        use :: incompressible_vars_characteristics
+        use :: incompressible_op_vars_characteristicLength
         implicit none
         !&<
         class(characteristics_type)         , intent(in) :: characteristics
@@ -39,8 +39,8 @@ contains
 
     !>特徴量に代表速度の値を反映して返す．
     function set_char_velo(characteristics, velocity) result(new_char)
-        use :: incompressible_characteristics
-        use :: incompressible_op_var_characteristicVelocity
+        use :: incompressible_vars_characteristics
+        use :: incompressible_op_vars_characteristicVelocity
         implicit none
         !&<
         class(characteristics_type)         , intent(in) :: characteristics
@@ -57,8 +57,8 @@ contains
 
     !>特徴量に動粘度の値を反映して返す．
     function set_kinetic_viscosity(characteristics, kinetic_visc) result(new_char)
-        use :: incompressible_characteristics
-        use :: incompressible_op_var_kineticViscosity
+        use :: incompressible_vars_characteristics
+        use :: incompressible_op_vars_kineticViscosity
         implicit none
         !&<
         class(characteristics_type)     , intent(in) :: characteristics
@@ -75,8 +75,8 @@ contains
 
     !>特徴量にReynolds数の値を反映して返す．
     function set_Reynolds_number(characteristics, Re) result(new_char)
-        use :: incompressible_characteristics
-        use :: incompressible_op_var_ReynoldsNumber
+        use :: incompressible_vars_characteristics
+        use :: incompressible_op_vars_ReynoldsNumber
         implicit none
         !&<
         class(characteristics_type) , intent(in) :: characteristics
@@ -94,10 +94,10 @@ contains
     !>複数の安定条件を設定して返す．
     function set_time_interval_stability_condition &
         (stability_conditions, time_stabilizer) result(new_stab_conds)
-        use :: incompressible_stability_conditions
-        use :: incompressible_op_var_stabilizer_time
-        use :: incompressible_op_var_stabilizer_time_advection
-        use :: incompressible_op_var_stabilizer_time_diffusion
+        use :: incompressible_vars_stability_conditions
+        use :: incompressible_op_vars_stabilizer_time
+        use :: incompressible_op_vars_stabilizer_time_advection
+        use :: incompressible_op_vars_stabilizer_time_diffusion
         implicit none
         !&<
         type(stability_conditions_type), intent(in) :: stability_conditions

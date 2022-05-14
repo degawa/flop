@@ -5,7 +5,7 @@
 module grid_uniform_staggered_op_io_as
     use :: grid_uniform_staggered_vars_scalar_2d
     use :: grid_uniform_staggered_vars_vector_2d
-    use :: grid_uniform_staggered_op_io_format
+    use :: grid_uniform_staggered_op_io_vars_format
     use :: grid_uniform_staggered_op_io_vars_scalar_writer_csv
     use :: grid_uniform_staggered_op_io_vars_vector_writer_csv
     implicit none

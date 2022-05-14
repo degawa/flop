@@ -5,8 +5,8 @@
 !>
 module space_op_set
     use, intrinsic :: iso_fortran_env
-    use :: space_axis
-    use :: space_Cartesian
+    use :: space_vars_axis
+    use :: space_vars_Cartesian
     implicit none
     private
     public :: operator(.set.)

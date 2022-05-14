@@ -40,7 +40,7 @@ contains
     !>\]
     !>に相当する．
     function tensor_product(vec_l, vec_r) result(new_tsr)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             xx => xx_index, xy => xy_index, yx => yx_index, yy => yy_index, &
             x_min => x_min_index, x_max => x_max_index, &
             y_min => y_min_index, y_max => y_max_index

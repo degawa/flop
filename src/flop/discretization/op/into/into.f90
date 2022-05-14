@@ -7,7 +7,7 @@ module discretization_op_into
     use, intrinsic :: iso_fortran_env
     use :: discretization_op_divide
     use :: grid_uniform_staggered_2d
-    use :: discreteTime
+    use :: discreteTime_vars_discreteTime
     implicit none
     private
     public :: operator(.into.)

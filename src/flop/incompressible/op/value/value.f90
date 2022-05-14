@@ -4,11 +4,11 @@
 !>
 module incompressible_op_value
     use, intrinsic :: iso_fortran_env
-    use :: incompressible_characteristics
-    use :: incompressible_op_var_characteristicLength
-    use :: incompressible_op_var_characteristicVelocity
-    use :: incompressible_op_var_kineticViscosity
-    use :: incompressible_op_var_ReynoldsNumber
+    use :: incompressible_vars_characteristics
+    use :: incompressible_op_vars_characteristicLength
+    use :: incompressible_op_vars_characteristicVelocity
+    use :: incompressible_op_vars_kineticViscosity
+    use :: incompressible_op_vars_ReynoldsNumber
     implicit none
     private
     public :: operator(.value.)

@@ -37,7 +37,7 @@ contains
     !>\]
     !>を適用し，得られた結果をベクトル量で返す．
     function grad_scr(scr) result(new_vec)
-        use :: space_Cartesian, &
+        use :: space_vars_Cartesian, &
             x_dir => x_dir_index, y_dir => y_dir_index, &
             x_min => x_min_index, x_max => x_max_index, &
             y_min => y_min_index, y_max => y_max_index
