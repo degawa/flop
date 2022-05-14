@@ -17,15 +17,17 @@ module incompressible_op_stabilize
 
 contains
     !>安定条件を満たす計算時間間隔を返す．
-    function stabilize_time_interval(dt_stab) result(time_interval)
+    function stabilize_time_interval(dt_by_stability_conditions) result(time_interval)
         implicit none
         !&<
-        type(stabilizing_type), intent(in) :: dt_stab
+        type(dt_by_stability_conditions_type), intent(in) :: dt_by_stability_conditions
             !! 安定化したい計算時間間隔
         !&>
         real(real64) :: time_interval
             !! 安定化された計算時間間隔
 
-        time_interval = dt_stab%stability_conditions%stabilize(dt_stab%dt)
+        time_interval = dt_by_stability_conditions &
+                        %stability_conditions &
+                        %stabilize(dt_by_stability_conditions%dt)
     end function stabilize_time_interval
 end module incompressible_op_stabilize
