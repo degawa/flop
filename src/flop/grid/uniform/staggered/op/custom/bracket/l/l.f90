@@ -23,7 +23,7 @@
 !>
 module grid_uniform_staggered_op_custom_bracket_l
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_binary_uGrad
+    use :: grid_uniform_staggered_op_custom_binary_vars_uGrad
     implicit none
     private
     public :: operator(.l.)
