@@ -5,7 +5,7 @@
 !>また，開始時間や終了時間を配列として扱うので，
 !>配列を参照するための定数も定義される．
 !>
-module time_axis
+module time_vars_axis
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
     implicit none
@@ -161,4 +161,4 @@ contains
 
         duration = this%end - this%begin
     end function get_duration
-end module time_axis
+end module time_vars_axis

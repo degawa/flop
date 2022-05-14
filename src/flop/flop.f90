@@ -1,11 +1,12 @@
 !>Flopを構成するモジュールを一括して`use`するためのモジュール
 module flop
-    use :: time_axis
-    use :: discreteTime
-    use :: time_op
-
     use :: space_variables
     use :: space_op
+
+    use :: time_variables
+    use :: time_op
+
+    use :: discreteTime
 
     use :: discretization_op
 
