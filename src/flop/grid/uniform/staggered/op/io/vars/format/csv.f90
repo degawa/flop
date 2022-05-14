@@ -4,7 +4,7 @@
 !>
 !>変数には，および式内で参照するための擬似的な変数が含まれる．
 !>
-module grid_uniform_staggered_op_io_format_csv
+module grid_uniform_staggered_op_io_vars_format_csv
     implicit none
     private
 
@@ -15,4 +15,4 @@ module grid_uniform_staggered_op_io_format_csv
     type(csv_format_type), public :: csv
         !! CSV形式に整形する指標を式内で参照するための変数
 
-end module grid_uniform_staggered_op_io_format_csv
+end module grid_uniform_staggered_op_io_vars_format_csv
