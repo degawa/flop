@@ -4,10 +4,10 @@
 !>派生型には，連立方程式の左辺\(\boldsymbol{Ax}\)と右辺\(\boldsymbol{b}\)
 !>を取り扱う派生型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_solver_AxEqB
+module grid_uniform_staggered_op_custom_solver_vars_AxEqB
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_Ax_adt
+    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
     implicit none
     private
 
@@ -66,4 +66,4 @@ contains
         allocate (lhs%Ax, source=rhs%Ax)
         lhs%b = rhs%b
     end subroutine assign
-end module grid_uniform_staggered_op_custom_solver_AxEqB
+end module grid_uniform_staggered_op_custom_solver_vars_AxEqB

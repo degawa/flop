@@ -21,8 +21,8 @@
 module grid_uniform_staggered_op_custom_solver_results
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_Ax_adt
-    use :: grid_uniform_staggered_op_custom_solver_AxEqB
+    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
+    use :: grid_uniform_staggered_op_custom_solver_vars_AxEqB
     implicit none
     private
     public :: operator(.results.)

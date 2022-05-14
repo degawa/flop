@@ -3,11 +3,11 @@
 !>
 !>派生型には，連立方程式の左辺\(\nabla^2 x\)を表す派生型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_solver_Ax_laplacian
+module grid_uniform_staggered_op_custom_solver_Ax_vars_laplacian
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_Ax_adt
+    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
     use :: grid_uniform_staggered_op_custom_bc_impose
     implicit none
     private
@@ -157,4 +157,4 @@ contains
 
         new_b = .laplacian.this%x ! \(\nabla^2 x\)なのでLaplace演算子を流用
     end function eval
-end module grid_uniform_staggered_op_custom_solver_Ax_laplacian
+end module grid_uniform_staggered_op_custom_solver_Ax_vars_laplacian

@@ -4,7 +4,7 @@
 !>派生型には，連立方程式の左辺\(\boldsymbol{Ax}\)を表す
 !>抽象データ型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_solver_Ax_adt
+module grid_uniform_staggered_op_custom_solver_vars_Ax_adt
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
     use :: grid_uniform_staggered_op_custom_bc_scalar
@@ -44,4 +44,4 @@ module grid_uniform_staggered_op_custom_solver_Ax_adt
             type(scalar_2d_type) :: new_b
         end function IEval
     end interface
-end module grid_uniform_staggered_op_custom_solver_Ax_adt
+end module grid_uniform_staggered_op_custom_solver_vars_Ax_adt
