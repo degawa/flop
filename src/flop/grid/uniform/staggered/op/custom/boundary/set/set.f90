@@ -9,13 +9,13 @@
 !>
 module grid_uniform_staggered_op_custom_bc_set
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_bc_type
-    use :: grid_uniform_staggered_op_custom_bc_position
-    use :: grid_uniform_staggered_op_custom_bc_vector_value_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_vector
-    use :: grid_uniform_staggered_op_custom_bc_scalar_grad_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_scalar_value_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_scalar
+    use :: grid_uniform_staggered_op_custom_bc_vars_type
+    use :: grid_uniform_staggered_op_custom_bc_vars_position
+    use :: grid_uniform_staggered_op_custom_bc_vars_vector_value_on_bnd
+    use :: grid_uniform_staggered_op_custom_bc_vars_vector
+    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_grad_on_bnd
+    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_value_on_bnd
+    use :: grid_uniform_staggered_op_custom_bc_vars_scalar
     implicit none
     private
     public :: operator(.set.)

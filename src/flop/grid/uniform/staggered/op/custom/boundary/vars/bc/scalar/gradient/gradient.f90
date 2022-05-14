@@ -3,9 +3,9 @@
 !>
 !>型には，境界におけるスカラ量の外向き法線方向勾配を取り扱う型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_bc_scalar_grad_on_bnd
+module grid_uniform_staggered_op_custom_bc_vars_scalar_grad_on_bnd
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_bc_scalar_grad_Neumann
+    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_grad_Neumann
     implicit none
     private
 
@@ -18,4 +18,4 @@ module grid_uniform_staggered_op_custom_bc_scalar_grad_on_bnd
             !! 境界の位置を示すインデックス
     end type scalar_gradient_on_boundary_type
 
-end module grid_uniform_staggered_op_custom_bc_scalar_grad_on_bnd
+end module grid_uniform_staggered_op_custom_bc_vars_scalar_grad_on_bnd

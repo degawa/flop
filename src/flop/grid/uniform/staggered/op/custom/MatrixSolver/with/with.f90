@@ -14,7 +14,7 @@
 !>
 module grid_uniform_staggered_op_custom_solver_with
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_bc_scalar
+    use :: grid_uniform_staggered_op_custom_bc_vars_scalar
     use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
     use :: grid_uniform_staggered_op_custom_solver_Ax_vars_laplacian
     implicit none

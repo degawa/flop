@@ -24,10 +24,10 @@ module grid_uniform_staggered_op_custom_bc_impose
     use :: grid_uniform_staggered_2d
     use :: grid_uniform_staggered_vars_vector_2d
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_bc_type
-    use :: grid_uniform_staggered_op_custom_bc_position
-    use :: grid_uniform_staggered_op_custom_bc_vector
-    use :: grid_uniform_staggered_op_custom_bc_scalar
+    use :: grid_uniform_staggered_op_custom_bc_vars_type
+    use :: grid_uniform_staggered_op_custom_bc_vars_position
+    use :: grid_uniform_staggered_op_custom_bc_vars_vector
+    use :: grid_uniform_staggered_op_custom_bc_vars_scalar
     implicit none
     private
     public :: operator(.impose.)

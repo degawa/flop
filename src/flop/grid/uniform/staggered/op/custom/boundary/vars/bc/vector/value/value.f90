@@ -3,9 +3,9 @@
 !>
 !>型には，境界におけるベクトル量の値を取り扱う型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_bc_vector_value_on_bnd
+module grid_uniform_staggered_op_custom_bc_vars_vector_value_on_bnd
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_bc_vector_value_Dirichlet
+    use :: grid_uniform_staggered_op_custom_bc_vars_vector_value_Dirichlet
     implicit none
     private
 
@@ -18,4 +18,4 @@ module grid_uniform_staggered_op_custom_bc_vector_value_on_bnd
             !! 境界の位置を示すインデックス
     end type vector_value_on_boundary_type
 
-end module grid_uniform_staggered_op_custom_bc_vector_value_on_bnd
+end module grid_uniform_staggered_op_custom_bc_vars_vector_value_on_bnd

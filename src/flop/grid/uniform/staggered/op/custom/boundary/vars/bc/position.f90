@@ -17,7 +17,7 @@
 !> +->x      B3
 !>```
 !>
-module grid_uniform_staggered_op_custom_bc_position
+module grid_uniform_staggered_op_custom_bc_vars_position
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
     implicit none
@@ -66,4 +66,4 @@ module grid_uniform_staggered_op_custom_bc_position
         B4 = boundary_position_type(position=boundary_top_index)
         !! 上側（\(+y\)方向）境界\(B_4\)を表現する定数
 
-end module grid_uniform_staggered_op_custom_bc_position
+end module grid_uniform_staggered_op_custom_bc_vars_position
