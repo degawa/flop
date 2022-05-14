@@ -5,7 +5,7 @@
 !>また，軸の最大値や最小値を配列として扱うので，
 !>配列を参照するための定数も定義される．
 !>
-module space_axis
+module space_vars_axis
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
     implicit none
@@ -159,4 +159,4 @@ contains
         length = this%max - this%min
     end function get_length
 
-end module space_axis
+end module space_vars_axis

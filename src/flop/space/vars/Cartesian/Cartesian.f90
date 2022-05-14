@@ -9,10 +9,10 @@
 !>
 !>手続には，各軸の情報から2次元デカルト座標系を構築するコンストラクタが含まれる．
 !>
-module space_Cartesian
+module space_vars_Cartesian
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
-    use :: space_axis, only:axis_type
+    use :: space_vars_axis, only:axis_type
     implicit none
     private
     public :: x_dir_index, y_dir_index
@@ -177,4 +177,4 @@ contains
         lhs%y = rhs%y
     end subroutine assign
 
-end module space_Cartesian
+end module space_vars_Cartesian

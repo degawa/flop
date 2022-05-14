@@ -4,7 +4,7 @@
 !>
 module grid_uniform_staggered_2d
     use, intrinsic :: iso_fortran_env
-    use :: space_Cartesian
+    use :: space_vars_Cartesian
     implicit none
     private
 

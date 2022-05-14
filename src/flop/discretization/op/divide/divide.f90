@@ -8,7 +8,7 @@
 !>
 module discretization_op_divide
     use, intrinsic :: iso_fortran_env
-    use :: space_Cartesian
+    use :: space_vars_Cartesian
     use :: time_axis
     implicit none
     private

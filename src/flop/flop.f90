@@ -4,8 +4,7 @@ module flop
     use :: discreteTime
     use :: time_op
 
-    use :: space_axis
-    use :: space_Cartesian
+    use :: space_variables
     use :: space_op
 
     use :: discretization_op
