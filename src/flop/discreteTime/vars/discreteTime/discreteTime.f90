@@ -3,7 +3,7 @@
 !>定義される型には，時間軸の情報（計算開始時間と終了時間）
 !>を取り扱う派生型が含まれる．
 !>
-module discreteTime
+module discreteTime_vars_discreteTime
     use, intrinsic :: iso_fortran_env
     use :: time_vars_axis
     implicit none
@@ -110,4 +110,4 @@ contains
 
         num_integration = this%Nt
     end function get_number_of_integration
-end module discreteTime
+end module discreteTime_vars_discreteTime
