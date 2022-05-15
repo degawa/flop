@@ -5,6 +5,12 @@
 !>ただし，演算子としての機能は有しておらず，
 !>移流項を`u.dot.nabla`と表現するための擬似的な型である．
 !>
+!>@note
+!>メインルーチンの中では明確に型宣言されない．
+!>演算に使われる他の型の成分として宣言，演算子に渡す値として生成，
+!>演算の結果として中間的に生成される．
+!>@endnote
+!>
 module grid_uniform_staggered_op_custom_binary_vars_nabla
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_op_custom_binary_vars_uGrad

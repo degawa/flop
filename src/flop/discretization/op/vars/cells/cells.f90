@@ -2,9 +2,15 @@
 !>
 !>派生型には，セル数をまとめた派生型が含まれる．
 !>
+!>@note
+!>メインルーチンの中では明確に型宣言されない．
+!>演算に使われる他の型の成分として宣言，演算子に渡す値として生成，
+!>演算の結果として中間的に生成される．
+!>@endnote
+!>
 !>手続には，セル数をまとめた派生型のコンストラクタが含まれる．
 !>
-module discretization_vars_cells
+module discretization_op_vars_cells
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -34,4 +40,4 @@ contains
 
         new_cells%num_cells = num_cells
     end function construct_cells
-end module discretization_vars_cells
+end module discretization_op_vars_cells

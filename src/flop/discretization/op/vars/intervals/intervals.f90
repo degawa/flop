@@ -2,9 +2,15 @@
 !>
 !>派生型には，微小区間の幅を表現する派生型が含まれる．
 !>
+!>@note
+!>メインルーチンの中では明確に型宣言されない．
+!>演算に使われる他の型の成分として宣言，演算子に渡す値として生成，
+!>演算の結果として中間的に生成される．
+!>@endnote
+!>
 !>手続には，微小区間の幅を表現する派生型のコンストラクタが含まれる．
 !>
-module discretization_vars_intervals
+module discretization_op_vars_intervals
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -48,4 +54,4 @@ contains
 
         new_intervals%intervals = intervals
     end function construct_intervals
-end module discretization_vars_intervals
+end module discretization_op_vars_intervals
