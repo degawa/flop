@@ -4,6 +4,12 @@
 !>
 !>変数には，および式内で参照するための擬似的な変数が含まれる．
 !>
+!>@note
+!>メインルーチンの中では明確に型宣言されない．
+!>演算に使われる他の型の成分として宣言，演算子に渡す値として生成，
+!>演算の結果として中間的に生成される．
+!>@endnote
+!>
 module grid_uniform_staggered_op_io_vars_format_csv
     implicit none
     private
