@@ -2,6 +2,8 @@
 module discretization_op
     use :: discretization_op_divide
     use :: discretization_op_into
+    use :: discretization_op_vars_cells
+    use :: discretization_op_vars_intervals
     use :: discretization_op_vars_space_intoCells
     use :: discretization_op_vars_time_intoIntervals
     public

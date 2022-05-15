@@ -18,7 +18,7 @@
 !>
 module discretization_op_vars_space_intoCells
     use :: space_vars_Cartesian
-    use :: discretization_vars_cells
+    use :: discretization_op_vars_cells
     implicit none
     private
 

@@ -18,7 +18,7 @@
 !>
 module discretization_op_vars_time_intoIntervals
     use :: time_vars_axis
-    use :: discretization_vars_intervals
+    use :: discretization_op_vars_intervals
     implicit none
     private
 
