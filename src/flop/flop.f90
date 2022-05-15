@@ -9,7 +9,6 @@ module flop
     use :: discreteTime_variables
 
     use :: discretization_op
-    use :: discretization_variables
 
     use :: grid_uniform_staggered_variables
     use :: grid_uniform_staggered_operators
