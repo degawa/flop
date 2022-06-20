@@ -22,8 +22,8 @@ u_aux = (u + dt*(-(.l.(u.dot.nabla).r.u) + kvisc*.laplacian.u)) &
 
 p = .inverse.(( &
               (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
-            .until. below_criterion &
-    )
+              .using.RBSOR(1.9d0) .until. below_criterion &
+    )               ! SOR() is also available
 
 u = (u_aux - dt/dens*.grad.p) .impose. BC_u
 ```
@@ -201,6 +201,7 @@ use :: flop
 ##### 連立方程式に関係する演算子
 - `.results.`: 連立方程式の左辺型とスカラ量を組み合わせて，連立方程式型を作成する．
 - `.until.`: 連立方程式型に，連立方程式を反復法で解く場合の収束判定条件の値を代入する．
+- `.using.`: 連立方程式の左辺型成分とソルバの仕様から，ソルバ型を割り付ける．
 - `.inverse.`: 連立方程式型の型束縛手続きを呼び出して連立方程式を解く．
 
 ##### 移流項の計算に関係する演算子
