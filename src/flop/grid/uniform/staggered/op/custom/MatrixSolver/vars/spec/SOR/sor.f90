@@ -18,9 +18,9 @@ module grid_uniform_staggered_op_custom_solver_vars_solver_spec_sor
         real(real64) :: accel = 1d0
             !! 加速係数
     contains
-        procedure, public, pass :: set_acceleration_coefficient
+        procedure, public, pass, non_overridable :: set_acceleration_coefficient
         !* 加速係数を設定
-        procedure, public, pass :: get_acceleration_coefficient
+        procedure, public, pass, non_overridable :: get_acceleration_coefficient
         !* 加速係数を返却
     end type SOR_spec_type
 

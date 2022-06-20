@@ -90,7 +90,7 @@ program cavity_flow
 
             p = .inverse.(( &
                   (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
-                  .using.SOR(1.9d0) .until. below_criterion &
+                  .using.RBSOR(1.9d0) .until. below_criterion &
                 ) !&
 
             u = (u_aux - dt/dens*.grad.p) .impose. BC_u !&
