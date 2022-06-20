@@ -106,14 +106,22 @@ contains
         class(solver_spec_atype), intent(in) :: solver_spec
 
         select type (solver_spec)
-        type is (sor_spec_type)
+        !!-------------------------------------------------------------!
+        type is (sor_spec_type) ! SOR
             allocate (laplacian_solver_sor_type :: this%solver)
 
             select type (solver => this%solver)
             type is (laplacian_solver_sor_type)
                 solver%accel = solver_spec%get_acceleration_coefficient()
             end select
+        !!-------------------------------------------------------------!
+        type is (rbsor_spec_type) ! RBSOR
+            allocate (laplacian_solver_rbsor_type :: this%solver)
 
+            select type (solver => this%solver)
+            type is (laplacian_solver_rbsor_type)
+                solver%accel = solver_spec%get_acceleration_coefficient()
+            end select
         end select
     end subroutine construct_solver
 end module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
