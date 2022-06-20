@@ -1,7 +1,9 @@
 !>Laplace-Poisson方程式\(\nabla^2 x=b\)
-!>の取り扱いに関する派生型を提供する．
+!>の取り扱いに関する派生型および手続を提供する．
 !>
 !>派生型には，連立方程式の左辺\(\nabla^2 x\)を表す派生型が含まれる．
+!>
+!>手続には，SOR法の仕様のコンストラクタが含まれる．
 !>
 !>@note
 !>メインルーチンの中では明確に型宣言されない．
@@ -22,19 +24,17 @@ module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
     !>Laplace-Poisson方程式の左辺\(\nabla^2 x\)を
     !>取り扱う派生型．
     type, public, extends(Ax_atype) :: Ax_laplacian_type
-        real(real64) :: accel = 1.925d0
-            !! 解放にSOR法を利用する場合の加速係数
     contains
-        procedure, public, pass :: solve
-            !! 連立方程式を解いて未知数`x`を更新<br>
-            !! 祖先型の手続をoverride
         procedure, public, pass :: eval
-            !! \(\boldsymbol{Ax}\)を計算した結果を返却<br>
-            !! 祖先型の手続をoverride
+        !* \(\boldsymbol{Ax}\)を計算した結果を返却<br>
+        ! 祖先型の手続をoverride
 
         procedure, public, pass :: assign
-            !! `Ax_laplacian_type`を代入
+        !* `Ax_laplacian_type`を代入
         generic :: assignment(=) => assign
+
+        procedure, public, pass :: construct_solver
+        !* 連立方程式のソルバを設定．
     end type Ax_laplacian_type
 
     !>`Ax_laplacian_type`のコンストラクタを
@@ -78,74 +78,8 @@ contains
         !&>
 
         lhs%x = rhs%x
-        lhs%err_tol = rhs%err_tol
         lhs%BC = rhs%BC
-        lhs%accel = rhs%accel
     end subroutine assign
-
-    !>連立方程式を解いて未知数`x`を更新する．
-    !>
-    !>求解アルゴリズムにはSOR法を用いる．
-    subroutine solve(this, x, b)
-        implicit none
-        !&<
-        class(Ax_laplacian_type), intent(in)    :: this
-            !! 連立方程式の左辺\(\boldsymbol{Ax}\)の情報<br>
-            !! 当該実体仮引数
-        class(scalar_2d_type)   , intent(inout) :: x
-            !! 未知数
-        class(scalar_2d_type)   , intent(in)    :: b
-            !! 右辺
-        !&>
-
-        type(staggered_uniform_grid_2d_type), pointer :: grid
-
-        integer(int32) :: ic, jc, Ncx, Ncy
-        real(real64) :: dx, dy, dxdx, dydy, dxdxdydy, dxdy2
-        integer(int32) :: ite_SOR
-        real(real64) :: err_n, err_d, err_r, d_f
-
-        ! 格子の情報の取得
-        grid => x%get_base_grid()
-        call grid%get_number_of_grid_center_to(Ncx, Ncy)
-        call grid%get_interval_to(dx, dy)
-
-        ! 計算用パラメータの設定
-        dxdx = dx*dx
-        dydy = dy*dy
-        dxdxdydy = dxdx*dydy
-        dxdy2 = (dxdx + dydy)*2d0
-
-        ite_SOR = 0
-        err_r = huge(err_r)
-        do while (err_r > this%err_tol)
-            ite_SOR = ite_SOR + 1
-
-            err_r = 0d0
-            err_n = 0d0
-            err_d = 0d0
-
-            !&<
-            do jc = 1, Ncy
-            do ic = 1, Ncx
-                d_f = (  dydy*(x%val(ic-1, jc  ) + x%val(ic+1, jc  )) &
-                       + dxdx*(x%val(ic  , jc-1) + x%val(ic  , jc+1)) &
-                       - (dxdxdydy*b%val(ic, jc)) &
-                      )/(dxdy2) - x%val(ic, jc)
-                x%val(ic, jc) = x%val(ic, jc) + this%accel*d_f
-                err_n = err_n + d_f**2
-                err_d = err_d + x%val(ic, jc)**2
-            end do
-            end do
-            !&>
-
-            !ノイマン境界条件を適用
-            call impose(x, this%BC)
-
-            if (err_d <= epsilon(err_d)) err_d = 1d0
-            err_r = sqrt(err_n/err_d)
-        end do
-    end subroutine solve
 
     !>\(\nabla^2 x\)を計算した結果を返す．
     function eval(this) result(new_b)
@@ -163,4 +97,23 @@ contains
 
         new_b = .laplacian.this%x ! \(\nabla^2 x\)なのでLaplace演算子を流用
     end function eval
+
+    subroutine construct_solver(this, solver_spec)
+        use :: grid_uniform_staggered_op_custom_solver_vars_solver_spec
+        use :: grid_uniform_staggered_op_custom_solver_vars_solver
+        implicit none
+        class(Ax_laplacian_type), intent(inout) :: this
+        class(solver_spec_atype), intent(in) :: solver_spec
+
+        select type (solver_spec)
+        type is (sor_spec_type)
+            allocate (laplacian_solver_sor_type :: this%solver)
+
+            select type (solver => this%solver)
+            type is (laplacian_solver_sor_type)
+                solver%accel = solver_spec%get_acceleration_coefficient()
+            end select
+
+        end select
+    end subroutine construct_solver
 end module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
