@@ -1,8 +1,8 @@
 !>連立方程式\(\boldsymbol{Ax}=\boldsymbol{b}\)
 !>の取り扱いに関する派生型を提供する．
 !>
-!>派生型には，Lapace-Poisson方程式から作られる連立方程式を
-!>求解するソルバを表す派生型が含まれる．
+!>派生型には，Laplace-Poisson方程式から作られる連立方程式を
+!>SOR法で求解するソルバを表す派生型が含まれる．
 !>
 module grid_uniform_staggered_op_custom_solver_vars_solver_lap_SOR
     use, intrinsic :: iso_fortran_env
