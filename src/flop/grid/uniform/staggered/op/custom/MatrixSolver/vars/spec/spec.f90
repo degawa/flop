@@ -1,0 +1,6 @@
+!>連立一次方程式の仕様に関するモジュールを一括して`use`するためのモジュール
+module grid_uniform_staggered_op_custom_solver_vars_solver_spec
+    use :: grid_uniform_staggered_op_custom_solver_vars_solver_spec_adt
+    use :: grid_uniform_staggered_op_custom_solver_vars_solver_spec_sor
+    public
+end module grid_uniform_staggered_op_custom_solver_vars_solver_spec
