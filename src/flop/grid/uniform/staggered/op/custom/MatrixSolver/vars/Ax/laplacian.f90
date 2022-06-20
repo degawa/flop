@@ -9,7 +9,7 @@
 !>演算の結果として中間的に生成される．
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_solver_Ax_vars_laplacian
+module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_2d
     use :: grid_uniform_staggered_vars_scalar_2d
@@ -163,4 +163,4 @@ contains
 
         new_b = .laplacian.this%x ! \(\nabla^2 x\)なのでLaplace演算子を流用
     end function eval
-end module grid_uniform_staggered_op_custom_solver_Ax_vars_laplacian
+end module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
