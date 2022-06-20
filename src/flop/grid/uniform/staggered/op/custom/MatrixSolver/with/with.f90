@@ -16,7 +16,7 @@ module grid_uniform_staggered_op_custom_solver_with
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d_bc
     use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
-    use :: grid_uniform_staggered_op_custom_solver_Ax_vars_laplacian
+    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
     implicit none
     private
     public :: operator(.with.)
@@ -44,7 +44,8 @@ contains
         new_Ax%x = Ax%x
         new_Ax%err_tol = Ax%err_tol
         new_Ax%BC = scr_bc
-        new_Ax%accel = Ax%accel
+        if (allocated(Ax%solver)) &
+            allocate (new_Ax%solver, source=Ax%solver)
     end function Ax_laplacian_with_BC
 
 end module grid_uniform_staggered_op_custom_solver_with
