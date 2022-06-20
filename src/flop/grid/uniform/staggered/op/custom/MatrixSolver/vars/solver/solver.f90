@@ -2,5 +2,6 @@
 module grid_uniform_staggered_op_custom_solver_vars_solver
     use :: grid_uniform_staggered_op_custom_solver_vars_solver_adt
     use :: grid_uniform_staggered_op_custom_solver_vars_solver_lap_SOR
+    use :: grid_uniform_staggered_op_custom_solver_vars_solver_lap_RBSOR
     public
 end module grid_uniform_staggered_op_custom_solver_vars_solver
