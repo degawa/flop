@@ -22,8 +22,9 @@ u_aux = (u + dt*(-(.l.(u.dot.nabla).r.u) + kvisc*.laplacian.u)) &
 
 p = .inverse.(( &
               (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
-              .using.RBSOR(1.9d0) .until. below_criterion &
-    )               ! SOR() is also available
+              .using. RBSOR(1.9d0) & ! SOR(1.9d0) is also available
+              .until. below_criterion &
+    )
 
 u = (u_aux - dt/dens*.grad.p) .impose. BC_u
 ```
