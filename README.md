@@ -50,11 +50,8 @@ delta_t = .divide.(t .into. intervals(dt))
 
 ```Fortran
 ! output to csv file
-call output((p.as.csv) .to. unit("p.txt"))
-call output((u.as.csv) .to. unit("u.txt"))
-
-close (unit("p.txt"))
-close (unit("u.txt"))
+call output((p.as.csv) .to. "p.txt")
+call output((u.as.csv) .to. "u.txt")
 ```
 
 **English documentations are in preparation.**
