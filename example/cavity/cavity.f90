@@ -90,17 +90,15 @@ program cavity_flow
 
             p = .inverse.(( &
                   (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
-                  .using.RBSOR(1.9d0) .until. below_criterion &
+                  .using. RBSOR(1.9d0) & ! SOR(1.9d0) is also available
+                  .until. below_criterion &
                 ) !&
 
             u = (u_aux - dt/dens*.grad.p) .impose. BC_u !&
 
         end do
 
-        call output((p.as.csv) .to.unit("p.txt"))
-        call output((u.as.csv) .to.unit("u.txt"))
-
-        close (unit("p.txt"))
-        close (unit("u.txt"))
+        call output((p.as.csv) .to."p.txt")
+        call output((u.as.csv) .to."u.txt")
     end block
 end program cavity_flow
