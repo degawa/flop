@@ -143,5 +143,11 @@ contains
         call write_vector_2d_as_csv(vector_2d_csv_writer, &
                                     unit, io_type, arg_list, &
                                     io_status, io_message)
+
+        block
+            logical :: opened
+            inquire (unit, opened=opened)
+            if (opened) close (unit)
+        end block
     end subroutine output_vector_2d
 end module grid_uniform_staggered_op_io_vars_vector_writer_csv

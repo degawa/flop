@@ -140,5 +140,11 @@ contains
         call write_scalar_2d_as_csv(scalar_2d_csv_writer, &
                                     unit, io_type, arg_list, &
                                     io_status, io_message)
+
+        block
+            logical :: opened
+            inquire (unit, opened=opened)
+            if (opened) close (unit)
+        end block
     end subroutine output_scalar_2d
 end module grid_uniform_staggered_op_io_vars_scalar_writer_csv
