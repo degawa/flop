@@ -46,6 +46,7 @@ module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
 contains
     !>`Ax_laplacian_type`のコンストラクタ．
     function construct_Ax_laplacian(x) result(new_Ax_lap)
+        use :: grid_uniform_staggered_op_custom_solver_vars_solver_lap_SOR
         implicit none
 
         class(scalar_2d_type), intent(in) :: x
@@ -54,9 +55,12 @@ contains
         type(Ax_laplacian_type) :: new_Ax_lap
             !! Laplace-Poisson方程式の左辺
 
-        ! 未知数`x`のみを更新
+        ! 未知数`x`を更新
         call new_Ax_lap%x%construct(x%get_base_grid())
         new_Ax_lap%x = x
+
+        ! 既定のソルバ（SOR）を設定
+        allocate (laplacian_solver_sor_type :: new_Ax_lap%solver)
 
         ! 境界条件および許容誤差は，実体を構築した後，
         ! 別途演算子を用いて更新
