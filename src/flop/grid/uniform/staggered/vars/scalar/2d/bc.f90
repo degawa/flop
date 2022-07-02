@@ -26,9 +26,9 @@ module grid_uniform_stg_vars_scalar_2d_bc
             !! 境界の種別（DirichletもしくはNeumann）
     contains
         procedure, public, pass :: get_boundary_value
-            !! 指定された境界におけるスカラ量を返却
+        !* 指定された境界におけるスカラ量を返却
         procedure, public, pass :: get_boundary_gradient
-            !! 指定された境界におけるスカラ量の外向き法線方向勾配を返却
+        !* 指定された境界におけるスカラ量の外向き法線方向勾配を返却
     end type scalar_boundary_condition_type
 
 contains

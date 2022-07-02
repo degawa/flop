@@ -21,7 +21,7 @@ module grid_uniform_stg_vars_vector_2d_bc
             !! 境界の種別（DirichletもしくはNeumann）
     contains
         procedure, public, pass :: get_boundary_value
-            !! 指定された境界におけるベクトル量を配列で返却
+        !* 指定された境界におけるベクトル量を配列で返却
     end type vector_boundary_condition_type
 
 contains

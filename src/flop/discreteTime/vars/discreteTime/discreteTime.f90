@@ -21,17 +21,17 @@ module discreteTime_vars_discreteTime
     contains
         !&<
         procedure, public, pass :: construct_by_time_interval
-            !! 時間軸と計算時間間隔を用いて時間離散化
+        !* 時間軸と計算時間間隔を用いて時間離散化
         procedure, public, pass :: construct_by_number_of_integration
-            !! 時間軸と時間積分回数を用いて時間離散化
+        !* 時間軸と時間積分回数を用いて時間離散化
         generic :: construct => &
                         construct_by_number_of_integration, &
                         construct_by_time_interval
         !&>
         procedure, public, pass :: get_time_interval
-            !! 計算時間間隔を返却
+        !* 計算時間間隔を返却
         procedure, public, pass :: get_number_of_integration
-            !! 時間積分回数を返却
+        !* 時間積分回数を返却
     end type discrete_time_type
 
 contains

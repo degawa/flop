@@ -45,54 +45,54 @@ module grid_uniform_stg_2d
     contains
         !&<
         procedure, public, pass :: construct_by_length_and_num_grid_points
-            !! 座標系情報と格子点数を用いて1次元等間隔格子を設定
+        !* 座標系情報と格子点数を用いて1次元等間隔格子を設定
         procedure, public, pass :: construct_by_length_and_interval
-            !! 座標系情報と格子点間隔に基づいて1次元等間隔格子を設定
+        !* 座標系情報と格子点間隔に基づいて1次元等間隔格子を設定
         procedure, public, pass :: construct_by_num_grid_points_and_interval
-            !! 座標系情報，格子点数，格子点間隔に基づいて
-            !! 1次元等間隔格子を設定
+        !* 座標系情報，格子点数，格子点間隔に基づいて
+        ! 1次元等間隔格子を設定
         generic :: construct => construct_by_length_and_num_grid_points, &
                                 construct_by_length_and_interval, &
                                 construct_by_num_grid_points_and_interval
         !&>
         procedure, public, pass :: get_number_of_grid_points
-            !! \(x, y\)方向の格子点数を配列で返却<br>
-            !! 仮想点の数は含まない
+        !* \(x, y\)方向の格子点数を配列で返却<br>
+        ! 仮想点の数は含まない
         procedure, public, pass :: get_number_of_grid_points_to
-            !! \(x, y\)方向の格子点数を個々に取得<br>
-            !! 仮想点の数は含まない
+        !* \(x, y\)方向の格子点数を個々に取得<br>
+        ! 仮想点の数は含まない
         procedure, public, pass :: get_interval
-            !! \(x, y\)方向の格子点間隔を配列で返却
+        !* \(x, y\)方向の格子点間隔を配列で返却
         procedure, public, pass :: get_interval_to
-            !! \(x, y\)方向の格子点間隔を個々に取得
+        !* \(x, y\)方向の格子点間隔を個々に取得
         procedure, public, pass :: get_length
-            !! \(x, y\)方向の領域長さを配列で返却
+        !* \(x, y\)方向の領域長さを配列で返却
         procedure, public, pass :: get_length_to
-            !! \(x, y\)方向の領域長さを個々に取得
+        !* \(x, y\)方向の領域長さを個々に取得
         procedure, public, pass :: get_number_of_grid_center
-            !! \(x, y\)方向のセル数を配列で返却<br>
-            !! 仮想点の数は含まない
+        !* \(x, y\)方向のセル数を配列で返却<br>
+        ! 仮想点の数は含まない
         procedure, public, pass :: get_number_of_grid_center_to
-            !! \(x, y\)方向のセル数を個々に取得<br>
-            !! 仮想点の数は含まない
+        !* \(x, y\)方向のセル数を個々に取得<br>
+        ! 仮想点の数は含まない
         procedure, public, pass :: get_number_of_virtual_points
-            !! 仮想点数を返却
+        !* 仮想点数を返却
         procedure, public, pass :: get_grid_point_range
-            !! 仮想点を含む格子点数の範囲を配列で返却
+        !* 仮想点を含む格子点数の範囲を配列で返却
         procedure, public, pass :: get_grid_center_range
-            !! 仮想点を含むセル数の範囲を配列で返却
+        !* 仮想点を含むセル数の範囲を配列で返却
         procedure, public, pass :: get_scalar_range
-            !! スカラ量が定義されている定義点番号の範囲を返却<br>
-            !! 仮想点を含む
+        !* スカラ量が定義されている定義点番号の範囲を返却<br>
+        ! 仮想点を含む
         procedure, public, pass :: get_vector_range
-            !! ベクトル量が定義されている定義点番号の範囲を返却<br>
-            !! 仮想点を含む
+        !* ベクトル量が定義されている定義点番号の範囲を返却<br>
+        ! 仮想点を含む
         procedure, public, pass :: get_tensor_range
-            !! テンソル量が定義されている定義点番号の範囲を返却<br>
-            !! 仮想点を含む
+        !* テンソル量が定義されている定義点番号の範囲を返却<br>
+        ! 仮想点を含む
 
         procedure, private, pass :: discretize_space
-            !! 離散化を実行
+        !* 離散化を実行
     end type staggered_uniform_grid_2d_type
 
 contains

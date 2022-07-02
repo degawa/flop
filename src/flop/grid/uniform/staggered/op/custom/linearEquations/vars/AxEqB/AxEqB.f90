@@ -26,9 +26,9 @@ module grid_uniform_stg_op_cust_linEqs_vars_AxEqB
             !! 連立方程式の右辺
     contains
         procedure, public, pass :: inverse
-            !! 連立方程式を求解
+        !* 連立方程式を求解
         procedure, public, pass :: assign
-            !! `Ax_eq_b_type`を代入
+        !* `Ax_eq_b_type`を代入
         generic :: assignment(=) => assign
     end type Ax_eq_b_type
 

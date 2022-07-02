@@ -26,20 +26,20 @@ module grid_uniform_stg_vars_tensor_2d
     contains
         !&<
         procedure, public, pass :: construct_by_base_grid
-            !! 成分`grid`に基づいて配列を割り付け
+        !* 成分`grid`に基づいて配列を割り付け
         procedure, public, pass :: construct_by_grid_pointer
-            !! 格子の情報に基づいて配列を割り付け
+        !* 格子の情報に基づいて配列を割り付け
         generic :: construct => construct_by_base_grid, &
                                 construct_by_grid_pointer
         procedure, public, pass :: destruct
-            !! 割り付けた配列を解放
+        !* 割り付けた配列を解放
         final :: finalize
-            !! 後始末手続
+        !* 後始末手続
         !&>
 
         procedure, public, pass :: get_base_grid
-            !! `tensor_2d_type`に関連付けられている
-            !! 格子へのポインタを返却
+        !* `tensor_2d_type`に関連付けられている
+        ! 格子へのポインタを返却
     end type tensor_2d_type
 contains
     !>成分の`grid`の情報に基づいて，`tensor_2d_type`を構築する．
