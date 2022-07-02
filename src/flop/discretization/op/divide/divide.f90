@@ -5,7 +5,7 @@
 !>
 module discretization_op_divide
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
+    use :: grid_uniform_stg_2d
     use :: discreteTime_vars_discreteTime
     use :: discretization_op_vars_space_intoCells
     use :: discretization_op_vars_time_intoIntervals

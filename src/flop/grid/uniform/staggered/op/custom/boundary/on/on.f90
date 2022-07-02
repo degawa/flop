@@ -12,16 +12,16 @@
 !>また，`Dirichlet([0d0, 0d0]) .on. B1`などと表現することを実現するための
 !>ユーザ定義演算子`.on.`を定義するインタフェースも含まれる．
 !>
-module grid_uniform_staggered_op_custom_bc_on
+module grid_uniform_stg_op_custom_bc_on
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_bc_vars_type
-    use :: grid_uniform_staggered_op_custom_bc_vars_position
-    use :: grid_uniform_staggered_op_custom_bc_vars_vector_value_Dirichlet
-    use :: grid_uniform_staggered_op_custom_bc_vars_vector_value_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_value_Dirichlet
-    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_value_on_bnd
-    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_grad_Neumann
-    use :: grid_uniform_staggered_op_custom_bc_vars_scalar_grad_on_bnd
+    use :: grid_uniform_stg_op_custom_bc_vars_type
+    use :: grid_uniform_stg_op_custom_bc_vars_position
+    use :: grid_uniform_stg_op_custom_bc_vars_vector_value_Dirichlet
+    use :: grid_uniform_stg_op_custom_bc_vars_vector_value_on_bnd
+    use :: grid_uniform_stg_op_custom_bc_vars_scalar_value_Dirichlet
+    use :: grid_uniform_stg_op_custom_bc_vars_scalar_value_on_bnd
+    use :: grid_uniform_stg_op_custom_bc_vars_scalar_grad_Neumann
+    use :: grid_uniform_stg_op_custom_bc_vars_scalar_grad_on_bnd
     implicit none
     private
     public :: operator(.on.)
@@ -85,4 +85,4 @@ contains
         new_scrgrad_bc%scalar_gradient = Neumann_scalar_gradient
         new_scrgrad_bc%boundary_index = position%position
     end function on_scrgrad_pos
-end module grid_uniform_staggered_op_custom_bc_on
+end module grid_uniform_stg_op_custom_bc_on

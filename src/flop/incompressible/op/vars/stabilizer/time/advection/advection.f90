@@ -13,7 +13,7 @@
 module incompressible_op_vars_stabilizer_time_advection
     use, intrinsic :: iso_fortran_env
     use :: incompressible_op_vars_stabilizer_time
-    use :: grid_uniform_staggered_2d
+    use :: grid_uniform_stg_2d
     implicit none
     private
     public :: Courant

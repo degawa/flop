@@ -2,7 +2,7 @@
 !>
 !>派生型には，2次元等間隔のスタガード格子を表す型が含まれる．
 !>
-module grid_uniform_staggered_2d
+module grid_uniform_stg_2d
     use, intrinsic :: iso_fortran_env
     use :: space_vars_Cartesian
     implicit none
@@ -535,4 +535,4 @@ contains
             end block y_dir
         end subroutine compute_coordinate_values
     end subroutine discretize_space
-end module grid_uniform_staggered_2d
+end module grid_uniform_stg_2d

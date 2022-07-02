@@ -11,7 +11,7 @@
 !>手続には，スカラ量の値を取り扱う型を構築する
 !>コンストラクタが含まれる．
 !>
-module grid_uniform_staggered_op_custom_bc_vars_scalar_value_Dirichlet
+module grid_uniform_stg_op_custom_bc_vars_scalar_value_Dirichlet
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -41,4 +41,4 @@ contains
 
         new_val%value = val
     end function Dirichlet_scalar
-end module grid_uniform_staggered_op_custom_bc_vars_scalar_value_Dirichlet
+end module grid_uniform_stg_op_custom_bc_vars_scalar_value_Dirichlet

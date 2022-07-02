@@ -4,12 +4,12 @@
 !>派生型には，Laplace-Poisson方程式から作られる連立方程式を
 !>SOR法で求解するソルバを表す派生型が含まれる．
 !>
-module grid_uniform_staggered_op_custom_linEqs_vars_solver_lap_SOR
+module grid_uniform_stg_op_custom_linEqs_vars_solver_lap_SOR
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_vars_scalar_2d_bc
-    use :: grid_uniform_staggered_op_custom_bc_impose
-    use :: grid_uniform_staggered_op_custom_linEqs_vars_solver_adt
+    use :: grid_uniform_stg_vars_scalar_2d
+    use :: grid_uniform_stg_vars_scalar_2d_bc
+    use :: grid_uniform_stg_op_custom_bc_impose
+    use :: grid_uniform_stg_op_custom_linEqs_vars_solver_adt
     implicit none
     private
 
@@ -25,7 +25,7 @@ module grid_uniform_staggered_op_custom_linEqs_vars_solver_lap_SOR
 contains
     !>SOR法を用いてPoisson方程式を解いて未知数`x`を更新する．
     subroutine solve_using_iterative_method(this, x, b, BC, err_tol)
-        use :: grid_uniform_staggered_2d
+        use :: grid_uniform_stg_2d
         implicit none
         !&<
         class(laplacian_solver_sor_type)        , intent(in)    :: this
@@ -88,4 +88,4 @@ contains
             err_r = sqrt(err_n/err_d)
         end do
     end subroutine solve_using_iterative_method
-end module grid_uniform_staggered_op_custom_linEqs_vars_solver_lap_SOR
+end module grid_uniform_stg_op_custom_linEqs_vars_solver_lap_SOR

@@ -19,15 +19,15 @@
 !>一時変数の生成・解放を回避する．
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_bc_impose
+module grid_uniform_stg_op_custom_bc_impose
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_vars_vector_2d
-    use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_bc_vars_type
-    use :: grid_uniform_staggered_op_custom_bc_vars_position
-    use :: grid_uniform_staggered_vars_vector_2d_bc
-    use :: grid_uniform_staggered_vars_scalar_2d_bc
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_vars_vector_2d
+    use :: grid_uniform_stg_vars_scalar_2d
+    use :: grid_uniform_stg_op_custom_bc_vars_type
+    use :: grid_uniform_stg_op_custom_bc_vars_position
+    use :: grid_uniform_stg_vars_vector_2d_bc
+    use :: grid_uniform_stg_vars_scalar_2d_bc
     implicit none
     private
     public :: operator(.impose.)
@@ -343,4 +343,4 @@ contains
             end if
         end block
     end subroutine impose_scr_scrbc_neumann
-end module grid_uniform_staggered_op_custom_bc_impose
+end module grid_uniform_stg_op_custom_bc_impose

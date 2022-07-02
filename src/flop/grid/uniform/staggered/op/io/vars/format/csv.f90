@@ -10,7 +10,7 @@
 !>演算の結果として中間的に生成される．
 !>@endnote
 !>
-module grid_uniform_staggered_op_io_vars_format_csv
+module grid_uniform_stg_op_io_vars_format_csv
     implicit none
     private
 
@@ -21,4 +21,4 @@ module grid_uniform_staggered_op_io_vars_format_csv
     type(csv_format_type), public :: csv
         !! CSV形式に整形する指標を式内で参照するための変数
 
-end module grid_uniform_staggered_op_io_vars_format_csv
+end module grid_uniform_stg_op_io_vars_format_csv

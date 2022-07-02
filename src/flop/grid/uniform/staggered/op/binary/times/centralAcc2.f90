@@ -11,11 +11,11 @@
 !>
 !>WENOやMUSCL等を用いた上流化は，必要に応じて実装する．
 !>
-module grid_uniform_staggered_op_binary_times_central
+module grid_uniform_stg_op_binary_times_central
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_vars_vector_2d
-    use :: grid_uniform_staggered_vars_tensor_2d
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_vars_vector_2d
+    use :: grid_uniform_stg_vars_tensor_2d
     implicit none
     private
     public :: operator(.times.)
@@ -117,4 +117,4 @@ contains
             !&>
         end block yy_
     end function tensor_product
-end module grid_uniform_staggered_op_binary_times_central
+end module grid_uniform_stg_op_binary_times_central

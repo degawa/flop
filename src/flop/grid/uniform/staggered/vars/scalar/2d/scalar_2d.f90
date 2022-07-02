@@ -3,9 +3,9 @@
 !>定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
 !>定義されるスカラ量を取り扱う型が含まれる．
 !>
-module grid_uniform_staggered_vars_scalar_2d
+module grid_uniform_stg_vars_scalar_2d
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
+    use :: grid_uniform_stg_2d
     implicit none
     private
     public :: scalar_2d_type
@@ -307,4 +307,4 @@ contains
         new_scr = this*factor
     end function r_multiply_r8
 
-end module grid_uniform_staggered_vars_scalar_2d
+end module grid_uniform_stg_vars_scalar_2d

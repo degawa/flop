@@ -2,7 +2,7 @@
 !>
 !>手続には，物理量の出力子に装置番号を渡す手続が含まれる．
 !>
-module grid_uniform_staggered_op_io_unit
+module grid_uniform_stg_op_io_unit
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -33,4 +33,4 @@ contains
         ! 開かれてなかったら開く
         open (newunit=unit_number, file=filename)
     end function filename_to_unit
-end module grid_uniform_staggered_op_io_unit
+end module grid_uniform_stg_op_io_unit

@@ -6,9 +6,9 @@
 !>
 !>手続には，Red-Black SOR法の仕様のコンストラクタが含まれる．
 !>
-module grid_uniform_staggered_op_custom_linEqs_vars_solver_spec_rbsor
+module grid_uniform_stg_op_custom_linEqs_vars_solver_spec_rbsor
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_linEqs_vars_solver_spec_sor
+    use :: grid_uniform_stg_op_custom_linEqs_vars_solver_spec_sor
     implicit none
     private
     public :: RBSOR
@@ -35,4 +35,4 @@ contains
 
         call new_rbsor_spec%set_acceleration_coefficient(acceleration_coefficient)
     end function construct_RBSOR_spec
-end module grid_uniform_staggered_op_custom_linEqs_vars_solver_spec_rbsor
+end module grid_uniform_stg_op_custom_linEqs_vars_solver_spec_rbsor

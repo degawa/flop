@@ -16,11 +16,11 @@
 !>は，laplacianをdiv･gradとして表現することを目的に，
 !>今後実装する予定である．
 !>
-module grid_uniform_staggered_op_unary_grad_acc2
+module grid_uniform_stg_op_unary_grad_acc2
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_vars_vector_2d
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_vars_scalar_2d
+    use :: grid_uniform_stg_vars_vector_2d
     implicit none
     private
     public :: operator(.grad.)
@@ -84,4 +84,4 @@ contains
             !&>
         end block
     end function grad_scr
-end module grid_uniform_staggered_op_unary_grad_acc2
+end module grid_uniform_stg_op_unary_grad_acc2

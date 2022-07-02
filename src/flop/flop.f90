@@ -10,8 +10,8 @@ module flop
 
     use :: discretization_op
 
-    use :: grid_uniform_staggered_variables
-    use :: grid_uniform_staggered_operators
+    use :: grid_uniform_stg_variables
+    use :: grid_uniform_stg_operators
 
     use :: incompressible_variables
     use :: incompressible_op

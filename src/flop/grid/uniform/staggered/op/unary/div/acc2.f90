@@ -13,12 +13,12 @@
 !>また，ユーザ定義演算子`.div.`として公開するための
 !>インタフェースも含まれる．
 !>
-module grid_uniform_staggered_op_unary_div_acc2
+module grid_uniform_stg_op_unary_div_acc2
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_vars_vector_2d
-    use :: grid_uniform_staggered_vars_tensor_2d
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_vars_scalar_2d
+    use :: grid_uniform_stg_vars_vector_2d
+    use :: grid_uniform_stg_vars_tensor_2d
     implicit none
     private
     public :: operator(.div.)
@@ -128,4 +128,4 @@ contains
             !&>
         end block
     end function div_tsr
-end module grid_uniform_staggered_op_unary_div_acc2
+end module grid_uniform_stg_op_unary_div_acc2
