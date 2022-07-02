@@ -18,11 +18,11 @@
 !>
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_solver_results
+module grid_uniform_staggered_op_custom_linEqs_results
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
-    use :: grid_uniform_staggered_op_custom_solver_vars_AxEqB
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_Ax_adt
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_AxEqB
     implicit none
     private
     public :: operator(.results.)
@@ -51,4 +51,4 @@ contains
         ! 右辺は`type`のため，そのまま代入
         new_Ax_eq_b%b = b
     end function results_Ax_eq_b
-end module grid_uniform_staggered_op_custom_solver_results
+end module grid_uniform_staggered_op_custom_linEqs_results

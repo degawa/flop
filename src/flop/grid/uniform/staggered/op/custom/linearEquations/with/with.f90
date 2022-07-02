@@ -12,11 +12,11 @@
 !>その他の連立方程式を取り扱う場合は，専用の手続を追加し，
 !>interfaceを用いて適切な手続が自動で選択されるようにする．
 !>
-module grid_uniform_staggered_op_custom_solver_with
+module grid_uniform_staggered_op_custom_linEqs_with
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d_bc
-    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
-    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_Ax_adt
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_Ax_laplacian
     implicit none
     private
     public :: operator(.with.)
@@ -48,4 +48,4 @@ contains
             allocate (new_Ax%solver, source=Ax%solver)
     end function Ax_laplacian_with_BC
 
-end module grid_uniform_staggered_op_custom_solver_with
+end module grid_uniform_staggered_op_custom_linEqs_with

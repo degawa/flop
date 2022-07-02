@@ -1,11 +1,11 @@
 !>連立方程式\(\boldsymbol{Ax}=\boldsymbol{b}\)
 !>の取り扱いに関する手続を提供する．
 !>
-module grid_uniform_staggered_op_custom_solver_using
+module grid_uniform_staggered_op_custom_linEqs_using
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_vars_AxEqB
-    use :: grid_uniform_staggered_op_custom_solver_vars_solver_spec_adt
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_AxEqB
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_solver_spec_adt
     implicit none
     private
     public :: operator(.using.)
@@ -34,4 +34,4 @@ contains
         call new_Ax_eq_b%Ax%destruct_solver()
         call new_Ax_eq_b%Ax%construct_solver(solver_spec)
     end function set_matrix_solver
-end module grid_uniform_staggered_op_custom_solver_using
+end module grid_uniform_staggered_op_custom_linEqs_using

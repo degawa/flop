@@ -8,11 +8,11 @@
 !>表現することを実現するためのユーザ定義演算子`.inverse.`を
 !>定義するインタフェースも含まれる．
 !>
-module grid_uniform_staggered_op_custom_solver_inverse
+module grid_uniform_staggered_op_custom_linEqs_inverse
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
-    use :: grid_uniform_staggered_op_custom_solver_vars_AxEqB
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_Ax_adt
+    use :: grid_uniform_staggered_op_custom_linEqs_vars_AxEqB
     implicit none
     private
     public :: operator(.inverse.)
@@ -44,4 +44,4 @@ contains
         ! 手続`inverse`を呼び出して連立方程式を解く
         call Ax_eq_b%inverse(x, Ax_eq_b%b)
     end function inverse_Ax_eq_b
-end module grid_uniform_staggered_op_custom_solver_inverse
+end module grid_uniform_staggered_op_custom_linEqs_inverse
