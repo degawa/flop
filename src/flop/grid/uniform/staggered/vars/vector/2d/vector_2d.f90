@@ -218,7 +218,7 @@ contains
     !>戻り値となる`vector_2d_type`に格子をbase_gridとして関連付けるが，
     !>配列は割り付けない．
     !>
-    !>割付は，[[grid_uniform_staggered_vars_vector_2d(module):initialize(function)]]
+    !>割付は，[[grid_uniform_stg_vars_vector_2d(module):initialize(function)]]
     !>が行う．
     !>
     !>演算子指向的に`u = u .on. grid`と呼ぶことを目的に，
@@ -399,7 +399,7 @@ contains
             !! 乗算結果を格納する`vetor_2d_type`
 
         ! 乗算は左右の入れ替えが可能なので，
-        ! 計算は[[grid_uniform_staggered_vars_vector_2d(module):multiply_r8(function)]]に委譲
+        ! 計算は[[grid_uniform_stg_vars_vector_2d(module):multiply_r8(function)]]に委譲
         new_vec = this*factor
     end function r_multiply_r8
 

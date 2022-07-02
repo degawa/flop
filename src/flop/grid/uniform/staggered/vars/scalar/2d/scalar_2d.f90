@@ -97,7 +97,7 @@ contains
     !>格子を`scalar_2d_type`のbase_gridとして関連付け，
     !>成分の配列を動的に割り付ける．
     !>
-    !>導入の理由は[[grid_uniform_staggered_vars_vector_2d(module):construct_by_grid_pointer(subroutine)]]
+    !>導入の理由は[[grid_uniform_stg_vars_vector_2d(module):construct_by_grid_pointer(subroutine)]]
     !>を参照のこと．
     subroutine construct_by_grid_pointer(this, grid)
         implicit none
@@ -185,7 +185,7 @@ contains
     !>戻り値となる`scalar_2d_type`に格子をbase_gridとして関連付けるが，
     !>配列は割り付けない．
     !>
-    !>割付は，[[grid_uniform_staggered_vars_scalar_2d(module):initialize(function)]]
+    !>割付は，[[grid_uniform_stg_vars_scalar_2d(module):initialize(function)]]
     !>が行う．
     !>
     !>演算子指向的に`p = p .on. grid`と呼ぶことを目的に，
@@ -303,7 +303,7 @@ contains
             !! 乗算結果を格納する`scalar_2d_type`
 
         ! 乗算は左右の入れ替えが可能なので，
-        ! 計算は[[grid_uniform_staggered_vars_scalar_2d(module):multiply_r8(function)]]に委譲
+        ! 計算は[[grid_uniform_stg_vars_scalar_2d(module):multiply_r8(function)]]に委譲
         new_scr = this*factor
     end function r_multiply_r8
 
