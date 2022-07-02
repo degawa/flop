@@ -41,8 +41,8 @@ program cavity_flow
         t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
         dt = 0.25d0
 
-        stability_conditions = stability_conditions .set. Courant(grid, U_wall, 0.1d0) &
-                                                    .set. Diffusion(grid, kvisc, 0.5d0) !&
+        stability_conditions = stability_conditions .set. Courant(minval(grid%get_interval()), U_wall, 0.1d0) &
+                                                    .set. Diffusion(minval(grid%get_interval()), kvisc, 0.5d0) !&
         dt = .stabilize.(dt .by. stability_conditions) !&
 
         delta_t = .divide. (t.into.intervals(dt))
