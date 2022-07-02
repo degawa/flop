@@ -14,7 +14,7 @@ module discretization_op_vars_intervals
     use, intrinsic :: iso_fortran_env
     implicit none
     private
-    public :: Intervals
+    public :: intervals
 
     !>微小区間の間隔を表現する派生型
     type, public :: intervals_type
@@ -23,8 +23,8 @@ module discretization_op_vars_intervals
     end type intervals_type
 
     !>微小区間の間隔を表現する派生型に対するコンストラクタを
-    !>`Intervals`と呼べるようにするためのインタフェース
-    interface Intervals
+    !>`intervals`と呼べるようにするためのインタフェース
+    interface intervals
         procedure :: construct_interval
     end interface
 
