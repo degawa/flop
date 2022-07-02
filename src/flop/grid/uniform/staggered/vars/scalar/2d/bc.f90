@@ -5,10 +5,10 @@
 !>
 module grid_uniform_stg_vars_scalar_2d_bc
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_stg_op_custom_bc_vars_type
-    use :: grid_uniform_stg_op_custom_bc_vars_position
-    use :: grid_uniform_stg_op_custom_bc_vars_scalar_grad_on_bnd
-    use :: grid_uniform_stg_op_custom_bc_vars_scalar_value_on_bnd
+    use :: grid_uniform_stg_op_cust_bc_vars_type
+    use :: grid_uniform_stg_op_cust_bc_vars_position
+    use :: grid_uniform_stg_op_cust_bc_vars_scalar_grad_on_bnd
+    use :: grid_uniform_stg_op_cust_bc_vars_scalar_value_on_bnd
     implicit none
     private
 

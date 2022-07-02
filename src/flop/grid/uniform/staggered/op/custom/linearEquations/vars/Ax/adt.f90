@@ -4,11 +4,11 @@
 !>派生型には，連立方程式の左辺\(\boldsymbol{Ax}\)を表す
 !>抽象データ型が含まれる．
 !>
-module grid_uniform_stg_op_custom_linEqs_vars_Ax_adt
+module grid_uniform_stg_op_cust_linEqs_vars_Ax_adt
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_stg_vars_scalar_2d
     use :: grid_uniform_stg_vars_scalar_2d_bc
-    use :: grid_uniform_stg_op_custom_linEqs_vars_solver_adt
+    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_adt
     implicit none
     private
 
@@ -43,7 +43,7 @@ module grid_uniform_stg_op_custom_linEqs_vars_Ax_adt
         end function IEval
         !>連立方程式のソルバを構築する手続のインタフェース．
         subroutine IConstruct_solver(this, solver_spec)
-            use :: grid_uniform_stg_op_custom_linEqs_vars_solver_spec_adt
+            use :: grid_uniform_stg_op_cust_linEqs_vars_solver_spec_adt
             import Ax_atype
             implicit none
             class(Ax_atype), intent(inout) :: this
@@ -73,4 +73,4 @@ contains
 
         if (allocated(this%solver)) deallocate (this%solver)
     end subroutine destruct_solver
-end module grid_uniform_stg_op_custom_linEqs_vars_Ax_adt
+end module grid_uniform_stg_op_cust_linEqs_vars_Ax_adt

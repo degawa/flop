@@ -3,7 +3,7 @@
 !>定数は，第1種（Dirichlet）境界条件および
 !>第2種（Neumann）境界条件を表す定数が定義される．
 !>
-module grid_uniform_stg_op_custom_bc_vars_type
+module grid_uniform_stg_op_cust_bc_vars_type
     use, intrinsic :: iso_fortran_env
     use, intrinsic :: iso_c_binding
     implicit none
@@ -42,4 +42,4 @@ contains
 
         is_Neumann_boundary = (boundary_type == boundary_Neumann)
     end function is_Neumann_boundary
-end module grid_uniform_stg_op_custom_bc_vars_type
+end module grid_uniform_stg_op_cust_bc_vars_type

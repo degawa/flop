@@ -7,13 +7,13 @@
 !>表現することを実現するためのユーザ定義演算子`.set.`を
 !>定義するインタフェースも含まれる．
 !>
-module grid_uniform_stg_op_custom_bc_set
+module grid_uniform_stg_op_cust_bc_set
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_stg_op_custom_bc_vars_type
-    use :: grid_uniform_stg_op_custom_bc_vars_position
-    use :: grid_uniform_stg_op_custom_bc_vars_vector_value_on_bnd
-    use :: grid_uniform_stg_op_custom_bc_vars_scalar_grad_on_bnd
-    use :: grid_uniform_stg_op_custom_bc_vars_scalar_value_on_bnd
+    use :: grid_uniform_stg_op_cust_bc_vars_type
+    use :: grid_uniform_stg_op_cust_bc_vars_position
+    use :: grid_uniform_stg_op_cust_bc_vars_vector_value_on_bnd
+    use :: grid_uniform_stg_op_cust_bc_vars_scalar_grad_on_bnd
+    use :: grid_uniform_stg_op_cust_bc_vars_scalar_value_on_bnd
     use :: grid_uniform_stg_vars_vector_2d_bc
     use :: grid_uniform_stg_vars_scalar_2d_bc
     implicit none
@@ -112,4 +112,4 @@ contains
             new_scr_bc%boundary_type(bnd_idx) = boundary_Dirichlet
         end block
     end function set_scrval_bc
-end module grid_uniform_stg_op_custom_bc_set
+end module grid_uniform_stg_op_cust_bc_set

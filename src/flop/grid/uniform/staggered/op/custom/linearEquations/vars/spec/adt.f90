@@ -4,7 +4,7 @@
 !>派生型には，連立方程式\(\boldsymbol{Ax}=\boldsymbol{b}\)を
 !>求解するソルバの仕様を表す抽象データ型が含まれる．
 !>
-module grid_uniform_stg_op_custom_linEqs_vars_solver_spec_adt
+module grid_uniform_stg_op_cust_linEqs_vars_solver_spec_adt
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -12,4 +12,4 @@ module grid_uniform_stg_op_custom_linEqs_vars_solver_spec_adt
     !>ソルバの仕様を表す抽象データ型．
     type, public, abstract :: solver_spec_atype
     end type solver_spec_atype
-end module grid_uniform_stg_op_custom_linEqs_vars_solver_spec_adt
+end module grid_uniform_stg_op_cust_linEqs_vars_solver_spec_adt

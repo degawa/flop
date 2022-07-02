@@ -11,9 +11,9 @@
 !>演算の結果として中間的に生成される．
 !>@endnote
 !>
-module grid_uniform_stg_op_custom_binary_vars_nabla
+module grid_uniform_stg_op_cust_binary_vars_nabla
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_stg_op_custom_binary_vars_uGrad
+    use :: grid_uniform_stg_op_cust_binary_vars_uGrad
     implicit none
     private
 
@@ -25,4 +25,4 @@ module grid_uniform_stg_op_custom_binary_vars_nabla
 
     type(nabla_type), public :: nabla
         !! ナブラ演算子\(\nabla\)
-end module grid_uniform_stg_op_custom_binary_vars_nabla
+end module grid_uniform_stg_op_cust_binary_vars_nabla

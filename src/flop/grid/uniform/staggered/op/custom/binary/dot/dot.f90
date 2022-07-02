@@ -7,11 +7,11 @@
 !>また，移流項を`u.dot.nabla`と表現することを実現するための
 !>ユーザ定義演算子`.dot.`を定義するインタフェースも含まれる．
 !>
-module grid_uniform_stg_op_custom_binary_dot
+module grid_uniform_stg_op_cust_binary_dot
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_stg_vars_vector_2d
-    use :: grid_uniform_stg_op_custom_binary_vars_uGrad
-    use :: grid_uniform_stg_op_custom_binary_vars_nabla, only:nabla_type
+    use :: grid_uniform_stg_op_cust_binary_vars_uGrad
+    use :: grid_uniform_stg_op_cust_binary_vars_nabla, only:nabla_type
     implicit none
     private
     public :: operator(.dot.)
@@ -42,4 +42,4 @@ contains
         if (same_type_as(nabla, nabla)) continue
     end function dot_u_nabla
 
-end module grid_uniform_stg_op_custom_binary_dot
+end module grid_uniform_stg_op_cust_binary_dot

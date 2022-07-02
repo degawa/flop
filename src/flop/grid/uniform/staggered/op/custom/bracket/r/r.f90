@@ -21,10 +21,10 @@
 !>
 !>@endnote
 !>
-module grid_uniform_stg_op_custom_bracket_r
+module grid_uniform_stg_op_cust_bracket_r
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_stg_vars_vector_2d
-    use :: grid_uniform_stg_op_custom_binary_vars_uGrad
+    use :: grid_uniform_stg_op_cust_binary_vars_uGrad
     implicit none
     private
     public :: operator(.r.)
@@ -53,4 +53,4 @@ contains
         call new_vec%construct(u%get_base_grid())
         new_vec = u_grad%compute(u)
     end function r
-end module grid_uniform_stg_op_custom_bracket_r
+end module grid_uniform_stg_op_cust_bracket_r

@@ -23,11 +23,11 @@
 !>
 !>@endnote
 !>
-module grid_uniform_stg_op_custom_linEqs_until
+module grid_uniform_stg_op_cust_linEqs_until
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_stg_vars_scalar_2d
-    use :: grid_uniform_stg_op_custom_linEqs_vars_Ax_adt
-    use :: grid_uniform_stg_op_custom_linEqs_vars_AxEqB
+    use :: grid_uniform_stg_op_cust_linEqs_vars_Ax_adt
+    use :: grid_uniform_stg_op_cust_linEqs_vars_AxEqB
     implicit none
     private
     public :: operator(.until.)
@@ -54,4 +54,4 @@ contains
         new_Ax_eq_b = Ax_eq_b
         new_Ax_eq_b%Ax%err_tol = error_tolerance
     end function set_error_tolerance
-end module grid_uniform_stg_op_custom_linEqs_until
+end module grid_uniform_stg_op_cust_linEqs_until

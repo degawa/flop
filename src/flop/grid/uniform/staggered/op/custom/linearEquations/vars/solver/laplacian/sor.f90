@@ -4,12 +4,12 @@
 !>派生型には，Laplace-Poisson方程式から作られる連立方程式を
 !>SOR法で求解するソルバを表す派生型が含まれる．
 !>
-module grid_uniform_stg_op_custom_linEqs_vars_solver_lap_SOR
+module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_stg_vars_scalar_2d
     use :: grid_uniform_stg_vars_scalar_2d_bc
-    use :: grid_uniform_stg_op_custom_bc_impose
-    use :: grid_uniform_stg_op_custom_linEqs_vars_solver_adt
+    use :: grid_uniform_stg_op_cust_bc_impose
+    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_adt
     implicit none
     private
 
@@ -88,4 +88,4 @@ contains
             err_r = sqrt(err_n/err_d)
         end do
     end subroutine solve_using_iterative_method
-end module grid_uniform_stg_op_custom_linEqs_vars_solver_lap_SOR
+end module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR

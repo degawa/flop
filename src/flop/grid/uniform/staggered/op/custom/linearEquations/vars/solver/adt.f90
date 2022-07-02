@@ -3,7 +3,7 @@
 !>
 !>派生型には，連立方程式を求解するソルバを表す抽象データ型が含まれる．
 !>
-module grid_uniform_stg_op_custom_linEqs_vars_solver_adt
+module grid_uniform_stg_op_cust_linEqs_vars_solver_adt
     use, intrinsic :: iso_fortran_env
     use :: grid_uniform_stg_vars_scalar_2d
     use :: grid_uniform_stg_vars_scalar_2d_bc
@@ -32,4 +32,4 @@ module grid_uniform_stg_op_custom_linEqs_vars_solver_adt
             real(real64), intent(in) :: err_tol
         end subroutine ISolve_iterative
     end interface
-end module grid_uniform_stg_op_custom_linEqs_vars_solver_adt
+end module grid_uniform_stg_op_cust_linEqs_vars_solver_adt
