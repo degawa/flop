@@ -8,10 +8,10 @@
 !>演算の結果として中間的に生成される．
 !>@endnote
 !>
-module grid_uniform_staggered_op_io_vars_vector_writer_csv
+module grid_uniform_stg_op_io_vars_vector_writer_csv
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_io_vars_vector_writer_adt
-    use :: grid_uniform_staggered_vars_vector_2d
+    use :: grid_uniform_stg_op_io_vars_vector_writer_adt
+    use :: grid_uniform_stg_vars_vector_2d
     implicit none
     private
     public :: output
@@ -77,7 +77,7 @@ contains
         end if
 
         block
-            use :: grid_uniform_staggered_2d
+            use :: grid_uniform_stg_2d
             integer(int32) :: Nx, Ny, i, j, ic, jc
             type(staggered_uniform_grid_2d_type), pointer :: grid
 
@@ -150,4 +150,4 @@ contains
             if (opened) close (unit)
         end block
     end subroutine output_vector_2d
-end module grid_uniform_staggered_op_io_vars_vector_writer_csv
+end module grid_uniform_stg_op_io_vars_vector_writer_csv

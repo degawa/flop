@@ -10,10 +10,10 @@
 !>演算の結果として中間的に生成される．
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_solver_vars_AxEqB
+module grid_uniform_stg_op_cust_linEqs_vars_AxEqB
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
+    use :: grid_uniform_stg_vars_scalar_2d
+    use :: grid_uniform_stg_op_cust_linEqs_vars_Ax_adt
     implicit none
     private
 
@@ -72,4 +72,4 @@ contains
         allocate (lhs%Ax, source=rhs%Ax)
         lhs%b = rhs%b
     end subroutine assign
-end module grid_uniform_staggered_op_custom_solver_vars_AxEqB
+end module grid_uniform_stg_op_cust_linEqs_vars_AxEqB

@@ -6,9 +6,9 @@
 !>
 !>手続には，SOR法の仕様のコンストラクタが含まれる．
 !>
-module grid_uniform_staggered_op_custom_solver_vars_solver_spec_sor
+module grid_uniform_stg_op_cust_linEqs_vars_solver_spec_sor
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_op_custom_solver_vars_solver_spec_adt
+    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_spec_adt
     implicit none
     private
     public :: SOR
@@ -75,4 +75,4 @@ contains
 
         accel = this%accel
     end function get_acceleration_coefficient
-end module grid_uniform_staggered_op_custom_solver_vars_solver_spec_sor
+end module grid_uniform_stg_op_cust_linEqs_vars_solver_spec_sor

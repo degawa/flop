@@ -11,7 +11,7 @@
 !>手続には，スカラ量の外向き法線方向勾配を取り扱う型を構築する
 !>コンストラクタが含まれる．
 !>
-module grid_uniform_staggered_op_custom_bc_vars_scalar_grad_Neumann
+module grid_uniform_stg_op_cust_bc_vars_scalar_grad_Neumann
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -41,4 +41,4 @@ contains
 
         new_grad%gradient = grad
     end function Neumann_scalar
-end module grid_uniform_staggered_op_custom_bc_vars_scalar_grad_Neumann
+end module grid_uniform_stg_op_cust_bc_vars_scalar_grad_Neumann

@@ -11,12 +11,12 @@
 !>演算の結果として中間的に生成される．
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
+module grid_uniform_stg_op_cust_linEqs_vars_Ax_laplacian
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_vars_scalar_2d
-    use :: grid_uniform_staggered_op_custom_solver_vars_Ax_adt
-    use :: grid_uniform_staggered_op_custom_bc_impose
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_vars_scalar_2d
+    use :: grid_uniform_stg_op_cust_linEqs_vars_Ax_adt
+    use :: grid_uniform_stg_op_cust_bc_impose
     implicit none
     private
     public :: laplacian
@@ -46,7 +46,7 @@ module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
 contains
     !>`Ax_laplacian_type`のコンストラクタ．
     function construct_Ax_laplacian(x) result(new_Ax_lap)
-        use :: grid_uniform_staggered_op_custom_solver_vars_solver_lap_SOR
+        use :: grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
         implicit none
 
         class(scalar_2d_type), intent(in) :: x
@@ -87,7 +87,7 @@ contains
 
     !>\(\nabla^2 x\)を計算した結果を返す．
     function eval(this) result(new_b)
-        use :: grid_uniform_staggered_op_unary_laplacian_acc2
+        use :: grid_uniform_stg_op_unary_laplacian_acc2
         implicit none
 
         class(Ax_laplacian_type), intent(in) :: this
@@ -103,8 +103,8 @@ contains
     end function eval
 
     subroutine construct_solver(this, solver_spec)
-        use :: grid_uniform_staggered_op_custom_solver_vars_solver_spec
-        use :: grid_uniform_staggered_op_custom_solver_vars_solver
+        use :: grid_uniform_stg_op_cust_linEqs_vars_solver_spec
+        use :: grid_uniform_stg_op_cust_linEqs_vars_solver
         implicit none
         class(Ax_laplacian_type), intent(inout) :: this
         class(solver_spec_atype), intent(in) :: solver_spec
@@ -128,4 +128,4 @@ contains
             end select
         end select
     end subroutine construct_solver
-end module grid_uniform_staggered_op_custom_solver_vars_Ax_laplacian
+end module grid_uniform_stg_op_cust_linEqs_vars_Ax_laplacian

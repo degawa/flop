@@ -3,9 +3,9 @@
 !>定義される型には，Staggered格子[[staggered_uniform_grid_2d_type]]上で
 !>定義されるテンソル量を取り扱う型が含まれる．
 !>
-module grid_uniform_staggered_vars_tensor_2d
+module grid_uniform_stg_vars_tensor_2d
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
+    use :: grid_uniform_stg_2d
     implicit none
     private
     public :: tensor_2d_type
@@ -155,4 +155,4 @@ contains
 
         grid => this%grid
     end function get_base_grid
-end module grid_uniform_staggered_vars_tensor_2d
+end module grid_uniform_stg_vars_tensor_2d

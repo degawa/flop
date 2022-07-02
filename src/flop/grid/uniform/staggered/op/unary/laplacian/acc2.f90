@@ -13,10 +13,10 @@
 !>また，ユーザ定義演算子`.laplacian.`として公開するための
 !>インタフェースも含まれる．
 !>
-module grid_uniform_staggered_op_unary_laplacian_acc2
+module grid_uniform_stg_op_unary_laplacian_acc2
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_variables
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_variables
     implicit none
     private
     public :: operator(.laplacian.)
@@ -123,4 +123,4 @@ contains
             !&>
         end block
     end function laplacian_scr
-end module grid_uniform_staggered_op_unary_laplacian_acc2
+end module grid_uniform_stg_op_unary_laplacian_acc2

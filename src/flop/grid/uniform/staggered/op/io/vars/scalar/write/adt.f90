@@ -2,9 +2,9 @@
 !>
 !>抽象型には，スカラ量を出力する出力子の抽象型が含まれる．
 !>
-module grid_uniform_staggered_op_io_vars_scalar_writer_adt
+module grid_uniform_stg_op_io_vars_scalar_writer_adt
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_vars_scalar_2d
+    use :: grid_uniform_stg_vars_scalar_2d
     implicit none
     private
 
@@ -29,4 +29,4 @@ module grid_uniform_staggered_op_io_vars_scalar_writer_adt
             !! スカラ量を出力する装置番号
     end type scalar_2d_writer_atype
 
-end module grid_uniform_staggered_op_io_vars_scalar_writer_adt
+end module grid_uniform_stg_op_io_vars_scalar_writer_adt

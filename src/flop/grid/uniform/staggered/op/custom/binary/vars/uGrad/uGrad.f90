@@ -25,10 +25,10 @@
 !>
 !>@endnote
 !>
-module grid_uniform_staggered_op_custom_binary_vars_uGrad
+module grid_uniform_stg_op_cust_binary_vars_uGrad
     use, intrinsic :: iso_fortran_env
-    use :: grid_uniform_staggered_2d
-    use :: grid_uniform_staggered_vars_vector_2d
+    use :: grid_uniform_stg_2d
+    use :: grid_uniform_stg_vars_vector_2d
     implicit none
     private
 
@@ -141,4 +141,4 @@ contains
             !&>
         end block
     end function compute
-end module grid_uniform_staggered_op_custom_binary_vars_uGrad
+end module grid_uniform_stg_op_cust_binary_vars_uGrad
