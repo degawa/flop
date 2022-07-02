@@ -17,14 +17,14 @@ BC_p = BC_p .set. (Neumann(0d0) .on. B1) &
 
 u_aux = (u + dt*(-(.l.(u.dot.nabla).r.u) + kvisc*.laplacian.u)) &
         .impose. BC_u
-
 ! (.l.(u.dot.nabla).r.u) can be rewritten in (.div. (u .times. u))
 
-p = .inverse.(( &
-              (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
-              .using. RBSOR(1.9d0) & ! SOR(1.9d0) is also available
-              .until. below_criterion &
-    )
+p = .inverse.((laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux))
+! p = .inverse.(( &
+!               (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
+!               .using. RBSOR(1.9d0) &    ! selecting a matrix solver. SOR is also available
+!               .until. below_criterion & ! error tolerance configuration for iterative methods
+!     )
 
 u = (u_aux - dt/dens*.grad.p) .impose. BC_u
 ```
