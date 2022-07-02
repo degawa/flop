@@ -29,23 +29,23 @@ module time_vars_axis
     contains
         !&<
         procedure, public, pass :: construct_by_values
-            !! 値に基づいて変数を生成
+        !* 値に基づいて変数を生成
         procedure, public, pass :: construct_by_array
-            !! 配列に基づいて変数を生成
+        !* 配列に基づいて変数を生成
         generic :: construct => construct_by_values, &
                                 construct_by_array
         !&>
         procedure, public, pass :: set_period
-            !! 開始時間と終了時間を設定
+        !* 開始時間と終了時間を設定
         procedure, public, pass :: get_period
-            !! 開始時間と終了時間を返却
+        !* 開始時間と終了時間を返却
         procedure, public, pass :: get_duration
-            !! 計算時間（開始時間と終了時間の差）を返却
+        !* 計算時間（開始時間と終了時間の差）を返却
 
         procedure, public, pass :: assign_array
-            !! 開始時間と終了時間を持った配列を代入
+        !* 開始時間と終了時間を持った配列を代入
         procedure, public, pass :: assign_time_axis
-            !! `time_axis`型の変数を代入
+        !* `time_axis`型の変数を代入
         generic :: assignment(=) => assign_array, assign_time_axis
     end type time_axis_type
 

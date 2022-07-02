@@ -22,54 +22,54 @@ module grid_uniform_stg_vars_vector_2d
     contains
         !&<
         procedure, public, pass :: construct_by_base_grid
-            !! 成分`grid`に基づいて配列を割り付け
+        !* 成分`grid`に基づいて配列を割り付け
         procedure, public, pass :: construct_by_grid
-            !! 格子の情報に基づいて配列を割り付け
+        !* 格子の情報に基づいて配列を割り付け
         procedure, public, pass :: construct_by_mold
-            !! `vector_2d_type`の情報に基づいて配列を割り付け
+        !* `vector_2d_type`の情報に基づいて配列を割り付け
         procedure, public, pass :: construct_by_grid_pointer
-            !! 格子（ポインタ）の情報に基づいて配列を割り付け
+        !* 格子（ポインタ）の情報に基づいて配列を割り付け
         generic :: construct => construct_by_base_grid, &
                                 construct_by_grid_pointer, &
                                 construct_by_mold
         generic :: init_on   => construct_by_grid
-            !! `call u%init_on(grid)`と呼ぶためのインタフェース
+        !* `call u%init_on(grid)`と呼ぶためのインタフェース
         procedure, public, pass :: destruct
-            !! 割り付けた配列を解放
+        !* 割り付けた配列を解放
         final :: finalize
-            !! 後始末手続
+        !* 後始末手続
         !&>
         procedure, public, pass :: associate_grid
-            !! 格子を関連付けた新しいベクトル量を返却．
+        !* 格子を関連付けた新しいベクトル量を返却．
         procedure, public, pass :: initialize
-            !! 関連付けられた格子に基づいて配列が割り付けられた，
-            !! 新しいベクトル量を返却．
+        !* 関連付けられた格子に基づいて配列が割り付けられた，
+        ! 新しいベクトル量を返却．
         generic :: operator(.on.) => associate_grid
-            !! `u .on. grid`で格子を関連付けるためのインタフェース
+        !* `u .on. grid`で格子を関連付けるためのインタフェース
         generic :: operator(.init.) => initialize
-            !! `.init. u`で配列を割り付けるためのインタフェース
+        !* `.init. u`で配列を割り付けるためのインタフェース
 
         procedure, public, pass :: get_base_grid
-            !! `vector_2d_type`に関連付けられている
-            !! 格子へのポインタを返却
+        !* `vector_2d_type`に関連付けられている
+        ! 格子へのポインタを返却
 
         !&<
         procedure, public, pass :: assign
-            !! `vector_2d_type`を代入
+        !* `vector_2d_type`を代入
         procedure, public, pass :: add_vec
-            !! `vector_2d_type`を加算し，
-            !! 結果を返却．
+        !* `vector_2d_type`を加算し，
+        ! 結果を返却．
         procedure, public, pass :: minus_vec
-            !! `vector_2d_type`を減算し，
-            !! 結果を返却．
+        !* `vector_2d_type`を減算し，
+        ! 結果を返却．
         procedure, public, pass :: negate
-            !! 各成分に`-`を適用し，結果を返却．
+        !* 各成分に`-`を適用し，結果を返却．
         procedure, public, pass :: multiply_r8
-            !! 倍精度実数を乗算し，結果を返却．<br>
-            !! `vector_2d_type*real64`の形
+        !* 倍精度実数を乗算し，結果を返却．<br>
+        ! `vector_2d_type*real64`の形
         procedure, public, pass(this) :: r_multiply_r8
-            !! 倍精度実数を乗算し，結果を返却．<br>
-            !! `real64*vector_2d_type`の形
+        !* 倍精度実数を乗算し，結果を返却．<br>
+        ! `real64*vector_2d_type`の形
         generic :: assignment(=) => assign
         generic :: operator(+)   => add_vec
         generic :: operator(-)   => minus_vec, negate
@@ -218,7 +218,7 @@ contains
     !>戻り値となる`vector_2d_type`に格子をbase_gridとして関連付けるが，
     !>配列は割り付けない．
     !>
-    !>割付は，[[grid_uniform_staggered_vars_vector_2d(module):initialize(function)]]
+    !>割付は，[[grid_uniform_stg_vars_vector_2d(module):initialize(function)]]
     !>が行う．
     !>
     !>演算子指向的に`u = u .on. grid`と呼ぶことを目的に，
@@ -399,7 +399,7 @@ contains
             !! 乗算結果を格納する`vetor_2d_type`
 
         ! 乗算は左右の入れ替えが可能なので，
-        ! 計算は[[grid_uniform_staggered_vars_vector_2d(module):multiply_r8(function)]]に委譲
+        ! 計算は[[grid_uniform_stg_vars_vector_2d(module):multiply_r8(function)]]に委譲
         new_vec = this*factor
     end function r_multiply_r8
 

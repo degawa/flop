@@ -39,9 +39,9 @@ module grid_uniform_stg_op_cust_binary_vars_uGrad
             !! 移流速度
     contains
         procedure, public, pass :: construct
-            !! 移流速度に基づいて実体を構築
+        !* 移流速度に基づいて実体を構築
         procedure, public, pass :: compute
-            !! 移流項の計算結果を返却
+        !* 移流項の計算結果を返却
     end type u_grad_type
 
 contains

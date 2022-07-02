@@ -20,45 +20,45 @@ module grid_uniform_stg_vars_scalar_2d
     contains
         !&<
         procedure, public, pass :: construct_by_base_grid
-            !! 成分`grid`に基づいて配列を割り付け
+        !* 成分`grid`に基づいて配列を割り付け
         procedure, public, pass :: construct_by_grid
-            !! 格子の情報に基づいて配列を割り付け
+        !* 格子の情報に基づいて配列を割り付け
         procedure, public, pass :: construct_by_mold
-            !! `scalar_2d_type`の情報に基づいて配列を割り付け
+        !* `scalar_2d_type`の情報に基づいて配列を割り付け
         procedure, public, pass :: construct_by_grid_pointer
-            !! 格子（ポインタ）の情報に基づいて配列を割り付け
+        !* 格子（ポインタ）の情報に基づいて配列を割り付け
         generic :: construct => construct_by_base_grid, &
                                 construct_by_grid_pointer, &
                                 construct_by_mold
         generic :: init_on   => construct_by_grid
-            !! `call u%init_on(grid)`と呼ぶためのインタフェース
+        !* `call u%init_on(grid)`と呼ぶためのインタフェース
         procedure, public, pass :: destruct
-            !! 割り付けた配列を解放
+        !* 割り付けた配列を解放
         final :: finalize
-            !! 後始末手続
+        !* 後始末手続
         !&>
         procedure, public, pass :: associate_grid
-            !! 格子を関連付けた新しいスカラ量を返却．
+        !* 格子を関連付けた新しいスカラ量を返却．
         procedure, public, pass :: initialize
-            !! 関連付けられた格子に基づいて配列が割り付けられた，
-            !! 新しいスカラ量を返却．
+        !* 関連付けられた格子に基づいて配列が割り付けられた，
+        ! 新しいスカラ量を返却．
         generic :: operator(.on.) => associate_grid
-            !! `p .on. grid`で格子を関連付けるためのインタフェース
+        !* `p .on. grid`で格子を関連付けるためのインタフェース
         generic :: operator(.init.) => initialize
-            !! `.init. p`で配列を割り付けるためのインタフェース
+        !* `.init. p`で配列を割り付けるためのインタフェース
 
         procedure, public, pass :: get_base_grid
-            !! `scalar_2d_type`に関連付けられている
-            !! 格子へのポインタを返却
+        !* `scalar_2d_type`に関連付けられている
+        ! 格子へのポインタを返却
         !&<
         procedure, public, pass :: assign
-            !! `scalar_2d_type`を代入
+        !* `scalar_2d_type`を代入
         procedure, public, pass :: multiply_r8
-            !! 倍精度実数を乗算し，結果を返却．<br>
-            !! `scalar_2d_type*real64`の形
+        !* 倍精度実数を乗算し，結果を返却．<br>
+        ! `scalar_2d_type*real64`の形
         procedure, public, pass(this) :: r_multiply_r8
-            !! 倍精度実数を乗算し，結果を返却．<br>
-            !! `real64*scalar_2d_type`の形
+        !* 倍精度実数を乗算し，結果を返却．<br>
+        ! `real64*scalar_2d_type`の形
         generic :: assignment(=) => assign
         generic :: operator(*)   => multiply_r8, r_multiply_r8
         !&>
@@ -97,7 +97,7 @@ contains
     !>格子を`scalar_2d_type`のbase_gridとして関連付け，
     !>成分の配列を動的に割り付ける．
     !>
-    !>導入の理由は[[grid_uniform_staggered_vars_vector_2d(module):construct_by_grid_pointer(subroutine)]]
+    !>導入の理由は[[grid_uniform_stg_vars_vector_2d(module):construct_by_grid_pointer(subroutine)]]
     !>を参照のこと．
     subroutine construct_by_grid_pointer(this, grid)
         implicit none
@@ -185,7 +185,7 @@ contains
     !>戻り値となる`scalar_2d_type`に格子をbase_gridとして関連付けるが，
     !>配列は割り付けない．
     !>
-    !>割付は，[[grid_uniform_staggered_vars_scalar_2d(module):initialize(function)]]
+    !>割付は，[[grid_uniform_stg_vars_scalar_2d(module):initialize(function)]]
     !>が行う．
     !>
     !>演算子指向的に`p = p .on. grid`と呼ぶことを目的に，
@@ -303,7 +303,7 @@ contains
             !! 乗算結果を格納する`scalar_2d_type`
 
         ! 乗算は左右の入れ替えが可能なので，
-        ! 計算は[[grid_uniform_staggered_vars_scalar_2d(module):multiply_r8(function)]]に委譲
+        ! 計算は[[grid_uniform_stg_vars_scalar_2d(module):multiply_r8(function)]]に委譲
         new_scr = this*factor
     end function r_multiply_r8
 

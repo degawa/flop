@@ -59,20 +59,20 @@ module space_vars_Cartesian
     contains
         !&<
         procedure, public, pass :: set_coordinate_2d_by_array
-            !! 配列の値に基づいて座標系の各軸を設定
+        !* 配列の値に基づいて座標系の各軸を設定
         procedure, public, pass :: set_coodinate_2d_by_axis
-            !! `axis_type`変数に基づいて座標系の各軸を設定
+        !* `axis_type`変数に基づいて座標系の各軸を設定
         generic :: construct => set_coordinate_2d_by_array, &
                                 set_coodinate_2d_by_axis
         !&>
         procedure, public, pass :: get_coordinate_values => get_coordinate_2d
-            !! 座標系の各軸の最小値と最大値を配列で返却<br>
-            !! `=[x_min, y_min, x_max, y_max]`
+        !* 座標系の各軸の最小値と最大値を配列で返却<br>
+        ! `=[x_min, y_min, x_max, y_max]`
         procedure, public, pass :: get_length => get_length_2d
-            !! 座標系の各軸の長さを配列で返却<br>
-            !! `=[length_x length_y]`
+        !* 座標系の各軸の長さを配列で返却<br>
+        ! `=[length_x length_y]`
         procedure, public, pass :: assign
-            !! デカルト座標系の値を代入
+        !* デカルト座標系の値を代入
         generic :: assignment(=) => assign
     end type Cartesian_2d_type
 

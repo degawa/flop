@@ -28,24 +28,24 @@ module space_vars_axis
     contains
         !&<
         procedure, public, pass :: construct_by_values
-            !! 値に基づいて変数を生成
+        !* 値に基づいて変数を生成
         procedure, public, pass :: construct_by_array
-            !! 配列に基づいて変数を生成
+        !* 配列に基づいて変数を生成
         generic :: construct => construct_by_values, &
                                 construct_by_array
         !&>
 
         procedure, public, pass :: set_coord_values
-            !! 軸の最小値と最大値を設定
+        !* 軸の最小値と最大値を設定
         procedure, public, pass :: get_coord_values
-            !! 軸の最小値と最大値を返却
+        !* 軸の最小値と最大値を返却
         procedure, public, pass :: get_length
-            !! 軸の長さを返却
+        !* 軸の長さを返却
 
         procedure, public, pass :: assign_array
-            !! 軸の最小値と最大値を持った配列を代入
+        !* 軸の最小値と最大値を持った配列を代入
         procedure, public, pass :: assign_axis
-            !! `axis`型の変数を代入
+        !* `axis`型の変数を代入
         generic :: assignment(=) => assign_array, assign_axis
     end type axis_type
 
