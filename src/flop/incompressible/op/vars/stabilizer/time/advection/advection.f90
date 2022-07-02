@@ -35,20 +35,20 @@ module incompressible_op_vars_stabilizer_time_advection
 contains
     !>移流に関する安定条件のコンストラクタ．
     !>移流に関する安定条件を構築して返す．
-    function construct_advection_stabilizer(grid, velocity, Courant_number) result(new_stabilizer)
+    function construct_advection_stabilizer(minimum_interval, velocity, Courant_number) result(new_stabilizer)
         implicit none
         !&<
-        type(staggered_uniform_grid_2d_type), pointer   , intent(in) :: grid
-            !! 格子（空間離散化情報）
-        real(real64)                                    , intent(in) :: velocity
+        real(real64), intent(in) :: minimum_interval
+            !! 格子幅の最小値
+        real(real64), intent(in) :: velocity
             !! 代表速度
-        real(real64)                                    , intent(in) :: Courant_number
+        real(real64), intent(in) :: Courant_number
             !! 移流に起因する安定性に関わる定数（Courant数）
         !&>
         type(advection_stabilizer_type) :: new_stabilizer
             !! 構築された安定条件
 
-        new_stabilizer%min_spatial_interval = minval(grid%get_interval())
+        new_stabilizer%min_spatial_interval = minimum_interval
         new_stabilizer%velocity = velocity
         new_stabilizer%stability_coefficient = Courant_number
     end function construct_advection_stabilizer
