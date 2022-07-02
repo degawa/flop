@@ -29,6 +29,8 @@ module grid_uniform_staggered_op_custom_solver_vars_Ax_adt
         !* \(\boldsymbol{Ax}\)を計算した結果を返却
         procedure(IConstruct_solver), public, pass, deferred :: construct_solver
         !* 連立方程式の解法を割付・設定
+        procedure, public, pass :: destruct_solver
+        !* 連立方程式の解法を破棄
     end type Ax_atype
 
     abstract interface
@@ -62,4 +64,13 @@ contains
 
         call this%solver%solve(x, b, this%BC, this%err_tol)
     end subroutine solve
+
+    !>連立方程式の解法`solver`を破棄する．
+    subroutine destruct_solver(this)
+        implicit none
+        class(Ax_atype), intent(inout) :: this
+            !! 当該実体仮引数
+
+        if (allocated(this%solver)) deallocate (this%solver)
+    end subroutine destruct_solver
 end module grid_uniform_staggered_op_custom_solver_vars_Ax_adt

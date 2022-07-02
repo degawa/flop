@@ -30,6 +30,8 @@ contains
             !! 許容誤差を反映した連立方程式
 
         new_Ax_eq_b = Ax_eq_b
+
+        call new_Ax_eq_b%Ax%destruct_solver()
         call new_Ax_eq_b%Ax%construct_solver(solver_spec)
     end function set_matrix_solver
 end module grid_uniform_staggered_op_custom_solver_using
