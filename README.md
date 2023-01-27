@@ -1,7 +1,7 @@
 # FLOP - Operator-Oriented Fortran Library for Two-Dimensional Incompressible Fluid Flow Simulation
 
 ```Fortran
-! solving top lid driven cavity flow
+! solving top lid driven cavity flow containing objects represented by the volume penalization method
 
 u = .init.(u .on. grid)
 p = .init.(p .on. grid)
@@ -15,14 +15,17 @@ BC_p = BC_p .set. (Neumann(0d0) .on. B1) &
             .set. (Neumann(0d0) .on. B3) &
             .set. (Neumann(0d0) .on. B4)
 
-u_aux = (u + dt*(-(.l.(u.dot.nabla).r.u) + kvisc*.laplacian.u)) &
-        .impose. BC_u
-! (.l.(u.dot.nabla).r.u) can be rewritten in (.div. (u .times. u))
+u_aux = (u + dt*(-((u.dot.nabla)*u) &        ! advection
+                 + kvisc*.laplacian.u &      ! diffusion
+                 + relct*(m.times.(u_s-u)) & ! penalization
+                ) &
+        ) .impose. BC_u
+! ((u.dot.nabla)*u) can be rewritten in (.div. (u .times. u))
 
-p = .inverse.((laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux))
+p = .inverse.((laplacian(p).with.BC_p) == (dens/dt*.div.u_aux))
 ! p = .inverse.(( &
-!               (laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)) &
-!               .using. RBSOR(1.9d0) &    ! selecting a matrix solver. SOR is also available
+!               (laplacian(p).with.BC_p) == (dens/dt*.div.u_aux)) &
+!               .using. CG() &            ! selecting a matrix solver. SOR and Red-Black SOR are also available
 !               .until. below_criterion & ! error tolerance configuration for iterative methods
 !     )
 
@@ -46,12 +49,16 @@ stability_conditions = stability_conditions .set. Courant(grid.value.of_minimum_
                                             .set. Diffusion(grid.value.of_minimum_interval, kvisc, 0.5d0)
 dt = .stabilize.(dt .by. stability_conditions)
 delta_t = .divide.(t .into. intervals(dt))
+relct = .stabilize. Reluctivity(delta_t.value.of_time_interval)
 ```
 
 ```Fortran
-! output to csv file
-call output((p.as.csv) .to. "p.txt")
-call output((u.as.csv) .to. "u.txt")
+! input from npy file
+m = input(m .in. npy .from. "mask")
+
+! output to vtr file
+call output(p .as. vtr .to. "p")
+call output(u .as. vtr .to. "u")
 ```
 
 **English documentations are in preparation.**
@@ -83,6 +90,12 @@ FLOPでは，非圧縮性流れの数値計算における一連の手続を分�
     - このライブラリは，fpm(fortran-lang/fpm)を用いてビルドされます．
 - FORD (optional)
     - FORDを利用するとAPI辞彙が生成できます．
+- VTKFortran
+    - ファイルをVTR形式で出力するために使用されます．
+    - 2次元配列の出力の対応，エラー処理のために，独自に拡張されたバージョンを用いています．
+- Fortran-stdlib
+    - npy形式での入出力のために使用されます．
+    - `stdlib_io_npy_load.f90`内の`parse_header`の`intent(out)`属性を持つ引数に値を設定するようにしました．
 
 ### ソースの入手
 ソースコードを入手するには，下記のコマンドをターミナルで実行します．
@@ -97,31 +110,32 @@ FLOPをビルドするには，flopディレクトリ内で下記のコマンド
 
 #### gfortran
 ```console
-fpm build --profile debug --flag "-std=f2018"
+fpm build --profile debug --flag "-std=f2018 -cpp -D_R16P"
 ```
 #### intel fortran
 ```console
-fpm build --compiler ifort --profile debug --flag "/stand=f18"
+fpm build --compiler ifort --profile debug --flag "/stand=f18 /fpp /D_R16P"
 ```
 #### nag fortran
 ```console
-fpm build --compiler nagfor --profile debug --flag "-f2018"
+fpm build --compiler nagfor --profile debug --flag "-f2018 -fpp"
 ```
+NAG Fortranは4倍精度実数をサポートしていないので，プリプロセッサ識別子`_R16P`は指定しません．
 
 ### サンプルの実行
 FLOPには，サンプルとしてキャビティ流れを計算するプログラムが添付されています．下記のコマンドを利用して，プログラムを実行します．
 
 #### gfortran
 ```console
-fpm run --profile debug --flag "-std=f2018" --example cavity
+fpm run --profile debug --flag "-std=f2018 -cpp -D_R16P" --example cavity
 ```
 #### intel fortran
 ```console
-fpm run --compiler ifort --profile debug --flag "/stand=f18"  --example cavity
+fpm run --compiler ifort --profile debug --flag "/stand=f18 /fpp /D_R16P"  --example cavity
 ```
 #### nag fortran
 ```console
-fpm run --compiler nagfor --profile debug --flag "-f2018"  --example cavity
+fpm run --compiler nagfor --profile debug --flag "-f2018 -fpp"  --example cavity
 ```
 
 ### API辞彙の生成
@@ -144,72 +158,13 @@ flop = {git = "https://github.com/degawa/flop"}
 use :: flop
 ```
 
-## 提供される機能
-上記の例を用いて，FLOPが提供する機能を説明します．
+### 物体表現
+物体表現にはVolume Penalization法を用いており，マスク関数と名付けられたスカラ量の値に基づいて，物体と流体を識別します．マスク関数の値が1の箇所を物体，0の箇所を流体と見なします．0より大きく1未満の場合は，物体と流体が混在していると見なします．
 
-### ユーザ定義型
-いくつかのユーザ定義型が提供されています．
+example/cavity_vpでは，npy形式のファイルから値を読み込みます．実行ディレクトリに応じて，適切な場所にコピーしてください．
+実行結果は下記のようになります．
 
-- ベクトル量（`u, u_aux`）
-- スカラ量（`p`）
-- 格子（`grid`）
-- ベクトル量に対する全体境界条件 (`BC_u`)
-- スカラ量に対する全体境界条件 (`BC_p`)
-- 境界場所型（`B1, B2, B3, B4`）
-- ナブラ演算子型（`nabla`）
-    - 何もしない擬似的な型
-
-明示的に実体として用いられているのは上記のユーザ定義型ですが，演算の戻り値として利用されるユーザ定義型が定義されています．
-
-- テンソル量（`u .times. u`の返値）
-- 非線形演算子型（`u.dot.nabla`の返値）
-- 連立方程式の左辺型（`laplacian(p)`の返値）
-- 連立方程式型（`(laplacian(p).with.BC_p) .results. (dens/dt*.div.u_aux)`の返値）
-- 境界値型（`Dirichlet()`, `Neumann()`の返値）
-- 境界条件型（`境界値型 .on. 境界場所型`の返値）
-- 出力型（`物理量 .as. 書式`の返値）
-
-### ユーザ定義演算子
-#### 単項演算子
-- `.grad.`: スカラ，ベクトル量の勾配を計算する．
-    - `.grad. scalar -> vector`
-    - `.grad. vector -> tensor`
-- `.div.`: スカラ，ベクトル量の発散を計算する．
-    - `.div. vector -> scalar`
-    - `.div. tensor -> vector`
-- `.laplacian.`: : スカラ，ベクトル量のラプラシアンを計算する．
-    - `.laplacian. scalar -> scalar`
-    - `.laplacian. vector -> vector`
-
-#### 2項演算子
-- `.times.`: ベクトル量同士のテンソル積を計算する．
-    - `vector .times. vector -> tensor`
-
-#### 独自の演算子
-##### 型束縛された演算子
-- `.on.`: スカラ量，ベクトル量に格子を関連付ける
-- `.init.`: 関連付けられた格子に基づいて，スカラ量，ベクトル量の成分の配列を割り付ける．
-
-##### 境界条件に関係する演算子
-- `.on.`: 境界条件の値（`Dirichlet()`, `Neumann()`）と組み合わせて，境界条件型を生成する．
-- `.set.`: 境界条件型の情報を，全体境界条件型に代入する．
-- `.impose.`: スカラ量，ベクトル量に全体境界条件型のDirichlet境界条件を適用する．
-- `.with.`: 連立方程式の左辺型に，全体境界条件型の情報を代入する．
-
-##### 連立方程式に関係する演算子
-- `.results.`: 連立方程式の左辺型とスカラ量を組み合わせて，連立方程式型を作成する．
-- `.until.`: 連立方程式型に，連立方程式を反復法で解く場合の収束判定条件の値を代入する．
-- `.using.`: 連立方程式の左辺型成分とソルバの仕様から，ソルバ型を割り付ける．
-- `.inverse.`: 連立方程式型の型束縛手続きを呼び出して連立方程式を解く．
-
-##### 移流項の計算に関係する演算子
-- `.dot.`: 演算子左側のベクトル量（移流速度）を取り込んだ非線形演算子型を作成する．
-- `.l.`: 左括弧演算子．非線形演算子型を受け取り，そのまま返す単項演算子．
-- `.r.`: 右括弧演算子．非線形演算子型とベクトル量（保存量としての速度）を引数として，非線形演算子型の型束縛手続きを呼び出して移流項を計算する2項演算子．
-
-##### ファイル出力に関係する演算子
-- `.as.`: 演算子右側に指定した書式で物理量を出力する出力型を作成する．
-- `.to.`: 出力型に出力装置番号を渡す．
+![](example/cavity_vp/cavity_vp.png)
 
 ## Issue
 - [ ] 境界の値が一定値ではない（例えば流入速度がPoieuille分布になっている）場合への対応
