@@ -28,7 +28,7 @@ module grid_uniform_stg_op_io_vars_scalar_writer_csv
 
     !>サブルーチン`output`を設定するインタフェース．
     interface output
-        procedure :: output_scalar_2d
+        procedure :: output_scalar_2d_as_csv
     end interface
 
 contains
@@ -114,7 +114,7 @@ contains
     !>内部で`write_scalar_2d_as_csv`を呼び出している．
     !>ユーザ定義派生型IOを導入するとIntel Fortranで
     !>コンパイルできなくなる対策として導入．
-    subroutine output_scalar_2d(scalar_2d_csv_writer)
+    subroutine output_scalar_2d_as_csv(scalar_2d_csv_writer)
         implicit none
         type(scalar_2d_csv_writer_type), intent(in) :: scalar_2d_csv_writer
             !! CSV writer
@@ -146,5 +146,5 @@ contains
             inquire (unit, opened=opened)
             if (opened) close (unit)
         end block
-    end subroutine output_scalar_2d
+    end subroutine output_scalar_2d_as_csv
 end module grid_uniform_stg_op_io_vars_scalar_writer_csv
