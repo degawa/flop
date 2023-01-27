@@ -98,6 +98,7 @@ contains
         use :: incompressible_op_vars_stabilizer_time
         use :: incompressible_op_vars_stabilizer_time_advection
         use :: incompressible_op_vars_stabilizer_time_diffusion
+        use :: incompressible_op_vars_stabilizer_time_penalization
         implicit none
         !&<
         type(stability_conditions_type), intent(in) :: stability_conditions
