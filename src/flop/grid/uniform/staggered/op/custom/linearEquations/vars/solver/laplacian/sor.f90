@@ -15,7 +15,7 @@ module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
 
     !>Laplace-Poisson方程式をSOR法で解くソルバを表す派生型．
     type, public, extends(solver_atype) :: laplacian_solver_sor_type
-        real(real64) :: accel = 1d0
+        real(real64), private :: accel = 1d0
             !! SOR法の加速係数
     contains
         procedure, public, pass :: solve_using_iterative_method
