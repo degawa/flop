@@ -2,5 +2,6 @@
 !>一括して`use`するためのモジュール
 module grid_uniform_stg_op_binary
     use :: grid_uniform_stg_op_binary_times_central
+    use :: grid_uniform_stg_op_binary_dot
     public
 end module grid_uniform_stg_op_binary
