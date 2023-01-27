@@ -20,6 +20,10 @@ module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
     contains
         procedure, public, pass :: solve_using_iterative_method
         !* Poisson方程式を解いて未知数`x`を更新
+        procedure, public, pass, non_overridable :: set_acceleration_coefficient
+        !* 加速係数を設定
+        procedure, public, pass, non_overridable :: get_acceleration_coefficient
+        !* 加速係数を返却
     end type laplacian_solver_sor_type
 
 contains
@@ -88,4 +92,28 @@ contains
             err_r = sqrt(err_n/err_d)
         end do
     end subroutine solve_using_iterative_method
+
+    !>加速係数を設定する．
+    subroutine set_acceleration_coefficient(this, acceleration_coefficient)
+        implicit none
+        !&<
+        class(laplacian_solver_sor_type), intent(inout) :: this
+            !! 当該実体仮引数
+        real(real64)                    , intent(in)    :: acceleration_coefficient
+            !! 加速係数
+        !&>
+
+        this%accel = acceleration_coefficient
+    end subroutine set_acceleration_coefficient
+
+    !>加速係数を返す．
+    function get_acceleration_coefficient(this) result(acceleration_coefficient)
+        implicit none
+        class(laplacian_solver_sor_type), intent(in) :: this
+            !! 当該実体仮引数
+        real(real64) :: acceleration_coefficient
+            !! 加速係数
+
+        acceleration_coefficient = this%accel
+    end function get_acceleration_coefficient
 end module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
