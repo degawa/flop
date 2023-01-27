@@ -20,10 +20,10 @@ contains
     function get_minimum_interval(grid, minimum_interval) result(minimum_interval_)
         implicit none
         !&<
-        type(staggered_uniform_grid_2d_type), pointer, intent(in) :: grid
+        type(staggered_uniform_grid_2d_type), pointer   , intent(in) :: grid
             !! 格子
-        type(minimum_grid_interval_type), intent(in) :: minimum_interval
-            !! 格子幅の最小値を返すためのダミー変数
+        type(minimum_grid_interval_type)                , intent(in) :: minimum_interval
+            !! 呼び出す手続を決定するためのダミー変数
         !&>
         real(real64) :: minimum_interval_
             !! 格子幅の最小値
