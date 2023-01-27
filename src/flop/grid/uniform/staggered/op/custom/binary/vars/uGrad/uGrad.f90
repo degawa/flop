@@ -24,6 +24,8 @@
 !>`.op.`を介して実行される手続内から`u_dot_nabla`の手続を呼び出せば，
 !>移流項の表現が実現できる．
 !>
+!>`.op.`には`*`が利用できる．
+!>
 !>@endnote
 !>
 module grid_uniform_stg_op_cust_binary_vars_uGrad
@@ -43,6 +45,7 @@ module grid_uniform_stg_op_cust_binary_vars_uGrad
         !* 移流速度に基づいて実体を構築
         procedure, public, pass :: compute
         !* 移流項の計算結果を返却
+        generic :: operator(*) => compute
     end type u_grad_type
 
 contains
