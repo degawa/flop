@@ -28,22 +28,26 @@ module incompressible_op_vars_ReynoldsNumber
 
     !>レイノルズ数を取り扱う派生型．
     type, public :: Reynolds_number_type
-        real(real64), public :: Re
+        real(real64), private :: Re = -1d0
             !! レイノルズ数の値
+    contains
+        procedure, public, pass :: get_Reynolds_number
+        !* レイノルズ数を返却
     end type Reynolds_number_type
 
-    type(Reynolds_number_type), public :: of_Reynolds_number
+    type(Reynolds_number_type), public, parameter :: &
+        of_Reynolds_number = Reynolds_number_type()
         !! 演算子にレイノルズ数を認識させるための変数
 
     !>コンストラクタを`Reynolds_number`と呼ぶためのインタフェース．
     interface Reynolds_number
-        procedure :: construct_Reynolds_Number
+        procedure :: construct_Reynolds_number
     end interface
 
 contains
     !>レイノルズ数を取り扱う型のコンストラクタ．
     !>レイノルズ数を取り扱う型を返す．
-    function construct_Reynolds_Number(Re) result(new_Re)
+    function construct_Reynolds_number(Re) result(new_Re)
         implicit none
 
         real(real64), intent(in) :: Re
@@ -52,5 +56,16 @@ contains
             !! レイノルズ数
 
         new_Re%Re = Re
-    end function construct_Reynolds_Number
+    end function construct_Reynolds_number
+
+    !>レイノルズ数を返す．
+    function get_Reynolds_number(this) result(Re)
+        implicit none
+        class(Reynolds_number_type), intent(in) :: this
+            !! 当該実体仮引数
+        real(real64) :: Re
+            !! 代表速度
+
+        Re = this%Re
+    end function get_Reynolds_number
 end module incompressible_op_vars_ReynoldsNumber

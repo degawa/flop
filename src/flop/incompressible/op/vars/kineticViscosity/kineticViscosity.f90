@@ -28,11 +28,15 @@ module incompressible_op_vars_kineticViscosity
 
     !>動粘度を取り扱う派生型．
     type, public :: kinetic_viscosity_type
-        real(real64), public :: kinetic_viscosity
+        real(real64), private :: kinetic_viscosity = 0d0
             !! 動粘度の値
+    contains
+        procedure, public, pass :: get_kinetic_viscosity
+        !* 動粘度を返却
     end type kinetic_viscosity_type
 
-    type(kinetic_viscosity_type), public :: of_kinetic_viscosity
+    type(kinetic_viscosity_type), public, parameter :: &
+        of_kinetic_viscosity = kinetic_viscosity_type()
         !! 演算子に動粘度を認識させるための変数
 
     !>コンストラクタを`kinetic_viscosity`と呼ぶためのインタフェース．
@@ -53,4 +57,15 @@ contains
 
         new_kvisc%kinetic_viscosity = kinetic_visc
     end function construct_kinetic_viscosity
+
+    !>動粘度を返す．
+    function get_kinetic_viscosity(this) result(kinetic_viscosity)
+        implicit none
+        class(kinetic_viscosity_type), intent(in) :: this
+            !! 当該実体仮引数
+        real(real64) :: kinetic_viscosity
+            !! 動粘度
+
+        kinetic_viscosity = this%kinetic_viscosity
+    end function get_kinetic_viscosity
 end module incompressible_op_vars_kineticViscosity
