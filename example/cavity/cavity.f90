@@ -99,7 +99,7 @@ program cavity_flow
 
         end do
 
-        call output((p.as.csv) .to."p.txt")
-        call output((u.as.csv) .to."u.txt")
+        call output((p.as.csv) .to."p")
+        call output((u.as.csv) .to."u")
     end block
 end program cavity_flow
