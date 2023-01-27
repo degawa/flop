@@ -86,7 +86,7 @@ program cavity_flow
 
             u_aux = (u + dt*(-(.div.(u.times.u)) + kvisc*.laplacian.u)) &
                     .impose. BC_u !&
-            ! u_aux = (u + dt*(-(.l.(u.dot.nabla).r.u) + kvisc*.laplacian.u)) &
+            ! u_aux = (u + dt*(-((u.dot.nabla)*u) + kvisc*.laplacian.u)) &
             !         .impose. BC_u !&
 
             p = .inverse.(( &
