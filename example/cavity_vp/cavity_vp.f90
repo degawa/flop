@@ -20,7 +20,7 @@ program cavity_flow
     U_wall = 0.01d0
 
     !&<
-    characteristics = characteristics .set. Reynolds_number(1000d0) &
+    characteristics = characteristics .set. Reynolds_number(3000d0) &
                                       .set. kinetic_viscosity(Water%kinetic_viscosity) &
                                       .set. characteristic_velocity(U_wall)
     !&>
@@ -39,7 +39,7 @@ program cavity_flow
         space = space.set.Cartesian([x, y])
         grid = .divide. (space.into.cells([50, 50]))
 
-        t = t.set. [0d0, 100d0*l/U_wall] !壁がキャビティを50回通過する時間
+        t = t.set. [0d0, 50d0*l/U_wall] !壁がキャビティを50回通過する時間
         dt = 0.25d0
 
         stability_conditions = stability_conditions &
@@ -56,8 +56,8 @@ program cavity_flow
         type(vector_2d_type) :: u !! 速度
         type(scalar_2d_type) :: p !! 圧力
         type(vector_2d_type) :: u_aux !! 中間速度
-        type(scalar_2d_type) :: m
-        type(vector_2d_type) :: u_s
+        type(scalar_2d_type) :: m !! マスク関数
+        type(vector_2d_type) :: u_s !! 物体内の速度
 
         type(vector_boundary_condition_type) :: BC_u !! 速度境界条件
         type(scalar_boundary_condition_type) :: BC_p !! 圧力境界条件
@@ -100,13 +100,13 @@ program cavity_flow
                     ) .impose. BC_u !&
             ! u_aux = (u + dt*(-((u.dot.nabla)*u) &
             !                  + kvisc*.laplacian.u &
-            !                  + relct*(m*(u_s-u)) &
+            !                  + relct*(m.times.(u_s-u)) &
             !                 ) &
             !         ) .impose. BC_u !&
 
             p = .inverse.( &
                   ((laplacian(p).with.BC_p) == (dens/dt*.div.u_aux)) &
-                  .using. CG() & !RBSOR(1.9d0) & ! SOR(1.9d0) is also available
+                  .using. CG() & ! RBSOR(1.9d0) and SOR(1.9d0) are also available
                   .until. below_criterion &
                 ) !&
 
