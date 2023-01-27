@@ -111,7 +111,7 @@ contains
 
         select type (solver_spec)
         !!-------------------------------------------------------------!
-        type is (sor_spec_type) ! SOR
+        type is (SOR_spec_type) ! SOR
             allocate (laplacian_solver_sor_type :: this%solver)
 
             select type (solver => this%solver)
@@ -119,7 +119,7 @@ contains
                 solver%accel = solver_spec%get_acceleration_coefficient()
             end select
         !!-------------------------------------------------------------!
-        type is (rbsor_spec_type) ! RBSOR
+        type is (RBSOR_spec_type) ! RBSOR
             allocate (laplacian_solver_rbsor_type :: this%solver)
 
             select type (solver => this%solver)
