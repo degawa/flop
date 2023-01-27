@@ -7,6 +7,8 @@ module grid_uniform_stg_op_io
     use :: grid_uniform_stg_op_io_vars_scalar_writer_csv
     use :: grid_uniform_stg_op_io_vars_vector_writer_vtr
     use :: grid_uniform_stg_op_io_vars_scalar_writer_vtr
+    use :: grid_uniform_stg_op_io_vars_scalar_writer_npy
+    use :: grid_uniform_stg_op_io_vars_vector_writer_npy
     use :: grid_uniform_stg_op_io_as
     use :: grid_uniform_stg_op_io_to
     public
