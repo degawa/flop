@@ -9,14 +9,12 @@ module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_RBSOR
     use :: grid_uniform_stg_vars_scalar_2d
     use :: grid_uniform_stg_vars_scalar_2d_bc
     use :: grid_uniform_stg_op_cust_bc_impose
-    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_adt
+    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
     implicit none
     private
 
     !>Laplace-Poisson方程式をRed-Black SOR法で解くソルバを表す派生型．
-    type, public, extends(solver_atype) :: laplacian_solver_rbsor_type
-        real(real64) :: accel = 1d0
-            !! SOR法の加速係数
+    type, public, extends(laplacian_solver_sor_type) :: laplacian_solver_rbsor_type
     contains
         procedure, public, pass :: solve_using_iterative_method
         !* Poisson方程式を解いて未知数`x`を更新
@@ -45,7 +43,7 @@ contains
         integer(int32) :: ic, jc, Ncx, Ncy
         real(real64) :: dx, dy, dxdx, dydy, dxdxdydy, dxdy2
         integer(int32) :: ite_SOR
-        real(real64) :: err_n, err_d, err_r, d_f
+        real(real64) :: err_n, err_d, err_r, d_f, accel
 
         ! 格子の情報の取得
         grid => x%get_base_grid()
@@ -57,6 +55,8 @@ contains
         dydy = dy*dy
         dxdxdydy = dxdx*dydy
         dxdy2 = (dxdx + dydy)*2d0
+
+        accel = this%get_acceleration_coefficient()
 
         ite_SOR = 0
         err_r = huge(err_r)
@@ -74,7 +74,7 @@ contains
                        + dxdx*(x%val(ic  , jc-1) + x%val(ic  , jc+1)) &
                        - (dxdxdydy*b%val(ic, jc)) &
                       )/(dxdy2) - x%val(ic, jc)
-                x%val(ic, jc) = x%val(ic, jc) + this%accel*d_f
+                x%val(ic, jc) = x%val(ic, jc) + accel*d_f
                 err_n = err_n + d_f**2
                 err_d = err_d + x%val(ic, jc)**2
             end do
@@ -85,7 +85,7 @@ contains
                        + dxdx*(x%val(ic  , jc-1) + x%val(ic  , jc+1)) &
                        - (dxdxdydy*b%val(ic, jc)) &
                       )/(dxdy2) - x%val(ic, jc)
-                x%val(ic, jc) = x%val(ic, jc) + this%accel*d_f
+                x%val(ic, jc) = x%val(ic, jc) + accel*d_f
                 err_n = err_n + d_f**2
                 err_d = err_d + x%val(ic, jc)**2
             end do
