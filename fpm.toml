@@ -1,9 +1,9 @@
 name = "FLOP"
-version = "0.8.0"
+version = "0.9.0"
 license = "MIT"
 author = "Tomoiro Degawa"
 maintainer = "@degawa/flop"
-copyright = "Copyright 2022, Tomohiro Degawa"
+copyright = "Copyright 2023, Tomohiro Degawa"
 
 [build]
 auto-executables = false
