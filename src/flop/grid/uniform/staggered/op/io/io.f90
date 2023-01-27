@@ -11,5 +11,9 @@ module grid_uniform_stg_op_io
     use :: grid_uniform_stg_op_io_vars_vector_writer_npy
     use :: grid_uniform_stg_op_io_as
     use :: grid_uniform_stg_op_io_to
+    ! read
+    use :: grid_uniform_stg_op_io_vars_scalar_reader_npy
+    use :: grid_uniform_stg_op_io_in
+    use :: grid_uniform_stg_op_io_from
     public
 end module grid_uniform_stg_op_io

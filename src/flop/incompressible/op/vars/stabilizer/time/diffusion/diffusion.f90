@@ -54,7 +54,7 @@ contains
         new_stabilizer%stability_coefficient = Diffusion_number
     end function construct_diffusion_stabilizer
 
-    !>拡散に関する安定条件を考慮した計算時間刻みを返す．
+    !>拡散に関する安定条件を考慮した計算時間間隔を返す．
     function stabilize(this, dt) result(stabilized_dt)
         implicit none
         !&<
@@ -66,8 +66,16 @@ contains
         real(real64) :: stabilized_dt
             !! 安定条件を考慮した計算時間間隔
 
+        !|安定条件を考慮した計算時間間隔は，安定条件
+        !\[
+        !   D=\nu\frac{\varDelta t}{d^{-1}\min\left(\varDelta x^2, \varDelta y^2\right)}<0.5
+        !\]
+        !から決定する．
+        !ここで，\(d\)は計算する空間次元であり，今\(d=2\)である．
+
         stabilized_dt = min(dt, &
                             this%stability_coefficient &
-                            *this%min_spatial_interval**2/this%kinetic_viscosity)
+                            *0.5d0*this%min_spatial_interval**2 &
+                            /this%kinetic_viscosity)
     end function stabilize
 end module incompressible_op_vars_stabilizer_time_diffusion

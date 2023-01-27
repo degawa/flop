@@ -7,6 +7,7 @@ module flop
     use :: time_op
 
     use :: discreteTime_variables
+    use :: discreteTime_operators
 
     use :: discretization_op
 
