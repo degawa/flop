@@ -131,6 +131,9 @@ contains
                     )
             end select
         !!-------------------------------------------------------------!
+        type is (CG_spec_type) ! CG
+            allocate (laplacian_solver_cg_type :: this%solver)
+        !!-------------------------------------------------------------!
         class default
             write (error_unit, *) "error: unexpected laplace/poisson solver"
         end select
