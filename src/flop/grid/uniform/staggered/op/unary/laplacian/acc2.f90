@@ -21,7 +21,7 @@ module grid_uniform_stg_op_unary_laplacian_acc2
     private
     public :: operator(.laplacian.)
 
-    !>ユーザ定義演算子`.laplacia.`を定義するインタフェース
+    !>ユーザ定義演算子`.laplacian.`を定義するインタフェース
     interface operator(.laplacian.)
         procedure :: laplacian_vec
         procedure :: laplacian_scr
