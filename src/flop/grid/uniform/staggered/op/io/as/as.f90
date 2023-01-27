@@ -3,6 +3,7 @@
 module grid_uniform_stg_op_io_as
     use :: grid_uniform_stg_op_io_as_csv
     use :: grid_uniform_stg_op_io_as_vtr
+    use :: grid_uniform_stg_op_io_as_npy
     implicit none
     private
     public :: operator(.as.)
@@ -15,5 +16,8 @@ module grid_uniform_stg_op_io_as
         ! variables as vtr
         procedure :: as_scr2d_vtrfmt
         procedure :: as_vec2d_vtrfmt
+        ! variables as npy
+        procedure :: as_scr2d_npyfmt
+        procedure :: as_vec2d_npyfmt
     end interface
 end module grid_uniform_stg_op_io_as
