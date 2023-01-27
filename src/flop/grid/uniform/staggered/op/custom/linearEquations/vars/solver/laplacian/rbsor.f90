@@ -9,14 +9,12 @@ module grid_uniform_stg_op_cust_linEqs_vars_solver_lap_RBSOR
     use :: grid_uniform_stg_vars_scalar_2d
     use :: grid_uniform_stg_vars_scalar_2d_bc
     use :: grid_uniform_stg_op_cust_bc_impose
-    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_adt
+    use :: grid_uniform_stg_op_cust_linEqs_vars_solver_lap_SOR
     implicit none
     private
 
     !>Laplace-Poisson方程式をRed-Black SOR法で解くソルバを表す派生型．
-    type, public, extends(solver_atype) :: laplacian_solver_rbsor_type
-        real(real64) :: accel = 1d0
-            !! SOR法の加速係数
+    type, public, extends(laplacian_solver_sor_type) :: laplacian_solver_rbsor_type
     contains
         procedure, public, pass :: solve_using_iterative_method
         !* Poisson方程式を解いて未知数`x`を更新
