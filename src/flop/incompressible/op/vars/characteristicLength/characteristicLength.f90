@@ -28,11 +28,15 @@ module incompressible_op_vars_characteristicLength
 
     !>代表長さを取り扱う派生型．
     type, public :: characteristic_length_type
-        real(real64), public :: length
+        real(real64), private :: length = -1d0
             !! 代表長さの値
+    contains
+        procedure, public, pass :: get_length
+        !* 代表長さを返却
     end type characteristic_length_type
 
-    type(characteristic_length_type), public :: of_length
+    type(characteristic_length_type), public, parameter :: &
+        of_length = characteristic_length_type()
         !! 演算子に代表長さを認識させるための変数
 
     !>コンストラクタを`characteristic_length`と呼ぶためのインタフェース．
@@ -53,4 +57,15 @@ contains
 
         new_char_len%length = length
     end function construct_characteristic_length
+
+    !>代表長さを返す．
+    function get_length(this) result(length)
+        implicit none
+        class(characteristic_length_type), intent(in) :: this
+            !! 当該実体仮引数
+        real(real64) :: length
+            !! 代表長さ
+
+        length = this%length
+    end function get_length
 end module incompressible_op_vars_characteristicLength

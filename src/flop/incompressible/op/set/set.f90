@@ -34,7 +34,7 @@ contains
             !! 特徴量
 
         new_char = characteristics
-        call new_char%set_length(length%length)
+        call new_char%set_length(length%get_length())
     end function set_char_len
 
     !>特徴量に代表速度の値を反映して返す．
@@ -52,7 +52,7 @@ contains
             !! 特徴量
 
         new_char = characteristics
-        call new_char%set_velocity(velocity%velocity)
+        call new_char%set_velocity(velocity%get_velocity())
     end function set_char_velo
 
     !>特徴量に動粘度の値を反映して返す．
@@ -70,7 +70,7 @@ contains
             !! 特徴量
 
         new_char = characteristics
-        call new_char%set_kinetic_viscosity(kinetic_visc%kinetic_viscosity)
+        call new_char%set_kinetic_viscosity(kinetic_visc%get_kinetic_viscosity())
     end function set_kinetic_viscosity
 
     !>特徴量にReynolds数の値を反映して返す．
@@ -88,7 +88,7 @@ contains
             !! 特徴量
 
         new_char = characteristics
-        call new_char%set_Reynolds_number(Re%Re)
+        call new_char%set_Reynolds_number(Re%get_Reynolds_number())
     end function set_Reynolds_number
 
     !>複数の安定条件を設定して返す．
@@ -98,6 +98,7 @@ contains
         use :: incompressible_op_vars_stabilizer_time
         use :: incompressible_op_vars_stabilizer_time_advection
         use :: incompressible_op_vars_stabilizer_time_diffusion
+        use :: incompressible_op_vars_stabilizer_time_penalization
         implicit none
         !&<
         type(stability_conditions_type), intent(in) :: stability_conditions

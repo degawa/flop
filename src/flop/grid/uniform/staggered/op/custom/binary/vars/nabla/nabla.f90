@@ -23,6 +23,6 @@ module grid_uniform_stg_op_cust_binary_vars_nabla
     type, public :: nabla_type
     end type nabla_type
 
-    type(nabla_type), public :: nabla
+    type(nabla_type), public, parameter :: nabla = nabla_type()
         !! ナブラ演算子\(\nabla\)
 end module grid_uniform_stg_op_cust_binary_vars_nabla
