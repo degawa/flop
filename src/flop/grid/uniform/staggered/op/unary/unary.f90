@@ -4,5 +4,6 @@ module grid_uniform_stg_op_unary
     use :: grid_uniform_stg_op_unary_div_acc2
     use :: grid_uniform_stg_op_unary_grad_acc2
     use :: grid_uniform_stg_op_unary_laplacian_acc2
+    use :: grid_uniform_stg_op_unary_norm_l2
     public
 end module grid_uniform_stg_op_unary
