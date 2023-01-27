@@ -41,6 +41,7 @@
 *.vts
 *.vtr
 *.npy
+!example/cavity_vp/mask.npy
 
 # settings and documents
 *.ini
