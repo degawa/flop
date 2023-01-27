@@ -91,7 +91,7 @@ program cavity_flow
 
             p = .inverse.(( &
                   (laplacian(p).with.BC_p) == (dens/dt*.div.u_aux)) &
-                  .using. RBSOR(1.9d0) & ! SOR(1.9d0) is also available
+                  .using. CG() & ! RBSOR(1.9d0), SOR(1.9d0) are also available
                   .until. below_criterion &
                 ) !&
 
