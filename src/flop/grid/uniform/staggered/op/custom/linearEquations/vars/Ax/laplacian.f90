@@ -116,7 +116,9 @@ contains
 
             select type (solver => this%solver)
             type is (laplacian_solver_sor_type)
-                solver%accel = solver_spec%get_acceleration_coefficient()
+                call solver%set_acceleration_coefficient( &
+                    solver_spec%get_acceleration_coefficient() &
+                    )
             end select
         !!-------------------------------------------------------------!
         type is (RBSOR_spec_type) ! RBSOR
@@ -124,7 +126,9 @@ contains
 
             select type (solver => this%solver)
             type is (laplacian_solver_rbsor_type)
-                solver%accel = solver_spec%get_acceleration_coefficient()
+                call solver%set_acceleration_coefficient( &
+                    solver_spec%get_acceleration_coefficient() &
+                    )
             end select
         end select
     end subroutine construct_solver
