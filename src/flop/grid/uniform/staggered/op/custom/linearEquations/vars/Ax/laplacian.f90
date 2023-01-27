@@ -102,6 +102,7 @@ contains
         new_b = .laplacian.this%x ! \(\nabla^2 x\)なのでLaplace演算子を流用
     end function eval
 
+    !> Laplace-Poisson方程式に対するソルバを設定する．
     subroutine construct_solver(this, solver_spec)
         use :: grid_uniform_stg_op_cust_linEqs_vars_solver_spec
         use :: grid_uniform_stg_op_cust_linEqs_vars_solver
