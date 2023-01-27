@@ -122,6 +122,12 @@ contains
             if (.not. allocated(new_stab_conds%Diffusion_stabilizer)) &
                 allocate (new_stab_conds%Diffusion_stabilizer, &
                           source=time_stabilizer)
+
+        type is (penalization_stabilizer_type)
+            ! Penalizationの安定条件
+            if (.not. allocated(new_stab_conds%Penalization_stabilizer)) &
+                allocate (new_stab_conds%Penalization_stabilizer, &
+                          source=time_stabilizer)
         end select
     end function set_time_interval_stability_condition
 end module incompressible_op_set

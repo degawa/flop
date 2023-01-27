@@ -13,6 +13,7 @@ module incompressible_op_stabilize
     !>ユーザ定義演算子`.stabilize.`を定義するインタフェース
     interface operator(.stabilize.)
         procedure :: stabilize_time_interval
+        procedure :: stabilize_reluctivity
     end interface
 
 contains
@@ -30,4 +31,18 @@ contains
                         %stability_conditions &
                         %stabilize(dt_by_stability_conditions%dt)
     end function stabilize_time_interval
+
+    !>安定条件を満たした抵抗率を返す．
+    function stabilize_reluctivity(reluctivity_stabilizer) result(stabilized_reluctivity)
+        use :: incompressible_op_vars_stabilizer_characteristics_reluctivity
+        implicit none
+        !&<
+        type(reluctivity_stabilizer_type), intent(in) :: reluctivity_stabilizer
+            !! 安定化したい抵抗率
+        !&>
+        real(real64) :: stabilized_reluctivity
+            !! 安定化された抵抗率
+
+        stabilized_reluctivity = reluctivity_stabilizer%stabilize()
+    end function stabilize_reluctivity
 end module incompressible_op_stabilize
