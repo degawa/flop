@@ -1,5 +1,5 @@
 name = "FLOP"
-version = "0.10.0"
+version = "0.11.0"
 license = "MIT"
 author = "Tomoiro Degawa"
 maintainer = "@degawa/flop"
@@ -12,3 +12,7 @@ auto-examples = true
 
 [install]
 library = true
+
+[dependencies]
+VTKFortran = {git="https://github.com/degawa/VTKFortran", branch="vtkfortran-fpm"}
+stdlib = { git="https://github.com/fortran-lang/stdlib", branch="stdlib-fpm" }
