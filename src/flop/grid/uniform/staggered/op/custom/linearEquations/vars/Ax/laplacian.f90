@@ -130,6 +130,9 @@ contains
                     solver_spec%get_acceleration_coefficient() &
                     )
             end select
+        !!-------------------------------------------------------------!
+        class default
+            write (error_unit, *) "error: unexpected laplace/poisson solver"
         end select
     end subroutine construct_solver
 end module grid_uniform_stg_op_cust_linEqs_vars_Ax_laplacian
