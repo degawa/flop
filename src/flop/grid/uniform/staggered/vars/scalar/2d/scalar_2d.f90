@@ -59,8 +59,16 @@ module grid_uniform_stg_vars_scalar_2d
         procedure, public, pass(this) :: r_multiply_r8
         !* 倍精度実数を乗算し，結果を返却．<br>
         ! `real64*scalar_2d_type`の形
+        procedure, public, pass :: add_scr
+        !* `scalar_2d_type`を加算し，
+        ! 結果を返却．
+        procedure, public, pass :: subtract_scr
+        !* `scalar_2d_type`を減算し，
+        ! 結果を返却．
         generic :: assignment(=) => assign
         generic :: operator(*)   => multiply_r8, r_multiply_r8
+        generic :: operator(+)   => add_scr
+        generic :: operator(-)   => subtract_scr
         !&>
     end type scalar_2d_type
 contains
@@ -307,4 +315,43 @@ contains
         new_scr = this*factor
     end function r_multiply_r8
 
+    !>`scalar_2d_type`同士の加算を計算し，
+    !>結果を`scalar_2d_type`で返す．
+    !>
+    !>単体で呼び出すことはなく，加算演算子をオーバーロードして利用する．
+    function add_scr(scr_l, scr_r) result(new_scr)
+        implicit none
+        !&<
+        class(scalar_2d_type), intent(in) :: scr_l
+            !! `+`演算子の左側に置かれる量<br>
+            !! 当該実体仮引数
+        class(scalar_2d_type), intent(in) :: scr_r
+            !! `+`演算子の右側に置かれる量
+        !&>
+        type(scalar_2d_type) :: new_scr
+            !! 加算結果を格納する`scalar_2d_type`
+
+        call new_scr%construct(scr_l%grid)
+        new_scr%val = scr_l%val + scr_r%val
+    end function add_scr
+
+    !>`scalar_2d_type`同士の減算を計算し，
+    !>結果を`scalar_2d_type`で返す．
+    !>
+    !>単体で呼び出すことはなく，加算演算子をオーバーロードして利用する．
+    function subtract_scr(scr_l, scr_r) result(new_scr)
+        implicit none
+        !&<
+        class(scalar_2d_type), intent(in) :: scr_l
+            !! `-`演算子の左側に置かれる量<br>
+            !! 当該実体仮引数
+        class(scalar_2d_type), intent(in) :: scr_r
+            !! `-`演算子の右側に置かれる量
+        !&>
+        type(scalar_2d_type) :: new_scr
+            !! 減算結果を格納する`scalar_2d_type`
+
+        call new_scr%construct(scr_l%grid)
+        new_scr%val = scr_l%val - scr_r%val
+    end function subtract_scr
 end module grid_uniform_stg_vars_scalar_2d
