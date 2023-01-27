@@ -128,6 +128,9 @@ contains
             if (.not. allocated(new_stab_conds%Penalization_stabilizer)) &
                 allocate (new_stab_conds%Penalization_stabilizer, &
                           source=time_stabilizer)
+
+        class default
+            write (error_unit, *) "error: unsupported stabilize condition"
         end select
     end function set_time_interval_stability_condition
 end module incompressible_op_set
