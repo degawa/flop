@@ -19,12 +19,12 @@ contains
         implicit none
         !&<
         type(scalar_2d_npy_writer_type) , intent(in) :: scr_writer
-        !! スカラ量のNPY形式出力子
+            !! スカラ量のNPY形式出力子
         integer(int32)                  , intent(in) :: unit_number
-        !! 出力装置番号
+            !! 出力装置番号
         !&>
         type(scalar_2d_npy_writer_type) :: new_scr_writer
-        !! 装置番号が設定されたスカラ量のNPY形式出力子
+            !! 装置番号が設定されたスカラ量のNPY形式出力子
 
         new_scr_writer%scr = scr_writer%scr
         new_scr_writer%unit_number = unit_number

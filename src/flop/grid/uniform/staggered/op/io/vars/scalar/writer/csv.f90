@@ -62,7 +62,7 @@ contains
             inquire (unit=unit, opened=is_unit_opened)
             if (.not. is_unit_opened) then
                 io_status = -1
-                io_message = 'unit to output is not opened yet.'
+                io_message = 'output unit is not opened yet.'
                 return
             end if
         end block
