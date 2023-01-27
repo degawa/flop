@@ -53,7 +53,7 @@ contains
         new_stabilizer%stability_coefficient = Courant_number
     end function construct_advection_stabilizer
 
-    !>移流に関する安定条件を考慮した計算時間刻みを返す．
+    !>移流に関する安定条件を考慮した計算時間間隔を返す．
     function stabilize(this, dt) result(stabilized_dt)
         implicit none
         !&<
@@ -64,6 +64,12 @@ contains
         !&>
         real(real64) :: stabilized_dt
             !! 安定条件を考慮した計算時間間隔
+
+        !|安定条件を考慮した計算時間間隔は，安定条件
+        !\[
+        !   C=c\frac{\varDelta t}{\min\left(\varDelta x, \varDelta y\right)}<1
+        !\]
+        !から決定する．
 
         stabilized_dt = min(dt, &
                             this%stability_coefficient &
