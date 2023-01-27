@@ -9,12 +9,13 @@
 !>定義するインタフェースも含まれる．
 !>
 !>@note
-!>連立方程式をより数式表現に近づけることを目的として，`.eq.`や`==`を
-!>オーバーロードし，`laplacian(p) == b`などと書くことも考えられる．
-!>しかし，プログラミングの原則として，`.eq.`や`==`が等値性の比較結果
-!>以外を返すことは受け入れられない．
+!>連立方程式をより数式表現に近づけることを目的として，`==`を
+!>オーバーロードし，`laplacian(p) == b`と書けるようにもしている．
+!>しかし，プログラミングの原則として，`==`が等値性の比較結果以外を
+!>返すことは受け入れられない．
 !>
-!>そのため，`.eq.`や`==`のオーバーロードは採用しなかった．
+!>そのため，`==`のオーバーロードはあくまで可能性を示すための例として扱い，
+!>常用すべきではないと考える．
 !>
 !>@endnote
 !>
@@ -26,9 +27,15 @@ module grid_uniform_stg_op_cust_linEqs_results
     implicit none
     private
     public :: operator(.results.)
+    public :: operator(==)
 
     !>ユーザ定義演算子`.results.`を定義するインタフェース
     interface operator(.results.)
+        procedure :: results_Ax_eq_b
+    end interface
+
+    !>等価演算子`==`をオーバーロードするためのインタフェース
+    interface operator(==)
         procedure :: results_Ax_eq_b
     end interface
 
