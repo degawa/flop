@@ -18,7 +18,9 @@ module grid_uniform_stg_op_io_vars_format_csv
     type, public :: csv_format_type
     end type csv_format_type
 
-    type(csv_format_type), public :: csv
+    type(csv_format_type), public, parameter :: csv = csv_format_type()
         !! CSV形式に整形する指標を式内で参照するための変数
 
+    character(*), public, parameter :: csv_extension = ".csv"
+        !! CSV形式のファイル拡張子
 end module grid_uniform_stg_op_io_vars_format_csv

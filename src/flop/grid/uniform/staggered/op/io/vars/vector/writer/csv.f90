@@ -28,7 +28,7 @@ module grid_uniform_stg_op_io_vars_vector_writer_csv
 
     !>サブルーチン`output`を設定するインタフェース．
     interface output
-        procedure :: output_vector_2d
+        procedure :: output_vector_2d_as_csv
     end interface
 contains
     !>ベクトル量をCSV形式で出力する．
@@ -117,7 +117,7 @@ contains
     !>内部で`write_vector_2d_as_csv`を呼び出している．
     !>ユーザ定義派生型IOを導入するとIntel Fortranで
     !>コンパイルできなくなる対策として導入．
-    subroutine output_vector_2d(vector_2d_csv_writer)
+    subroutine output_vector_2d_as_csv(vector_2d_csv_writer)
         implicit none
         type(vector_2d_csv_writer_type), intent(in) :: vector_2d_csv_writer
             !! CSV writer
@@ -149,5 +149,5 @@ contains
             inquire (unit, opened=opened)
             if (opened) close (unit)
         end block
-    end subroutine output_vector_2d
+    end subroutine output_vector_2d_as_csv
 end module grid_uniform_stg_op_io_vars_vector_writer_csv

@@ -19,7 +19,7 @@ module grid_uniform_stg_op_io_vars_scalar_writer_adt
     !>Intel Fortran (Intel(R) 64 Compiler Classic, Version 2021.5.0 Build 20211109_000000)
     !>がcatastrophic errorを出力し，ビルドできない．
     !>対策として，`output`サブルーチンを設けて
-    !>`call output(p.as.csv .to. unit("p.txt")`
+    !>`call output(p.as.csv .to. "p.txt")`
     !>と実行するようにしており，その際に装置番号を受け取る必要がある．
     !>@endwarning
     type, public, abstract :: scalar_2d_writer_atype
