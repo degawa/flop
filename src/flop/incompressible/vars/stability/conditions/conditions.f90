@@ -6,6 +6,7 @@ module incompressible_vars_stability_conditions
     use :: incompressible_op_vars_stabilizer_time
     use :: incompressible_op_vars_stabilizer_time_advection
     use :: incompressible_op_vars_stabilizer_time_diffusion
+    use :: incompressible_op_vars_stabilizer_time_penalization
     implicit none
     private
 
@@ -15,6 +16,8 @@ module incompressible_vars_stability_conditions
             !! 移流に関する安定条件
         type(diffusion_stabilizer_type), allocatable :: Diffusion_stabilizer
             !! 拡散に関する安定条件
+        type(penalization_stabilizer_type), allocatable :: Penalization_stabilizer
+            !! Penalizationに関する安定条件
     contains
         procedure, public, pass :: stabilize
         !* 安定化した計算時間間隔を返却
@@ -44,6 +47,10 @@ contains
         ! 拡散の安定条件が設定されていれば，計算時間間隔を変更して安定化する
         if (allocated(this%Diffusion_stabilizer)) &
             dt = this%Diffusion_stabilizer%stabilize(dt)
+
+        ! Penalizationの安定条件が設定されていれば，計算時間間隔を変更して安定化する
+        if (allocated(this%Penalization_stabilizer)) &
+            dt = this%Penalization_stabilizer%stabilize(dt)
 
         stabilized_time_interval = dt
     end function stabilize
